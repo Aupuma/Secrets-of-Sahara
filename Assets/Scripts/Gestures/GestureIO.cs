@@ -2,23 +2,24 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml;
 using PDollarGestureRecognizer;
+using UnityEngine;
 
-public class GestureIO
+public class GestureIO : MonoBehaviour
 {
     /// <summary>
     /// Reads a multistroke gesture from an XML file
     /// </summary>
     /// <param name="fileName"></param>
     /// <returns></returns>
-    public static Gesture ReadGesture(string xml)
+    public static Gesture ReadGesture(TextAsset textAsset)
     {
         List<Point> points = new List<Point>();
-        XmlTextReader xmlReader = null;
+        XmlReader xmlReader = null;
         int currentStrokeIndex = -1;
         string gestureName = "";
         try
         {
-            xmlReader = new XmlTextReader(xml);
+            xmlReader = XmlReader.Create(new StringReader(textAsset.text));
             while (xmlReader.Read())
             {
                 if (xmlReader.NodeType != XmlNodeType.Element) continue;
