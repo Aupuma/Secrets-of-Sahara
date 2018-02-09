@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PDollarGestureRecognizer;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SwipeTrail : MonoBehaviour
 {
@@ -16,52 +17,75 @@ public class SwipeTrail : MonoBehaviour
     private Vector3          startPos;    //Posición inicial de trazo
     private int              strokeID;    //Número de trazo
     private Plane            objPlane;
+    private bool             drawingTrail;
 
     void Start()
     {
         objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
         trainingSet = LoadTrainingSet();
         strokeID = -1;
+        drawingTrail = false;
     }
 
     void Update()
     {
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) ||
-            Input.GetMouseButtonDown(0))
+    #if UNITY_EDITOR
+      //  if(Input.GetMouseButtonDown(0))
+    #endif
+    #if UNITY_ANDROID
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
+    #endif     
         {
-            Debug.Log("Cuenta trazos: " + drawingTrails.Count + ", id trazo: " + strokeID);
-            if (drawingTrails.Count > 0 && strokeID == -1) ResetDrawing();
-
-            Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float rayDistance;
-            if (objPlane.Raycast(mRay, out rayDistance))
-                startPos = mRay.GetPoint(rayDistance);
-
-            //Instanciamos trazo
-            thisTrail = (GameObject)Instantiate(trailPrefab, startPos, Quaternion.identity);
-            drawingTrails.Add(thisTrail);
-            strokeID++;
-        }
-        else if (((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-            || Input.GetMouseButton(0)))
-        {
-            //Añadimos punto actual al conjunto
-            points.Add(new Point(Input.mousePosition.x, Input.mousePosition.y, strokeID));
-
-            Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            float rayDistance;
-            if (objPlane.Raycast(mRay, out rayDistance))
-                thisTrail.transform.position = mRay.GetPoint(rayDistance);
-        }
-        else if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) ||
-         Input.GetMouseButtonUp(0))
-        {
-            //Si el trazo es muy pequeño lo destruimos
-            if (Vector3.Distance(thisTrail.transform.position, startPos) < 0.1)
+            if (DrawingPanel.instance.pointerOnPanel)
             {
-                Destroy(thisTrail);
-                drawingTrails.Remove(thisTrail);
-                strokeID--;
+                if (drawingTrails.Count > 0 && strokeID == -1) ResetDrawing();
+
+                Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float rayDistance;
+                if (objPlane.Raycast(mRay, out rayDistance))
+                    startPos = mRay.GetPoint(rayDistance);
+
+                //Instanciamos trazo
+                thisTrail = (GameObject)Instantiate(trailPrefab, startPos, Quaternion.identity);
+                drawingTrails.Add(thisTrail);
+                strokeID++;
+                drawingTrail = true;
+            }
+        }
+    #if UNITY_EDITOR
+      //  else if (Input.GetMouseButton(0))
+    #endif
+    #if UNITY_ANDROID
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+    #endif
+        {
+            if (DrawingPanel.instance.pointerOnPanel)
+            {
+                //Añadimos punto actual al conjunto
+                points.Add(new Point(Input.mousePosition.x, Screen.height - Input.mousePosition.y, strokeID));
+
+                Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float rayDistance;
+                if (objPlane.Raycast(mRay, out rayDistance))
+                    thisTrail.transform.position = mRay.GetPoint(rayDistance);
+            }
+            else if(thisTrail!=null && drawingTrail)
+            {
+                DestroyTrail();
+            }
+        }
+    #if UNITY_EDITOR
+      //  else if (Input.GetMouseButtonUp(0))
+    #endif
+    #if UNITY_ANDROID
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+    #endif
+        {
+            drawingTrail = false;
+            
+            if (thisTrail!=null && Vector3.Distance(thisTrail.transform.position, startPos) < 0.1)
+            {
+                DestroyTrail(); //Si el trazo es muy pequeño lo destruimos
             }
         }
 
@@ -69,6 +93,12 @@ public class SwipeTrail : MonoBehaviour
         {
             RecognizeGesture();
         }
+
+        //Vector2 localpoint;
+        //if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingPanel, Input.mousePosition, canvas.worldCamera, out localpoint)) return;
+
+        //Vector2 normalizedPoint = Rect.PointToNormalized(drawingPanel.rect, localpoint);
+        ////Debug.Log(normalizedPoint);
     }
 
     public void RecognizeGesture()
@@ -82,9 +112,20 @@ public class SwipeTrail : MonoBehaviour
         }
     }
 
+    private void DestroyTrail()
+    {
+        Destroy(thisTrail);
+        drawingTrails.Remove(thisTrail);
+        for (int i = points.Count - 1; i >= 0; i--)
+        {
+            //Eliminamos puntos generados por el trazo
+            if (points[i].StrokeID == strokeID) points.Remove(points[i]);
+        }
+        strokeID--;
+    }
+
     private void ResetDrawing()
     {
-        Debug.Log("Reiniciado");
         for (int i = drawingTrails.Count - 1; i >= 0; i--)
         {
             GameObject tempObject = drawingTrails[i];
