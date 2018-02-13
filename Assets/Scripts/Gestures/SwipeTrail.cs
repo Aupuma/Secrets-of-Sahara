@@ -30,7 +30,7 @@ public class SwipeTrail : MonoBehaviour
     void Update()
     {
     #if UNITY_EDITOR
-      //  if(Input.GetMouseButtonDown(0))
+        //if(Input.GetMouseButtonDown(0))
     #endif
     #if UNITY_ANDROID
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) 
@@ -53,7 +53,7 @@ public class SwipeTrail : MonoBehaviour
             }
         }
     #if UNITY_EDITOR
-      //  else if (Input.GetMouseButton(0))
+        //else if (Input.GetMouseButton(0))
     #endif
     #if UNITY_ANDROID
         else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -75,7 +75,7 @@ public class SwipeTrail : MonoBehaviour
             }
         }
     #if UNITY_EDITOR
-      //  else if (Input.GetMouseButtonUp(0))
+        //else if (Input.GetMouseButtonUp(0))
     #endif
     #if UNITY_ANDROID
         else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
