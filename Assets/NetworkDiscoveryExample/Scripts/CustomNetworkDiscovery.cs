@@ -1,64 +1,60 @@
 ﻿using System;
 using UnityEngine.Networking;
 
-namespace AXNGames.Networking
+public class CustomNetworkDiscovery : NetworkDiscovery
 {
-    public class CustomNetworkDiscovery : NetworkDiscovery
+    public static CustomNetworkDiscovery Instance;
+
+    public Action<string, string> onServerDetected;
+
+    void OnServerDetected(string fromAddress, string data)
     {
-        public static CustomNetworkDiscovery Instance;
-
-        public Action<string, string> onServerDetected;
-
-        void OnServerDetected(string fromAddress, string data)
+        if (onServerDetected != null)
         {
-            if (onServerDetected != null)
-            {
-                onServerDetected.Invoke(fromAddress, data);
-            }
+            onServerDetected.Invoke(fromAddress, data);
         }
+    }
 
-        void Awake()
+    void Awake()
+    {
+        if (Instance == null)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            Instance = this;
         }
+    }
 
+    void Start()
+    {
+        InitializeNetworkDiscovery();
+    }
 
-        void Start()
-        {
-            InitializeNetworkDiscovery();
-        }
+    public bool InitializeNetworkDiscovery()
+    {
+        return Initialize();
+    }
 
-        public bool InitializeNetworkDiscovery()
-        {
-            return Initialize();
-        }
+    public void StartBroadcasting()
+    {
+        StartAsServer();
+    }
 
-        public void StartBroadcasting()
-        {
-            StartAsServer();
-        }
+    public void ReceiveBroadcast()
+    {
+        StartAsClient();
+    }
 
-        public void ReceiveBraodcast()
-        {
-            StartAsClient();
-        }
+    public void StopBroadcasting()
+    {
+        StopBroadcast();
+    }
 
-        public void StopBroadcasting()
-        {
-            StopBroadcast();
-        }
+    public void SetBroadcastData(string broadcastPayload)
+    {
+        broadcastData = broadcastPayload;
+    }
 
-        public void SetBroadcastData(string broadcastPayload)
-        {
-            broadcastData = broadcastPayload;
-        }
-
-        public override void OnReceivedBroadcast(string fromAddress, string data)
-        {
-            OnServerDetected(fromAddress.Split(':')[3], data);
-        }
+    public override void OnReceivedBroadcast(string fromAddress, string data)
+    {
+        OnServerDetected(fromAddress.Split(':')[3], data);
     }
 }
