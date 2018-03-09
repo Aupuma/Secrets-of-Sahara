@@ -99,14 +99,15 @@ namespace Mongoose
                 }
                 m_Planes.Clear();
 
-                LoadLobbyScene ();
+                LoadGameScene ();
 			}
         }
 
-		void LoadLobbyScene()
+		void LoadGameScene()
 		{
             CustomNetworkDiscovery.Instance.StartBroadcasting();
-            NetworkManager.singleton.StartServer();
+            NetworkManager.singleton.StartHost();
+           // SceneManager.LoadScene(2);
 			GetComponent<ARPlaneChooser> ().enabled = false;
 		}
 
