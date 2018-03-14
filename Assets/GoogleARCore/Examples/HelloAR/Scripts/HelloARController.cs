@@ -24,6 +24,7 @@ namespace GoogleARCore.HelloAR
     using GoogleARCore;
     using UnityEngine;
     using UnityEngine.Rendering;
+    using UnityEngine.Networking;
 
 #if UNITY_EDITOR
     using Input = InstantPreviewInput;
@@ -157,6 +158,9 @@ namespace GoogleARCore.HelloAR
 
                 // Make Andy model a child of the anchor.
                 andyObject.transform.parent = anchor.transform;
+
+                CustomNetworkDiscovery.Instance.StartBroadcasting();
+                NetworkManager.singleton.StartHost();
             }
         }
 
