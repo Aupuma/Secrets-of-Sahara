@@ -64,7 +64,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     void CmdSpawnMyUnit()
     {
         //Tenemos la garantía de estar en el servidor
-        GameObject go = Instantiate(PlayerUnitPrefab);
+        GameObject go = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
 
         //go.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 

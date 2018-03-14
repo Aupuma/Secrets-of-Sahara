@@ -86,3 +86,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUnitPrefab: {fileID: 1835349474315994, guid: 7e77205bab1933a46ac3a9678134afe2,
     type: 2}
+  PlayerName: Anonymous

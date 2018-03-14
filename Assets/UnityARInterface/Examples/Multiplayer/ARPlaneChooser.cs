@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityARInterface;
+using UnityEngine.Networking;
 
 namespace Mongoose
 {
@@ -10,9 +11,6 @@ namespace Mongoose
     {
         [SerializeField]
         private GameObject m_PlanePrefab;
-
-		[SerializeField]
-		private string  lobbySceneStr;
 
         [SerializeField]
         private float m_LevelGeometrySize = 110;
@@ -101,13 +99,15 @@ namespace Mongoose
                 }
                 m_Planes.Clear();
 
-                LoadLobbyScene ();
+                LoadGameScene ();
 			}
         }
 
-		void LoadLobbyScene()
+		void LoadGameScene()
 		{
-			SceneManager.LoadScene (lobbySceneStr);
+            CustomNetworkDiscovery.Instance.StartBroadcasting();
+            NetworkManager.singleton.StartHost();
+           // SceneManager.LoadScene(2);
 			GetComponent<ARPlaneChooser> ().enabled = false;
 		}
 
