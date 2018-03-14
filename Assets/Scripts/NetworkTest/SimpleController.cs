@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Network
 
         void Update()
         {
-            if (!isLocalPlayer)
+            if (!hasAuthority)
             {
                 return;
             }
@@ -34,7 +34,8 @@ namespace UnityStandardAssets.Network
 
             if (horizontalMove)
             {
-                moveX = CrossPlatformInput.CrossPlatformInputManager.GetAxis("Horizontal");
+                moveX = Input.GetAxis("Horizontal");
+                Debug.Log(moveX);
             }
 
             if (verticalMove)
@@ -64,6 +65,7 @@ namespace UnityStandardAssets.Network
         {
             if (NetworkServer.active)
             {
+                //Debug.Log("Network server active");
                 transform.Translate(moveX * moveSpeed, moveY * moveSpeed, 0);
             }
         }

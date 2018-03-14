@@ -12,7 +12,9 @@ public class NetworkUi : MonoBehaviour
 
     public void HostGame()
     {
-        SceneManager.LoadScene(1);
+        CustomNetworkDiscovery.Instance.StartBroadcasting();
+        NetworkManager.singleton.StartHost();
+        //SceneManager.LoadScene(1);
     }
 
     public void ReceiveGameBroadcast()
