@@ -6,17 +6,33 @@ using UnityEngine.Networking;
 public class PlayerConnectionObject : NetworkBehaviour {
 
     public GameObject PlayerUnitPrefab;
+    public GameObject ARPlayerCamera;
+
+    //[SyncVar]
+    //public static bool playerExists = false;
 
     //SyncVars son variables en las que si su valor cambia en el SERVIDOR, 
     //todos los clientes son informados automáticamente del nuevo valor
     [SyncVar (hook = "OnPlayerNameChanged")]
     public string PlayerName = "Anonymous";
 
-	void Start () {
+    public override void OnStartClient()
+    {
+        /*
+        if (isLocalPlayer == false)
+        {
+            Camera cam = FindObjectOfType<Camera>();
+            if (cam != null) cam.enabled = false;
+            return;
+        }*/
+    }
+
+    void Start () {
         //Es éste mi PlayerObject local?
         if (isLocalPlayer == false)
         {
-            //Este objeto pertenece a otro jugador
+            Camera cam = FindObjectOfType<Camera>();
+            if (cam != null) cam.enabled = false;
             return;
         }
 
@@ -28,7 +44,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //Instantiate(PlayerUnitPrefab);
 
         //Decirle al servidor que spawnée nuestra unidad
-        CmdSpawnMyUnit();
+        if (!isServer) Instantiate(ARPlayerCamera);
+        else CmdSpawnMyUnit();
     }
 
     void Update () {
@@ -71,6 +88,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //Ahora que el objeto existe en el servidor, propagarlo a todos
         //los clientes (y conectarlo a NetworkIdentity)
         NetworkServer.SpawnWithClientAuthority(go,connectionToClient);
+
+       // playerExists = true;
     }
 
     [Command]

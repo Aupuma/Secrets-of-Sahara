@@ -84,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbb8a6e52d3c6145848c1f2813779e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1835349474315994, guid: 7e77205bab1933a46ac3a9678134afe2,
+  PlayerUnitPrefab: {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf,
+    type: 2}
+  ARPlayerCamera: {fileID: 1206050539615930, guid: 8ab9602dbf39d174fb79cd7d8ee451df,
     type: 2}
   PlayerName: Anonymous

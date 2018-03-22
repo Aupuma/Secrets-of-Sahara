@@ -873,7 +873,7 @@ MonoBehaviour:
   m_OfflineScene: PlayerSelectionScene
   m_OnlineScene: GameTestScene
   m_SpawnPrefabs:
-  - {fileID: 1835349474315994, guid: 7e77205bab1933a46ac3a9678134afe2, type: 2}
+  - {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
