@@ -42,6 +42,7 @@ public class PlayerMovement : NetworkBehaviour {
                 CmdMove();
             }*/
 
+            CheckSwipe();
             if (isSwiping(SwipeDirection.Up))
             {
                 CmdMove();
