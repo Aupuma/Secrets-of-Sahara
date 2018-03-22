@@ -29,14 +29,11 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     void Start () {
         //Es éste mi PlayerObject local?
-        /*
         if (isLocalPlayer == false)
         {
-            Camera cam = FindObjectOfType<Camera>();
-            if (cam != null) cam.enabled = false;
             return;
         }
-        */
+        
         //Instantiate() solo crea un objeto en el ORDENADOR LOCAL
         //Incluso si tiene un NetworkIdentity no existirá en 
         //la red (y por lo tanto en ningún otro cliente) 
