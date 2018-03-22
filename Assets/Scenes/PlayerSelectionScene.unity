@@ -514,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1274402033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,6 +838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826097337}
   - component: {fileID: 1826097336}
+  - component: {fileID: 1826097339}
   - component: {fileID: 1826097338}
   m_Layer: 0
   m_Name: NetworkManager
@@ -864,7 +865,7 @@ MonoBehaviour:
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
-  m_MaxDelay: 0.05
+  m_MaxDelay: 0.01
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1072844160582704, guid: 453800d5df6c1054daff2ba8d5148377,
     type: 2}
@@ -877,7 +878,7 @@ MonoBehaviour:
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
-    m_PacketSize: 1500
+    m_PacketSize: 1440
     m_FragmentSize: 500
     m_ResendTimeout: 1200
     m_DisconnectTimeout: 2000
@@ -893,7 +894,7 @@ MonoBehaviour:
     m_SendDelay: 10
     m_MaxCombinedReliableMessageSize: 100
     m_MaxCombinedReliableMessageCount: 10
-    m_MaxSentMessageQueueSize: 128
+    m_MaxSentMessageQueueSize: 512
     m_AcksType: 1
     m_UsePlatformSpecificProtocols: 0
     m_InitialBandwidth: 0
@@ -916,7 +917,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 0500000000000000
+  m_Channels: 
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -950,7 +951,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1826097335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81383149ae8aade42aa7dcec06546a2d, type: 3}
+  m_Script: {fileID: -1553936188, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_BroadcastPort: 47777
@@ -958,11 +959,26 @@ MonoBehaviour:
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
   m_BroadcastInterval: 1000
-  m_UseNetworkManager: 1
+  m_UseNetworkManager: 0
   m_BroadcastData: HELLO
-  m_ShowGUI: 0
+  m_ShowGUI: 1
   m_OffsetX: 0
-  m_OffsetY: 0
+  m_OffsetY: 200
+--- !u!114 &1826097339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1826097335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &1875793746
 GameObject:
   m_ObjectHideFlags: 0
