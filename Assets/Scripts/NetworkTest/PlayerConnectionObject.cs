@@ -16,17 +16,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
     [SyncVar (hook = "OnPlayerNameChanged")]
     public string PlayerName = "Anonymous";
 
-    public override void OnStartClient()
-    {
-        /*
-        if (isLocalPlayer == false)
-        {
-            Camera cam = FindObjectOfType<Camera>();
-            if (cam != null) cam.enabled = false;
-            return;
-        }*/
-    }
-
     void Start () {
         //Es éste mi PlayerObject local?
         if (isLocalPlayer == false)
@@ -42,7 +31,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //Instantiate(PlayerUnitPrefab);
 
         //Decirle al servidor que spawnée nuestra unidad
-        if (!isServer) Instantiate(ARPlayerCamera);
+        if (isServer) Instantiate(ARPlayerCamera);
         else CmdSpawnMyUnit();
     }
 
