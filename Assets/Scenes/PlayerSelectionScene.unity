@@ -864,7 +864,7 @@ MonoBehaviour:
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
-  m_MaxDelay: 0.01
+  m_MaxDelay: 0.05
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 1072844160582704, guid: 453800d5df6c1054daff2ba8d5148377,
     type: 2}
@@ -958,7 +958,7 @@ MonoBehaviour:
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
   m_BroadcastInterval: 1000
-  m_UseNetworkManager: 0
+  m_UseNetworkManager: 1
   m_BroadcastData: HELLO
   m_ShowGUI: 0
   m_OffsetX: 0
