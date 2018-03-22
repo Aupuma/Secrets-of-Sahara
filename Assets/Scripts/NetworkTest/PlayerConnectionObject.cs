@@ -31,7 +31,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //Instantiate(PlayerUnitPrefab);
 
         //Decirle al servidor que spawnée nuestra unidad
-        if (isServer) Instantiate(ARPlayerCamera);
+        if (!isServer) Instantiate(ARPlayerCamera);
         else CmdSpawnMyUnit();
     }
 
