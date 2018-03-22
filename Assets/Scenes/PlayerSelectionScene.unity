@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: -822479833, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NetworkPort: 7777
+  m_NetworkPort: 1616
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
   m_NetworkAddress: localhost
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
   m_BroadcastInterval: 1000
-  m_UseNetworkManager: 0
+  m_UseNetworkManager: 1
   m_BroadcastData: HELLO
   m_ShowGUI: 1
   m_OffsetX: 0
