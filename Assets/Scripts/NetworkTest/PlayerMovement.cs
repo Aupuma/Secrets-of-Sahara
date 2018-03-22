@@ -19,45 +19,53 @@ public class PlayerMovement : NetworkBehaviour {
     public float actionTime = 0.5f;
 
     private SwipeDirection direction;
-
     private Vector3 touchPosition;
     private float swipeResistanceX = 50.0f;
     private float swipeResistanceY = 100.0f;
 
+    float accelerometerUpdateInterval = 1.0f / 60.0f;
+    // The greater the value of LowPassKernelWidthInSeconds, the slower the
+    // filtered value will converge towards current input sample (and vice versa).
+    float lowPassKernelWidthInSeconds = 1.0f;
+    float shakeDetectionThreshold = 2.0f;
+    float lowPassFilterFactor;
+    Vector3 lowPassValue;
+
+    private void Start()
+    {
+        SetAccelerometer();
+    }
+
     // Update is called once per frame
     void Update () {
-        if (hasAuthority && canAct)
+        if (!hasAuthority)
         {
-            /*
-            if (Input.GetAxis("Horizontal") == -1)
-            {
-                CmdRotateLeft();
-            }
-            if (Input.GetAxis("Horizontal") == 1)
-            {
-                CmdRotateRight();
-            }
-            if (Input.GetAxis("Vertical") == 1)
-            {
-                CmdMove();
-            }*/
-
-            CheckSwipe();
-            if (isSwiping(SwipeDirection.Up))
-            {
-                CmdMove();
-            }
-            if (isSwiping(SwipeDirection.Left))
-            {
-                CmdRotateLeft();
-            }
-            if (isSwiping(SwipeDirection.Right))
-            {
-                CmdRotateRight();
-            }
+            return;
         }
+        if(canAct) CheckShake();
+        if(canAct) CheckSwipe();
+    }
 
 
+    #region Input Handlers
+    private void SetAccelerometer()
+    {
+        lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
+        shakeDetectionThreshold *= shakeDetectionThreshold;
+        lowPassValue = Input.acceleration;
+    }
+
+    private void CheckShake()
+    {
+        Vector3 acceleration = Input.acceleration;
+        lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
+        Vector3 deltaAcceleration = acceleration - lowPassValue;
+
+        if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
+        {
+            CmdDash();
+            Debug.Log("Shake event detected at time " + Time.time);
+        }
     }
 
     private void CheckSwipe()
@@ -85,12 +93,26 @@ public class PlayerMovement : NetworkBehaviour {
                 direction |= (deltaSwipe.y < 0) ? SwipeDirection.Up : SwipeDirection.Down;
             }
         }
+
+        if (isSwiping(SwipeDirection.Up))
+        {
+            CmdMove();
+        }
+        else if (isSwiping(SwipeDirection.Left))
+        {
+            CmdRotateLeft();
+        }
+        else if (isSwiping(SwipeDirection.Right))
+        {
+            CmdRotateRight();
+        }
     }
 
     private bool isSwiping(SwipeDirection dir)
     {
         return (direction & dir) == dir;
-    }
+    } 
+    #endregion
 
     #region Network Methods
     [Command]
@@ -132,6 +154,19 @@ public class PlayerMovement : NetworkBehaviour {
     {
         canAct = false;
         transform.DOMove(transform.position + transform.forward, actionTime).OnComplete(ActionFinished);
+    }
+
+    [Command]
+    public void CmdDash()
+    {
+        RpcMove();
+    }
+
+    [ClientRpc]
+    public void RpcDash()
+    {
+        canAct = false;
+        transform.DOMove(transform.position + transform.forward * 2, actionTime).OnComplete(ActionFinished);
     }
 
     void ActionFinished()
