@@ -159,7 +159,7 @@ public class PlayerMovement : NetworkBehaviour {
     [Command]
     public void CmdDash()
     {
-        RpcMove();
+        RpcDash();
     }
 
     [ClientRpc]
