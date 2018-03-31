@@ -1243,6 +1243,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1072844160582704, guid: 453800d5df6c1054daff2ba8d5148377,
         type: 2}
+    - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: GameTestScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd36261dd0fe4956be2a433afa622dc, type: 2}
   m_IsPrefabParent: 0
