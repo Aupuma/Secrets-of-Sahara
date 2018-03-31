@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour {
 
     public void StartServerButtonClicked()
     {
-        SceneManager.LoadScene(arSetupScene);
+        NetworkManager.singleton.StartHost();
+       // SceneManager.LoadScene(arSetupScene);
     }
 
     public void StartClientButtonClicked()

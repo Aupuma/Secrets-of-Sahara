@@ -13,8 +13,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     //SyncVars son variables en las que si su valor cambia en el SERVIDOR, 
     //todos los clientes son informados automáticamente del nuevo valor
-    [SyncVar (hook = "OnPlayerNameChanged")]
-    public string PlayerName = "Anonymous";
 
     void Start () {
         //Es éste mi PlayerObject local?
@@ -41,32 +39,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
         }
     }
 
-    void Update () {
-        if(isLocalPlayer == false)
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            CmdSpawnMyUnit();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            string n = "Quill" + Random.Range(1, 100);
-
-            CmdChangePlayerName(n);
-        }
-	}
-
-    void OnPlayerNameChanged(string newName)
-    {
-        //WARNING: Si se usa un hook en una SyncVar, el valor local
-        //NO se actualiza automáticamente
-        PlayerName = newName;
-    }
-
     //--------------------------------------COMMANDS
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor
 
@@ -85,25 +57,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
        // playerExists = true;
     }
 
-    [Command]
-    void CmdChangePlayerName(string n)
-    {
-        //Quizás queramos comprobar si el nombre no tiene ninguna palabra prohibida?
-        //Si hay una palabra prohibida, ignoramos la petición y no hacemos nada?
-        //   ...o seguimos llamando a la Rpc pero con el nombre original?
-
-        PlayerName = n;
-
-        //Cuéntale a todos los clientes cuál es el nombre actual del player
-        RpcChangePlayerName(PlayerName);
-    }
 
     //-------------------------------------RPC
     //RPCs son funciones especiales que SOLO se ejecutan en los clientes
 
-    [ClientRpc]
-    void RpcChangePlayerName(string n)
-    {
-
-    }
 }
