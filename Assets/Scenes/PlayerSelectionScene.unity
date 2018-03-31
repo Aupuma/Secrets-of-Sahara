@@ -1253,6 +1253,21 @@ Prefab:
       propertyPath: gameScene
       value: GameTestScene
       objectReference: {fileID: 0}
+    - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_NetworkAddress
+      value: 255.255.255.255
+      objectReference: {fileID: 0}
+    - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_NetworkPort
+      value: 8080
+      objectReference: {fileID: 0}
+    - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_BroadcastPort
+      value: 8080
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd36261dd0fe4956be2a433afa622dc, type: 2}
   m_IsPrefabParent: 0
