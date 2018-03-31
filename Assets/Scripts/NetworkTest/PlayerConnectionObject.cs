@@ -22,7 +22,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         {
             return;
         }
-        
+
         //Instantiate() solo crea un objeto en el ORDENADOR LOCAL
         //Incluso si tiene un NetworkIdentity no existirá en 
         //la red (y por lo tanto en ningún otro cliente) 
@@ -31,8 +31,14 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //Instantiate(PlayerUnitPrefab);
 
         //Decirle al servidor que spawnée nuestra unidad
-        if (!isServer) Instantiate(ARPlayerCamera);
-        else CmdSpawnMyUnit();
+        if (isServer) //Soy el host, jugador con camara AR
+        {
+            Instantiate(ARPlayerCamera);
+        }
+        else
+        {
+            CmdSpawnMyUnit();
+        }
     }
 
     void Update () {

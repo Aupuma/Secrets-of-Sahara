@@ -3,54 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
-    public static UIManager instance;
-    public Text statusText;
-    public GameObject hostButton;
-    public GameObject clientButton;
-    public PlayerConnection connection;
+    //public static UIManager instance;
+    public GameObject menuScreen;
+    public GameObject loadingScreen;
 
-    public int clicksToResetTargets;
-    public int clicksMade;
-
+    public string arSetupScene;
+    public string gameScene;
+    
     private void Start()
     {
-        instance = this;
-        clicksMade = 0;
+        //instance = this;
     }
 
     public void StartServerButtonClicked()
     {
-        hostButton.SetActive(false);
-        clientButton.SetActive(false);
-        statusText.text = "Status: Hosting";
-        NetDiscovery.instance.StartAsServer();
-        NetworkManager.singleton.StartHost();
+        SceneManager.LoadScene(arSetupScene);
     }
 
     public void StartClientButtonClicked()
     {
-        hostButton.SetActive(false);
-        clientButton.SetActive(false);
-        statusText.text = "Status: Looking for server";
+        //Esto se hará con transición
+        //Aqui se puede empezar a cargar la escena también
+        loadingScreen.SetActive(true);
+        menuScreen.SetActive(false);
         NetDiscovery.instance.StartAsClient();
     }
 
-    public void ResetTargetsButtonClicked()
+    public void BackFromLoadingScreenClicked()
     {
-        clicksMade++;
-        if(clicksMade == clicksToResetTargets)
-        {
-            connection.CmdResetTargets();
-            clicksMade = 0;
-        }
-    }
-
-    public void ConnectionFound()
-    {
-        statusText.text = "Status: Connected";
+        loadingScreen.SetActive(false);
+        menuScreen.SetActive(true);
+        NetDiscovery.instance.StopBroadcast();
     }
 
     // Update is called once per frame

@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DG.Tweening;
 using UnityEngine.Networking;
-using UnityARInterface;
 
-public class LoadGameScene : ARBase {
+public class SceneSetUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        this.transform.DOMoveY(-2, 2f).From().OnComplete(SceneReady);
 	}
 	
 	// Update is called once per frame
@@ -17,10 +16,9 @@ public class LoadGameScene : ARBase {
 		
 	}
 
-    public void LoadGame()
+    void SceneReady()
     {
-        CustomNetworkDiscovery.Instance.StartBroadcasting();
+        NetDiscovery.instance.StartAsServer();
         NetworkManager.singleton.StartHost();
-        //SceneManager.LoadScene(3);
     }
 }
