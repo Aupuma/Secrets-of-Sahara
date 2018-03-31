@@ -129,6 +129,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbc3cbdf0b991743be18ef17ee2fcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &258898012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 258898010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 76
+    i1: 197
+    i2: 150
+    i3: 160
+    i4: 246
+    i5: 106
+    i6: 136
+    i7: 244
+    i8: 123
+    i9: 46
+    i10: 208
+    i11: 211
+    i12: 204
+    i13: 159
+    i14: 171
+    i15: 243
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!1001 &711404077
 Prefab:
   m_ObjectHideFlags: 0
