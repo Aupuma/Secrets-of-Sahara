@@ -18,13 +18,14 @@ public class NetDiscovery : NetworkDiscovery{
 
     public override void OnReceivedBroadcast(string fromAddress, string data)
     {
+        Debug.Log("Broadcast: " + fromAddress);
         if (!connected)
         {
             connected = true;
-            Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
             //SceneManager.LoadScene(gameScene);
             NetworkManager.singleton.StartClient();
         }
+       
     }
 }

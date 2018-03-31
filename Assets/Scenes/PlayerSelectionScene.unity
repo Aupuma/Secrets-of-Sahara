@@ -1266,7 +1266,7 @@ Prefab:
     - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_BroadcastPort
-      value: 47777
+      value: 8080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd36261dd0fe4956be2a433afa622dc, type: 2}
