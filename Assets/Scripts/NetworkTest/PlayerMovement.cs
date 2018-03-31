@@ -33,6 +33,10 @@ public class PlayerMovement : NetworkBehaviour {
 
     private void Start()
     {
+        if (!hasAuthority)
+        {
+            GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        }
         SetAccelerometer();
     }
 

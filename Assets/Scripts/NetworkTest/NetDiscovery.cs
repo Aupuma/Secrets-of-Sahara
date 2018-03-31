@@ -8,7 +8,6 @@ public class NetDiscovery : NetworkDiscovery{
 
     public static NetDiscovery instance;
     public bool connected = false;
-    public string gameScene;
 
     // Use this for initialization
     void Start () {
@@ -18,14 +17,12 @@ public class NetDiscovery : NetworkDiscovery{
 
     public override void OnReceivedBroadcast(string fromAddress, string data)
     {
-        Debug.Log("Broadcast: " + fromAddress);
         if (!connected)
         {
             connected = true;
+            Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
-            //SceneManager.LoadScene(gameScene);
             NetworkManager.singleton.StartClient();
         }
-       
     }
 }
