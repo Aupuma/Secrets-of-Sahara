@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class NetDiscovery : NetworkDiscovery{
 
     public static NetDiscovery instance;
     public bool connected = false;
+    public string gameScene;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +23,7 @@ public class NetDiscovery : NetworkDiscovery{
             connected = true;
             Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
+            SceneManager.LoadScene(gameScene);
             NetworkManager.singleton.StartClient();
         }
     }
