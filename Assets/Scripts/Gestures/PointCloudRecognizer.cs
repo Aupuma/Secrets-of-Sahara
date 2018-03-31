@@ -59,6 +59,7 @@
 **/
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace PDollarGestureRecognizer
 {
@@ -75,7 +76,7 @@ namespace PDollarGestureRecognizer
         /// <param name="candidate"></param>
         /// <param name="trainingSet"></param>
         /// <returns></returns>
-        public static string Classify(Gesture candidate, Gesture[] trainingSet)
+        public static GestureResult Classify(Gesture candidate, Gesture[] trainingSet)
         {
             float minDistance = float.MaxValue;
             string gestureClass = "";
@@ -88,7 +89,8 @@ namespace PDollarGestureRecognizer
                     gestureClass = template.Name;
                 }
             }
-            return gestureClass;
+            float score = Mathf.Max((minDistance - 2.0f) / -2.0f, 0.0f);
+            return new GestureResult(gestureClass,score);
         }
 
         /// <summary>
