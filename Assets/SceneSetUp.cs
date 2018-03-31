@@ -22,6 +22,5 @@ public class SceneSetUp : NetworkBehaviour {
     void SceneReady()
     {
         NetDiscovery.instance.StartAsServer();
-        NetworkManager.singleton.StartHost();
     }
 }
