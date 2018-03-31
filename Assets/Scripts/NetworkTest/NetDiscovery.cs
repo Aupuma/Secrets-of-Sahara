@@ -23,7 +23,7 @@ public class NetDiscovery : NetworkDiscovery{
             connected = true;
             Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
-            SceneManager.LoadScene(gameScene);
+            //SceneManager.LoadScene(gameScene);
             NetworkManager.singleton.StartClient();
         }
     }

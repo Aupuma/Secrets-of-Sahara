@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour {
     public void StartServerButtonClicked()
     {
         NetworkManager.singleton.StartHost();
-        SceneManager.LoadScene(arSetupScene);
+       // SceneManager.LoadScene(arSetupScene);
     }
 
     public void StartClientButtonClicked()
