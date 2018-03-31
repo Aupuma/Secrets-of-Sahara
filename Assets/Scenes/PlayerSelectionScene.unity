@@ -1205,6 +1205,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4931720611718282, guid: ccd36261dd0fe4956be2a433afa622dc, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1251,23 +1256,39 @@ Prefab:
     - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: gameScene
-      value: GameTestScene
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_NetworkAddress
-      value: 255.255.255.255
+      value: localhost
       objectReference: {fileID: 0}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_NetworkPort
-      value: 8080
+      value: 7777
       objectReference: {fileID: 0}
     - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_BroadcastPort
-      value: 8080
+      value: 47777
       objectReference: {fileID: 0}
+    - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_UseNetworkManager
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_ShowGUI
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd36261dd0fe4956be2a433afa622dc, type: 2}
   m_IsPrefabParent: 0
