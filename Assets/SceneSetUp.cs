@@ -4,11 +4,14 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Networking;
 
-public class SceneSetUp : MonoBehaviour {
+public class SceneSetUp : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.transform.DOMoveY(-2, 2f).From().OnComplete(SceneReady);
+        if (isServer)
+        {
+            this.transform.DOMoveY(-2, 2f).From().OnComplete(SceneReady);
+        }
 	}
 	
 	// Update is called once per frame
