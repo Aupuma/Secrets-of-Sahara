@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GesturePanel : MonoBehaviour {
 
-    public string myGestureName;
-    public GameObject gestureSystem;
+    public string gestureName;
+    GestureManager gestureManager;
+    private bool solved;
 
 	// Use this for initialization
 	void Start () {
-		
+        gestureManager = FindObjectOfType<GestureManager>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +20,13 @@ public class GesturePanel : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        gestureSystem.SetActive(true);
+        gestureManager.ShowPanel(this);
+    }
+
+    public void SolutionFound()
+    {
+        solved = true;
+        GetComponent<MeshRenderer>().material.color = Color.green;
+        //Comunico al gameManager que he sido resuelto para que lo comunique en red
     }
 }

@@ -33,6 +33,9 @@ public class GestureManager : MonoBehaviour
     private Plane            objPlane;
     private bool             drawingTrail;
 
+    public GameObject gCanvas;
+    private GesturePanel currentActivePanel;
+
     void Start()
     {
         objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
@@ -71,6 +74,11 @@ public class GestureManager : MonoBehaviour
         ////Debug.Log(normalizedPoint);
     }
 
+    public void ShowPanel(GesturePanel panel)
+    {
+        gCanvas.SetActive(true);
+        currentActivePanel = panel;
+    }
 
     #region Drawing the trail
     private void StartDrawing()
@@ -145,31 +153,25 @@ public class GestureManager : MonoBehaviour
     #endregion
 
     #region Getting the result
-    public void RecognizeGesture()
+    public GestureResult RecognizeGesture()
     {
         if (strokeID > -1)
         {
             strokeID = -1;
             Gesture candidate = new Gesture(points.ToArray());
-            GestureResult result = PointCloudRecognizer.Classify(candidate, trainingSet);
-            Debug.Log(result.score);
-            gestureText.text = result.name;
+            return PointCloudRecognizer.Classify(candidate, trainingSet); ;
         }
+        return null;
     }
 
-    public bool CompareGesture(string panelGestureName)
+    public void CompareGesture()
     {
-        if (strokeID > -1)
+        GestureResult result = RecognizeGesture();
+        Debug.Log(result.name + " " + result.score);
+        if (result.name == currentActivePanel.gestureName && result.score > 0.75f)
         {
-            strokeID = -1;
-            Gesture candidate = new Gesture(points.ToArray());
-            GestureResult result = PointCloudRecognizer.Classify(candidate, trainingSet);
-            if (result.name == panelGestureName && result.score > 0.75f)
-            {
-                return true;
-            }
+            currentActivePanel.SolutionFound();
         }
-        return false;
     } 
     #endregion
 
