@@ -24,14 +24,12 @@ public class PlayerConnectionObject : NetworkBehaviour {
         }
         else //Soy el jugador en primera persona
         {
+            Instantiate(GestureManagerPrefab);
             CmdSpawnMyUnit();
             CmdSetUpFPObjects();
-            Instantiate(GestureManagerPrefab);
         }
-        FindObjectOfType<GameManager>().connection = this;
+        //FindObjectOfType<GameManager>().connection = this;
     }
-
-
 
     //--------------------------------------COMMANDS
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor

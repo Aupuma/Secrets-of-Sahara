@@ -41,13 +41,16 @@ public class GestureManager : MonoBehaviour
     void Start()
     {
         gCanvas = transform.GetChild(0).gameObject;
-        gCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
-        gCanvas.SetActive(false);
-
-        objPlane = new Plane(Camera.main.transform.forward * -1, drawingPos.position);
         trainingSet = LoadTrainingSet();
         strokeID = -1;
         drawingTrail = false;
+    }
+
+    public void SetCamera(Camera cam)
+    {
+        gCanvas.GetComponent<Canvas>().worldCamera = cam;
+        gCanvas.SetActive(false);
+        objPlane = new Plane(cam.transform.forward * -1, drawingPos.position);
     }
 
     /// <summary>

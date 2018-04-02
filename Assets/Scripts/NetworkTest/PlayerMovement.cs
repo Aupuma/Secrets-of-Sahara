@@ -38,6 +38,10 @@ public class PlayerMovement : NetworkBehaviour {
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
         }
+        else
+        {
+            FindObjectOfType<GestureManager>().SetCamera(GetComponentInChildren<Camera>());
+        }
         SetAccelerometer();
     }
 
