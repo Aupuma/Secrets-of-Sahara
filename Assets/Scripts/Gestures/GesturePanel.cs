@@ -5,21 +5,18 @@ using UnityEngine.Networking;
 
 public class GesturePanel : NetworkBehaviour {
 
+    GestureManager gestureManager;
     public string gestureName;
     private bool solved;
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
     public void PanelTouched()
     {
-        GestureManager.instance.ShowPanel(this);
+        FindObjectOfType<GestureManager>().ShowPanel(this);
     }
 
     [Command]

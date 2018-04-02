@@ -44,7 +44,11 @@ public class PlayerConnectionObject : NetworkBehaviour {
     [Command]
     void CmdSetUpFPObjects()
     {
-        FindObjectOfType<GesturePanel>().GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+        GesturePanel[] gPanels = FindObjectsOfType<GesturePanel>();
+        foreach (var panel in gPanels)
+        {
+            panel.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+        }
     }
 
     //-------------------------------------RPC
