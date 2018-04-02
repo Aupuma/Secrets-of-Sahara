@@ -32,20 +32,45 @@ public class GestureManager : MonoBehaviour
     private int              strokeID;    //Número de trazo
     private Plane            objPlane;
     private bool             drawingTrail;
+    private float            drawingStartingTime;
 
-    public GameObject gCanvas;
     private GesturePanel currentActivePanel;
+    private GameObject gCanvas;
+    public Transform drawingPos;
 
     void Start()
     {
-        objPlane = new Plane(Camera.main.transform.forward * -1, this.transform.position);
+        gCanvas = transform.GetChild(0).gameObject;
+        gCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+        gCanvas.SetActive(false);
+
+        objPlane = new Plane(Camera.main.transform.forward * -1, drawingPos.position);
         trainingSet = LoadTrainingSet();
         strokeID = -1;
         drawingTrail = false;
     }
 
+    /// <summary>
+    /// Loads training gesture samples from XML files
+    /// </summary>
+    /// <returns></returns>
+    private Gesture[] LoadTrainingSet()
+    {
+        List<Gesture> gestures = new List<Gesture>();
+        Object[] gestureFiles = Resources.LoadAll("Gestures");
+        foreach (Object file in gestureFiles)
+        {
+            TextAsset textAsset = (TextAsset)file;
+            gestures.Add(GestureIO.ReadGesture(textAsset));
+        }
+        return gestures.ToArray();
+    }
+
     void Update()
     {
+        if (currentActivePanel == null)
+            return;
+
         if(Input.GetMouseButtonDown(0))
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)     
         {
@@ -80,6 +105,14 @@ public class GestureManager : MonoBehaviour
         currentActivePanel = panel;
     }
 
+    public void HidePanel()
+    {
+        gCanvas.SetActive(false);
+        currentActivePanel = null;
+    }
+
+
+
     #region Drawing the trail
     private void StartDrawing()
     {
@@ -97,6 +130,7 @@ public class GestureManager : MonoBehaviour
             drawingTrails.Add(thisTrail);
             strokeID++;
             drawingTrail = true;
+            drawingStartingTime = Time.unscaledTime;
         }
     }
 
@@ -122,8 +156,10 @@ public class GestureManager : MonoBehaviour
     {
         drawingTrail = false;
 
-        if (thisTrail != null && Vector3.Distance(thisTrail.transform.position, startPos) < 0.1)
+        if (thisTrail != null && Vector3.Distance(thisTrail.transform.position, startPos) < 0.1 
+            && Time.unscaledTime - drawingStartingTime < 0.5f)
         {
+            Debug.Log(points.Count);
             DestroyTrail(); //Si el trazo es muy pequeño lo destruimos
         }
     }
@@ -170,24 +206,8 @@ public class GestureManager : MonoBehaviour
         Debug.Log(result.name + " " + result.score);
         if (result.name == currentActivePanel.gestureName && result.score > 0.75f)
         {
-            currentActivePanel.SolutionFound();
+            currentActivePanel.CmdShowSolutionOverNetwork();
         }
     } 
     #endregion
-
-    /// <summary>
-    /// Loads training gesture samples from XML files
-    /// </summary>
-    /// <returns></returns>
-    private Gesture[] LoadTrainingSet()
-    {
-        List<Gesture> gestures = new List<Gesture>();
-        Object[] gestureFiles = Resources.LoadAll("Gestures");
-        foreach (Object file in gestureFiles)
-        {
-            TextAsset textAsset = (TextAsset)file;
-            gestures.Add(GestureIO.ReadGesture(textAsset));
-        }
-        return gestures.ToArray();
-    }
 }

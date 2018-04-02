@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using DG.Tweening;
+using System;
 
 public enum SwipeDirection
 {
@@ -48,8 +49,8 @@ public class PlayerMovement : NetworkBehaviour {
         }
         if(canAct) CheckShake();
         if(canAct) CheckSwipe();
+        CheckIfTouchedPanel();
     }
-
 
     #region Input Handlers
     private void SetAccelerometer()
@@ -67,7 +68,13 @@ public class PlayerMovement : NetworkBehaviour {
 
         if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
         {
-            CmdDash();
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 2f))
+                return;
+            else
+                CmdDash();
             Debug.Log("Shake event detected at time " + Time.time);
         }
     }
@@ -100,7 +107,16 @@ public class PlayerMovement : NetworkBehaviour {
 
         if (isSwiping(SwipeDirection.Up))
         {
-            CmdMove();
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            {
+                Debug.DrawRay(transform.position,fwd,Color.red,2f);
+                print("There is something in front of the object!");
+            }
+            else
+                CmdMove();
         }
         else if (isSwiping(SwipeDirection.Left))
         {
@@ -115,7 +131,25 @@ public class PlayerMovement : NetworkBehaviour {
     private bool isSwiping(SwipeDirection dir)
     {
         return (direction & dir) == dir;
-    } 
+    }
+
+    private void CheckIfTouchedPanel()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            {
+                if (hit.collider.tag == "GesturePanel")
+                {
+                    hit.collider.GetComponent<GesturePanel>().PanelTouched();
+                }
+            }
+        }
+    }
+
     #endregion
 
     #region Network Methods

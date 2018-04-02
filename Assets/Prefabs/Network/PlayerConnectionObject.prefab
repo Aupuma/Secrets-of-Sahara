@@ -88,4 +88,5 @@ MonoBehaviour:
     type: 2}
   ARPlayerCamera: {fileID: 1206050539615930, guid: 8ab9602dbf39d174fb79cd7d8ee451df,
     type: 2}
-  PlayerName: Anonymous
+  GestureManagerPrefab: {fileID: 1032570319179854, guid: f4dc6bd587a8e2841863fd29b28893f5,
+    type: 2}

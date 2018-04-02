@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GesturePanel : MonoBehaviour {
+public class GesturePanel : NetworkBehaviour {
 
     public string gestureName;
-    GestureManager gestureManager;
     private bool solved;
 
 	// Use this for initialization
 	void Start () {
-        gestureManager = FindObjectOfType<GestureManager>();
 	}
 	
 	// Update is called once per frame
@@ -18,12 +17,19 @@ public class GesturePanel : MonoBehaviour {
 		
 	}
 
-    private void OnMouseDown()
+    public void PanelTouched()
     {
-        gestureManager.ShowPanel(this);
+        GestureManager.instance.ShowPanel(this);
     }
 
-    public void SolutionFound()
+    [Command]
+    public void CmdShowSolutionOverNetwork()
+    {
+        RpcShowSolutionLocally();
+    }
+
+    [ClientRpc]
+    public void RpcShowSolutionLocally()
     {
         solved = true;
         GetComponent<MeshRenderer>().material.color = Color.green;
