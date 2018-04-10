@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerInteractions : NetworkBehaviour{
 
+    private Transform raycastInitialPos;
+
 	// Use this for initialization
 	void Start () {
         if (!hasAuthority)
@@ -14,6 +16,7 @@ public class PlayerInteractions : NetworkBehaviour{
         else
         {
             FindObjectOfType<GestureManager>().SetCamera(GetComponentInChildren<Camera>());
+            raycastInitialPos = transform.GetChild(1);
         }
     }
 	
@@ -30,10 +33,10 @@ public class PlayerInteractions : NetworkBehaviour{
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Vector3 fwd = raycastInitialPos.TransformDirection(Vector3.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, 1f))
             {
                 if (hit.collider.tag == "GesturePanel")
                 {

@@ -32,9 +32,12 @@ public class PlayerMovement : NetworkBehaviour {
     float lowPassFilterFactor;
     Vector3 lowPassValue;
 
+    private Transform raycastInitialPos;
+
     private void Start()
     {
         SetAccelerometer();
+        raycastInitialPos = transform.GetChild(1);
     }
 
     // Update is called once per frame
@@ -64,10 +67,10 @@ public class PlayerMovement : NetworkBehaviour {
 
         if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
         {
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Vector3 fwd = raycastInitialPos.TransformDirection(Vector3.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, fwd, out hit, 2f))
+            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, 2f))
                 return;
             else
                 CmdDash();
@@ -103,12 +106,12 @@ public class PlayerMovement : NetworkBehaviour {
 
         if (isSwiping(SwipeDirection.Up))
         {
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Vector3 fwd = raycastInitialPos.TransformDirection(Vector3.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, 1f))
             {
-                Debug.DrawRay(transform.position,fwd,Color.red,2f);
+                Debug.DrawRay(raycastInitialPos.position,fwd,Color.red,2f);
                 print("There is something in front of the object!");
             }
             else
