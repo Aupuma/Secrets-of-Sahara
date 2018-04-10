@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class PlayerInteractions : NetworkBehaviour{
 
     private Transform raycastInitialPos;
-    private Transform drawingTrailPos;
+    public Transform drawingTrailPos;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,6 @@ public class PlayerInteractions : NetworkBehaviour{
         }
         else
         {
-            drawingTrailPos = transform.GetChild(2);
             FindObjectOfType<GestureManager>().SetCamera(GetComponentInChildren<Camera>(),drawingTrailPos);
             raycastInitialPos = transform.GetChild(1);
         }

@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715453f35eeb7c940b98919404a7f6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawingTrailPos: {fileID: 4077378706087530}
 --- !u!114 &114324446085803668
 MonoBehaviour:
   m_ObjectHideFlags: 1
