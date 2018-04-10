@@ -46,11 +46,11 @@ public class GestureManager : MonoBehaviour
         drawingTrail = false;
     }
 
-    public void SetCamera(Camera cam)
+    public void SetCamera(Camera cam, Transform tr)
     {
-        gCanvas.GetComponent<Canvas>().worldCamera = cam;
-        gCanvas.SetActive(false);
-        objPlane = new Plane(cam.transform.forward * -1, drawingPos.position);
+        //gCanvas.GetComponent<Canvas>().worldCamera = cam;
+        //gCanvas.SetActive(false);
+        objPlane = new Plane(cam.transform.forward * -1, tr.position);
     }
 
     /// <summary>
@@ -90,10 +90,11 @@ public class GestureManager : MonoBehaviour
             FinishDrawing();
         }
 
+        /*
         if (Input.GetMouseButtonDown(1))
         {
             RecognizeGesture();
-        }
+        }*/
 
         //Vector2 localpoint;
         //if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingPanel, Input.mousePosition, canvas.worldCamera, out localpoint)) return;
