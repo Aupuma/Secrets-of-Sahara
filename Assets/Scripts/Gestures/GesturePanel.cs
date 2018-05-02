@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GesturePanel : NetworkBehaviour {
+public class GesturePanel : MonoBehaviour {
 
     GestureManager gestureManager;
     public string gestureName;
@@ -14,11 +14,11 @@ public class GesturePanel : NetworkBehaviour {
 		
 	}
 
-    public void PanelTouched()
+    public void ShowSolution()
     {
-        FindObjectOfType<GestureManager>().ShowPanel(this);
+        GetComponent<MeshRenderer>().material.color = Color.green;
     }
-
+    /*
     [Command]
     public void CmdShowSolutionOverNetwork()
     {
@@ -31,5 +31,5 @@ public class GesturePanel : NetworkBehaviour {
         solved = true;
         GetComponent<MeshRenderer>().material.color = Color.green;
         //Comunico al gameManager que he sido resuelto para que lo comunique en red
-    }
+    }*/
 }

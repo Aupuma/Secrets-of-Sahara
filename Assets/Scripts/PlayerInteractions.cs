@@ -10,14 +10,12 @@ public class PlayerInteractions : NetworkBehaviour{
 
 	// Use this for initialization
 	void Start () {
-        if (!hasAuthority)
+        raycastInitialPos = transform.GetChild(1);
+
+        if (isServer)
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
-        }
-        else
-        {
-            FindObjectOfType<GestureManager>().SetCamera(GetComponentInChildren<Camera>(),drawingTrailPos);
-            raycastInitialPos = transform.GetChild(1);
+            EnemyManager.instance.SetPlayerObj(this.gameObject);
         }
     }
 	
@@ -41,7 +39,7 @@ public class PlayerInteractions : NetworkBehaviour{
             {
                 if (hit.collider.tag == "GesturePanel")
                 {
-                    hit.collider.GetComponent<GesturePanel>().PanelTouched();
+                    //hit.collider.GetComponent<GesturePanel>().PanelTouched();
                 }
             }
         }

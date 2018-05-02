@@ -7,7 +7,6 @@ public class DrawingPanel : MonoBehaviour,IPointerDownHandler,IPointerUpHandler,
 
     public static DrawingPanel instance;
 
-    [HideInInspector]
     public bool pointerOnPanel = false;
 
     // Use this for initialization
