@@ -48,11 +48,12 @@ public class GesturePlatform : MonoBehaviour {
     public void DestroyEnemiesInside()
     {
         renderer.enabled = true;
-        foreach (var enemy in enemiesInside)
+        for (int i = enemiesInside.Count - 1; i >= 0; i--)
         {
-            Destroy(enemy);
+            Enemy enemyToDestroy = enemiesInside[i];
+            enemiesInside.RemoveAt(i);
+            Destroy(enemyToDestroy.gameObject);
         }
-        enemiesInside.RemoveAll((o) => o == null);
         Invoke("FadeEffect", 1f);
     }
 
