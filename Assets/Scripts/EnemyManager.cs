@@ -2,70 +2,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
+[System.Serializable]
+public class EnemyPathInfo
+{
+    public Transform spawnPoint;
+    public Transform objective;
+    public GameObject enemyPrefab;
+}
 
 public class EnemyManager : MonoBehaviour {
 
     public static EnemyManager instance;
 
-    private List<Enemy> enemyList;
     private int lastEnemySpawned = -1;
-    public Enemy[] enemyPrefabs;
-    public Transform[] enemySpawnPos;
-    public GameObject player;
-    private bool ready = false;
+    private bool ready = true;
 
     //Time settings
-    public float timeBetweenSpawns;
+    public float minTimeBetweenSpawns;
+    public float maxTimeBetweenSpawns;
+    private float currentTimeBetweenSpawns;
     private float lastSpawnTime = 0;
+
+    public EnemyPathInfo[] enemyPaths;
 
 	// Use this for initialization
 	void Start () {
         instance = this;
-        enemyList = new List<Enemy>();
+        currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(ready && Time.unscaledTime - lastSpawnTime >= timeBetweenSpawns)
+        if(ready && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
         {
+            currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             lastSpawnTime = Time.unscaledTime;
             SpawnEnemy();
         }
 	}
 
-    public void SetPlayerObj(GameObject gameObject)
-    {
-        player = gameObject;
-        ready = true;
-    }
-
     private void SpawnEnemy()
     {
         int rand = lastEnemySpawned;
-        while(rand == lastEnemySpawned)
+        while (rand == lastEnemySpawned)
         {
-            rand = UnityEngine.Random.Range(0, enemyPrefabs.Length); //Creamos nº random para elegir enemigo
+            rand = UnityEngine.Random.Range(0, enemyPaths.Length); //Creamos nº random para elegir enemigo
         }
         lastEnemySpawned = rand;
 
-        int j = UnityEngine.Random.Range(0, enemySpawnPos.Length);
-
-        Enemy newEnemy = Instantiate(enemyPrefabs[rand], enemySpawnPos[j].position, Quaternion.identity) as Enemy;
-        newEnemy.player = player;
-        enemyList.Add(newEnemy);
-    }
-
-    public void DestroyEnemiesOfGesture(string type)
-    {
-        for (int i = enemyList.Count - 1; i >= 0; i--)
-        {
-            //Eliminamos puntos generados por el trazo
-            if (enemyList[i].gestureType == type)
-            {
-                GameObject enemyToDestroy = enemyList[i].gameObject;
-                enemyList.Remove(enemyList[i]);
-                Destroy(enemyToDestroy);
-            }
-        }
+        GameObject enemy = Instantiate(enemyPaths[rand].enemyPrefab, enemyPaths[rand].spawnPoint.position, Quaternion.identity);
+        enemy.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[rand].objective.position);
     }
 }

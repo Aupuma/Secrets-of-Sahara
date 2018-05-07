@@ -15,7 +15,6 @@ public class PlayerInteractions : NetworkBehaviour{
         if (isServer)
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
-            EnemyManager.instance.SetPlayerObj(this.gameObject);
         }
     }
 	

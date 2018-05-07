@@ -140,7 +140,6 @@ public class GestureManager : MonoBehaviour
         GestureResult result = RecognizeGesture();
         if(result.score > 0.75f)
         {
-            EnemyManager.instance.DestroyEnemiesOfGesture(result.name);
         }
         //if (result.name == currentActivePanel.gestureName && result.score > 0.75f)
         //{

@@ -9,12 +9,12 @@ public class Enemy : MonoBehaviour {
     private NavMeshAgent agent;
 
     [HideInInspector]
-    public GameObject player;
+    public Transform objective;
 
 	// Use this for initialization
 	void Start () {
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(player.transform.position);
+        //agent.SetDestination(objective.transform.position);
     }
 
     // Update is called once per frame
