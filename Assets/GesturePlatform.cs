@@ -7,9 +7,13 @@ public class GesturePlatform : MonoBehaviour {
     public string gestureType;
     public List<Enemy> enemiesInside;
 
+    private MeshRenderer renderer;
+
 	// Use this for initialization
 	void Start () {
         enemiesInside = new List<Enemy>();
+        renderer = GetComponent<MeshRenderer>();
+        renderer.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -43,10 +47,17 @@ public class GesturePlatform : MonoBehaviour {
 
     public void DestroyEnemiesInside()
     {
+        renderer.enabled = true;
         foreach (var enemy in enemiesInside)
         {
             Destroy(enemy);
         }
         enemiesInside.RemoveAll((o) => o == null);
+        Invoke("FadeEffect", 1f);
+    }
+
+    public void FadeEffect()
+    {
+        renderer.enabled = false;
     }
 }

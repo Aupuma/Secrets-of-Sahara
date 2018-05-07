@@ -32,6 +32,8 @@ public class GestureManager : MonoBehaviour
     private float            drawingStartingTime;
     private Transform drawingPos;
 
+    public GesturePlatform[] gesturePlatforms;
+
     void Start()
     {
         trainingSet = LoadTrainingSet();
@@ -140,11 +142,12 @@ public class GestureManager : MonoBehaviour
         GestureResult result = RecognizeGesture();
         if(result.score > 0.75f)
         {
+            foreach (var platform in gesturePlatforms)
+            {
+                if (platform.gestureType == result.name)
+                    platform.DestroyEnemiesInside();
+            }
         }
-        //if (result.name == currentActivePanel.gestureName && result.score > 0.75f)
-        //{
-        //    currentActivePanel.ShowSolution();
-        //}
     } 
     #endregion
 }
