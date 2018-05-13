@@ -26,12 +26,17 @@ public class EnemyManager : MonoBehaviour {
     private float lastSpawnTime = 0;
 
     public EnemyPathInfo[] enemyPaths;
+    
+    [Range(0f, 1f)]
+    public float superEnemyProbability;
+    public GameObject superEnemyPrefab;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         instance = this;
         currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
-	}
+        NetDiscovery.instance.StartAsServer();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -52,7 +57,17 @@ public class EnemyManager : MonoBehaviour {
         }
         lastEnemySpawned = rand;
 
-        GameObject enemy = Instantiate(enemyPaths[rand].enemyPrefab, enemyPaths[rand].spawnPoint.position, Quaternion.identity);
-        enemy.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[rand].objective.position);
+        float prob = UnityEngine.Random.Range(0f, 1f);
+        Debug.Log(prob);
+        if (prob < superEnemyProbability) //Si el número aleatorio es menor que la probabilidad spawneamos el super enemigo
+        {
+            GameObject enemy = Instantiate(superEnemyPrefab, enemyPaths[rand].spawnPoint.position, Quaternion.identity);
+            enemy.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[rand].objective.position);
+        }
+        else //Si no spawneamos enemigo normal
+        {
+            GameObject enemy = Instantiate(enemyPaths[rand].enemyPrefab, enemyPaths[rand].spawnPoint.position, Quaternion.identity);
+            enemy.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[rand].objective.position);
+        }
     }
 }

@@ -8,7 +8,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     public GameObject PlayerUnitPrefab;
     public GameObject ARPlayerCamera;
-    private GameObject playerObject;
 
     void Start () {
         //Es éste mi PlayerObject local?
@@ -19,8 +18,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
         if(!isServer) //Soy el jugador en primera persona
         {
-            CmdSpawnMyUnit();
-            CmdSetUpFPObjects();
+            CmdSpawnPOVPlayerObj();
         }
         //FindObjectOfType<GameManager>().connection = this;
     }
@@ -29,22 +27,32 @@ public class PlayerConnectionObject : NetworkBehaviour {
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor
 
     [Command]
-    void CmdSpawnMyUnit()
+    void CmdSpawnPOVPlayerObj()
     {
-        playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
+        GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
         NetworkServer.SpawnWithClientAuthority(playerObject,connectionToClient);
+        RpcAssignConnectionToPOVPlayer(playerObject);
     }
 
     [Command]
-    void CmdSetUpFPObjects()
+    public void CmdActivateRemoteTraps()
     {
+        RpcActivateRemoteTraps();
     }
+
 
     //-------------------------------------RPC
     //RPCs son funciones especiales que SOLO se ejecutan en los clientes
+    [ClientRpc]
+    void RpcAssignConnectionToPOVPlayer(GameObject playerObject)
+    {
+        if (!isServer) playerObject.GetComponent<PlayerInteractions>().myConnection = this;
+    }
 
-
-
-
+    [ClientRpc]
+    void RpcActivateRemoteTraps()
+    {
+        if (isServer) TrapManager.instance.TrapsOnOff();
+    }
     //---------------------------------------
 }

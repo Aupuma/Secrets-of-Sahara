@@ -14,6 +14,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
     [SyncVar]
     public int seqIndex = 0;
     public bool solved = false;
+    public bool isDebug = false;
 
     //References
     private SequenceButton[] buttons;
@@ -30,7 +31,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
             sequencePanel.SetActive(true);
         else
         {
-            NetDiscovery.instance.StartAsServer();
+            if(isDebug) NetDiscovery.instance.StartAsServer();
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour {
 
@@ -15,8 +16,9 @@ public class GameManager : NetworkBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
+    void Start ()
+    {
+        SceneManager.LoadScene("GameTestScene", LoadSceneMode.Additive);
 	}
 	
 	// Update is called once per frame
