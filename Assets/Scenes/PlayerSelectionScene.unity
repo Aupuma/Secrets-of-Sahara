@@ -1251,7 +1251,7 @@ Prefab:
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_OnlineScene
-      value: 
+      value: MasterScene
       objectReference: {fileID: 0}
     - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}

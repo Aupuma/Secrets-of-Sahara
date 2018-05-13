@@ -383,7 +383,7 @@ public class NetworkSceneManager : NetworkBehaviour
 
     private void SendCLientSceneUnloadedMessage(string sceneName)
     {
-        GameNetworkManager.singleton.client.Send(NetworkMessages.CLIENT_SCENE_UNLOADED, new StringMessage(sceneName));
+        GameManager.instance.client.Send(NetworkMessages.CLIENT_SCENE_UNLOADED, new StringMessage(sceneName));
     }
 
     private void SendClientActiveSceneChangedMessage(string sceneName)
