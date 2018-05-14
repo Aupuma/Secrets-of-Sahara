@@ -18,6 +18,8 @@ public class PlayerMovement : NetworkBehaviour {
 
     bool canAct = true;
     public float actionTime = 0.5f;
+    public float movementDistance = 2f;
+    public float dashDistance = 4f;
 
     private SwipeDirection direction;
     private Vector3 touchPosition;
@@ -172,7 +174,7 @@ public class PlayerMovement : NetworkBehaviour {
     public void RpcMove()
     {
         canAct = false;
-        transform.DOMove(transform.position + transform.forward, actionTime).OnComplete(ActionFinished);
+        transform.DOMove(transform.position + transform.forward * movementDistance, actionTime).OnComplete(ActionFinished);
     }
 
     [Command]
@@ -185,7 +187,7 @@ public class PlayerMovement : NetworkBehaviour {
     public void RpcDash()
     {
         canAct = false;
-        transform.DOMove(transform.position + transform.forward * 2, actionTime).OnComplete(ActionFinished);
+        transform.DOMove(transform.position + transform.forward * dashDistance, actionTime).OnComplete(ActionFinished);
     }
 
     void ActionFinished()
