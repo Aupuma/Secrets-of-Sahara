@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayerSelectionScene.unity
     guid: c742a5ed976b7944d8feaefa2d61d116
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Old/DummyScene.unity
     guid: c4100fe63762e8e47a3a38223f178de0
   - enabled: 1
     path: Assets/Scenes/GameTestScene.unity
     guid: 57407896835baa6409817ec45e804209
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SequencePuzzle.unity
     guid: 05b648c9f4ebfe349bb034ed07d3c2eb
   - enabled: 1

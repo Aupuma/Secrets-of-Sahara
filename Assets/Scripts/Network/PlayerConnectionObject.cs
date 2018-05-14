@@ -10,6 +10,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
     public GameObject ARPlayerCamera;
 
     void Start () {
+        DontDestroyOnLoad(gameObject);
+
         //Es éste mi PlayerObject local?
         if (isLocalPlayer == false)
         {

@@ -8,29 +8,20 @@ public class GameManager : NetworkBehaviour {
 
     public static GameManager instance;
 
-    public PlayerConnectionObject connection;
+    public string[] scenes;
+    private int sceneIndex;
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         instance = this;
+        sceneIndex = 0;
     }
 
-    // Use this for initialization
-    void Start ()
+    public void LoadNextScene()
     {
-        if (isServer)
-        {
-            NetDiscovery.instance.StartAsServer();
-        }
-        else
-        {
-            NetworkManager.singleton.ServerChangeScene("GameTestScene");
-        }
+        sceneIndex++;
+        NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
+    }
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

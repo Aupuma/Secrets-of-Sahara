@@ -11,6 +11,8 @@ public class PlayerInteractions : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        DontDestroyOnLoad(gameObject);
+
         raycastInitialPos = transform.GetChild(1);
 
         if (isServer)
