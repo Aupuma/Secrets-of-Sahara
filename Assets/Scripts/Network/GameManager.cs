@@ -20,7 +20,7 @@ public class GameManager : NetworkBehaviour {
 
     public void LoadNextScene()
     {
-        sceneIndex++;
+        //sceneIndex++;
         NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
     }
 
