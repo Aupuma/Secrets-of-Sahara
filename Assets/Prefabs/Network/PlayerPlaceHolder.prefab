@@ -260,6 +260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionTime: 0.2
+  movementDistance: 1.5
+  dashDistance: 3
 --- !u!124 &124404810486234058
 Behaviour:
   m_ObjectHideFlags: 1
