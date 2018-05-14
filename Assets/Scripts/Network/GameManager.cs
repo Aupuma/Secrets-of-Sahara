@@ -18,7 +18,15 @@ public class GameManager : NetworkBehaviour {
     // Use this for initialization
     void Start ()
     {
-        SceneManager.LoadScene("GameTestScene", LoadSceneMode.Additive);
+        if (isServer)
+        {
+            NetDiscovery.instance.StartAsServer();
+        }
+        else
+        {
+            NetworkManager.singleton.ServerChangeScene("GameTestScene");
+        }
+
 	}
 	
 	// Update is called once per frame
