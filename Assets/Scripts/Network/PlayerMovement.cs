@@ -18,7 +18,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     bool canAct = true;
     public float actionTime = 0.5f;
-    public float movementDistance = 2f;
+    public float movementDistance = 1.5f;
     public float dashDistance = 4f;
 
     private SwipeDirection direction;
