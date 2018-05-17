@@ -115,7 +115,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
         }
         else
         {
-            RpcRestartSequence();
+            CmdGenerateNewSequence();
             seqIndex = 0;
         }
 
@@ -123,6 +123,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
         {
             solved = true;
             seqIndex = 0;
+            AppearTween.instance.HideObjects();
         }
     }
 
