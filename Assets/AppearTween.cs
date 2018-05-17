@@ -11,6 +11,8 @@ public class AppearTween : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        instance = this;
+
         initialTweener = this.transform.DOMoveY(-2, 2f).From().
             OnComplete(AnimationCompleted).
             OnRewind(AnimationRewinded).
