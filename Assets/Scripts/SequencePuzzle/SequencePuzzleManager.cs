@@ -26,15 +26,14 @@ public class SequencePuzzleManager : NetworkBehaviour {
 
 	void Start () {
         instance = this;
-
-        if (isServer == false)
-            sequencePanel.SetActive(true);
-        else
+        
+        if(isServer)
         {
             if(isDebug) NetDiscovery.instance.StartAsServer();
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
+            CmdGenerateNewSequence();
         }
 	}
 
