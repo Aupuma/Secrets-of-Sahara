@@ -8318,7 +8318,7 @@ MonoBehaviour:
   - {fileID: 1297727505}
   POV_Player_Objects:
   - {fileID: 712054164}
-  puzzle: {fileID: 0}
+  puzzle: {fileID: 425414429}
 --- !u!114 &2025838594
 MonoBehaviour:
   m_ObjectHideFlags: 0
