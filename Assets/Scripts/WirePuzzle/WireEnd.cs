@@ -8,7 +8,6 @@ public class WireEnd : WireObj {
     public MeshRenderer endMesh;
     public Material solutionConnexionMaterial;
     private Material originalMaterial;
-    public bool solved = false;
     public bool connected = false;
 
     private void Start()
@@ -21,13 +20,8 @@ public class WireEnd : WireObj {
         if(mat == solutionConnexionMaterial)
         {
             connected = true;
+            WirePuzzleManager.instance.CheckIfSolved();
             endMesh.material = mat;
-
-            if (!solved)
-            {
-                solved = true;
-                //LLAMAMOS A EVENTO DE RESOLUCIÓN
-            }
         }
     }
 

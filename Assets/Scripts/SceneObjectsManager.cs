@@ -5,11 +5,18 @@ using UnityEngine.Networking;
 
 public class SceneObjectsManager : NetworkBehaviour {
 
+    public static SceneObjectsManager instance;
+
     public GameObject[] AR_Player_Objects;
     public GameObject[] POV_Player_Objects;
+    private bool hasStarted = false;
+    private Animator animator;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        instance = this;
+        animator = GetComponent<Animator>();
+
         if (isServer) //Somos el jugador en AR
         {
             foreach (var obj in POV_Player_Objects)
@@ -25,4 +32,19 @@ public class SceneObjectsManager : NetworkBehaviour {
             }
         }
 	}
+
+    public void StartPuzzle()
+    {
+        hasStarted = true;
+    }
+
+    public void HideObjects()
+    {
+        animator.SetTrigger("Disappear");
+    }
+
+    public void LoadNextLevel()
+    {
+        if (hasStarted) GameManager.instance.LoadNextScene();
+    }
 }

@@ -123,7 +123,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
         {
             solved = true;
             seqIndex = 0;
-            AppearTween.instance.HideObjects();
+            SceneObjectsManager.instance.HideObjects();
         }
     }
 

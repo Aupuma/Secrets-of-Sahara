@@ -14,10 +14,10 @@ public class RotatingPuzzleManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        RaycastHit hit = new RaycastHit();
+	void Update () {  
         if (Input.GetMouseButtonDown(0))
         {
+            RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -36,7 +36,7 @@ public class RotatingPuzzleManager : MonoBehaviour {
         {
             if (!piece.isCorrect) return; //Si hay alguna incorrecta finalizamos
         }
-        solved = true;
+        SceneObjectsManager.instance.HideObjects();
         //Si llegamos al final del bucle es que todas son correctas
 
     }
