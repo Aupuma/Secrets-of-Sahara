@@ -36,7 +36,7 @@ public class SceneObjectsManager : NetworkBehaviour {
 
     public void StartPuzzle()
     {
-        puzzle.SetActive(true);
+        SequencePuzzleManager.instance.CmdGenerateNewSequence();
         hasStarted = true;
     }
 

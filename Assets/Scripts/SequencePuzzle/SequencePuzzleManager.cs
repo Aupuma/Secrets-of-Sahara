@@ -33,7 +33,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
-            CmdGenerateNewSequence();
+            //CmdGenerateNewSequence();
         }
 	}
 
@@ -66,6 +66,8 @@ public class SequencePuzzleManager : NetworkBehaviour {
     [Command]
     public void CmdGenerateNewSequence()
     {
+        Debug.Log("Generating new sequence");
+
         seqIndex = 0;
 
         RpcRestartSequence();
