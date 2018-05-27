@@ -6,18 +6,19 @@ using UnityEngine.UI;
 public class SequenceButton : MonoBehaviour {
 
     Animator anim;
-    public Image img;
+    MeshRenderer textureRenderer;
     public int id;
 
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
+        textureRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
 	}
 
-    public void SetInfo(int n, Sprite spr)
+    public void SetInfo(int n, Material mat)
     {
         id = n;
-        img.sprite = spr;
+        textureRenderer.material = mat;
     }
 
     public void ButtonPressed()

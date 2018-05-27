@@ -19,10 +19,12 @@ public class SequencePuzzleManager : NetworkBehaviour {
     //References
     private SequenceButton[] buttons;
     public int[] btnIds;
-    public Sprite[] symbolTextures;
+    public Material[] symbolTextures;
     public GameObject sequencePanel;
-    public Image[] sequencePanelSymbols;
-    public Image[] sequencePanelBooleans;
+    public MeshRenderer[] sequencePanelSymbols;
+    public MeshRenderer[] sequencePanelBooleans;
+    public Material wrongBoolMaterial;
+    public Material correctBoolMaterial;
 
 	void Start () {
         instance = this;
@@ -136,7 +138,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
         {
             for (int i = 0; i < seq.Length; i++)
             {
-                sequencePanelSymbols[i].sprite = symbolTextures[seq[i]];
+                sequencePanelSymbols[i].material = symbolTextures[seq[i]];
             }
         }
     }
@@ -146,7 +148,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
     {
         if (isServer == false)
         {
-            sequencePanelBooleans[seqIndex].color = Color.green;
+            sequencePanelBooleans[seqIndex].material = correctBoolMaterial;
         }
     }
 
@@ -155,9 +157,9 @@ public class SequencePuzzleManager : NetworkBehaviour {
     {
         if (isServer == false)
         {
-            foreach (var imgBool in sequencePanelBooleans)
+            foreach (var rendBool in sequencePanelBooleans)
             {
-                imgBool.color = Color.red;
+                rendBool.material = wrongBoolMaterial;
             }
         }
     }
