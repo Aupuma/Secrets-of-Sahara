@@ -1,0 +1,250 @@
+fileFormatVersion: 2
+guid: 7c78bdda683e3a84b96bc99344e03322
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Floor
+    100002: Fspot001
+    100004: //RootNode
+    100006: Pillar1
+    100008: Pillar2
+    100010: Pillar3
+    100012: Pillar4
+    100014: Pillar5
+    100016: Pillar6
+    100018: Pillar7
+    100020: Pillar8
+    100022: Pillar9
+    400000: Floor
+    400002: Fspot001
+    400004: //RootNode
+    400006: Pillar1
+    400008: Pillar2
+    400010: Pillar3
+    400012: Pillar4
+    400014: Pillar5
+    400016: Pillar6
+    400018: Pillar7
+    400020: Pillar8
+    400022: Pillar9
+    2100000: FloorMat
+    2100002: Pillar1Mat
+    2100004: Pillar2Mat
+    2100006: Pillar3Mat
+    2100008: Pillar6Mat
+    2100010: Pillar5Mat
+    2100012: Pillar4Mat
+    2100014: Pillar7Mat
+    2100016: Pillar8Mat
+    2100018: Pillar9Mat
+    2300000: Floor
+    2300002: Pillar1
+    2300004: Pillar2
+    2300006: Pillar3
+    2300008: Pillar4
+    2300010: Pillar5
+    2300012: Pillar6
+    2300014: Pillar7
+    2300016: Pillar8
+    2300018: Pillar9
+    3300000: Floor
+    3300002: Pillar1
+    3300004: Pillar2
+    3300006: Pillar3
+    3300008: Pillar4
+    3300010: Pillar5
+    3300012: Pillar6
+    3300014: Pillar7
+    3300016: Pillar8
+    3300018: Pillar9
+    4300000: Floor
+    4300002: Pillar1
+    4300004: Pillar2
+    4300006: Pillar3
+    4300008: Pillar6
+    4300010: Pillar5
+    4300012: Pillar4
+    4300014: Pillar7
+    4300016: Pillar8
+    4300018: Pillar9
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorMat
+    second: {fileID: 2100000, guid: d83dda374e64c5241895081480e93e47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar1Mat
+    second: {fileID: 2100000, guid: 72b2e6a801af9a147883c490e9077477, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar2Mat
+    second: {fileID: 2100000, guid: a52cb80bb6484cd468c8b9413a5fd958, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar3Mat
+    second: {fileID: 2100000, guid: 43f7b1c0ada309f4bbbe5fe386130ee1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar4Mat
+    second: {fileID: 2100000, guid: e22ce5f5e6e01f24da8c909f4b2b3247, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar5Mat
+    second: {fileID: 2100000, guid: 237b246c44e7c3947a84cdca42b6cd6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar6Mat
+    second: {fileID: 2100000, guid: b437d3612e8dd404f875c40e57ed3a75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar7Mat
+    second: {fileID: 2100000, guid: 10b34314fc0962e429a5d2d8d99ac3c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar8Mat
+    second: {fileID: 2100000, guid: 8a6c94db4820d0648b65accf96a845cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar9Mat
+    second: {fileID: 2100000, guid: 9db3b8ca1e1c17b49b848c394f2e7e0f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: FloorLightingMap
+    second: {fileID: 2800000, guid: efbe1a2299158b640af9bffa4324563c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar1LightingMap
+    second: {fileID: 2800000, guid: 7bfe2536bfaab1f47b3a7d54d648583f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar2LightingMap
+    second: {fileID: 2800000, guid: af2071dbb598d7d458db250f598ad481, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar3LightingMap
+    second: {fileID: 2800000, guid: c35f17ecf9021a643a63dece0fc9fff6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar4LightingMap
+    second: {fileID: 2800000, guid: be443d4d755c0b44985db250d2baad72, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar5LightingMap
+    second: {fileID: 2800000, guid: 9ad58b92d1969c44182a7d54961be001, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar6LightingMap
+    second: {fileID: 2800000, guid: 21c0c1fe06596b441b1c99475edf858a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar7LightingMap
+    second: {fileID: 2800000, guid: 734649687b0a73440ae46d3d3b837c76, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar8LightingMap
+    second: {fileID: 2800000, guid: cfb4df12fbb6f4848819208455a014d0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar9LightingMap
+    second: {fileID: 2800000, guid: 1bc519d6d00c4294a8c82a9040f3ee35, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

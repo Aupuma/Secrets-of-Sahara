@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class RotatingPuzzleManager : MonoBehaviour {
+public class RotatingPuzzleManager : NetworkBehaviour {
 
     public static RotatingPuzzleManager instance;
     public RotatingPuzzlePiece[] puzzlePieces;
+    public GameObject[] pillars;
     public bool solved = false;
 
 	// Use this for initialization
