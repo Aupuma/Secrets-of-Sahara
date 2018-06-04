@@ -47,13 +47,6 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         }
     }
 
-    //[Command]
-    //public void CmdRotateElements(int index)
-    //{
-    //    isRotating = true;
-    //    RpcRotateElements(index);
-    //}
-
     [ClientRpc]
     public void RpcRotateElements(int index)
     {
