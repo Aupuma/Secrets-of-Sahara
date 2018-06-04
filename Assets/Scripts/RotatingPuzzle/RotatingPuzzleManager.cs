@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -6,40 +7,73 @@ using UnityEngine.Networking;
 public class RotatingPuzzleManager : NetworkBehaviour {
 
     public static RotatingPuzzleManager instance;
-    public RotatingPuzzlePiece[] puzzlePieces;
-    public GameObject[] pillars;
-    public bool solved = false;
 
-	// Use this for initialization
-	void Start () {
+    public float rotationTime = 0.35f;
+    public Transform[] puzzlePieces;
+    public Transform[] pillars;
+
+    [SyncVar]
+    private bool isRotating = false;
+
+    // Use this for initialization
+    void Start () {
         instance = this;
 	}
 	
 	// Update is called once per frame
 	void Update () {  
-        if (Input.GetMouseButtonDown(0))
+        if (!isServer && !isRotating && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit = new RaycastHit();
-            // Construct a ray from the current touch coordinates
+            // Detectamos el touch en las piezas
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "RotatingPiece")
                 {
-                    hit.collider.GetComponent<RotatingPuzzlePiece>().Rotate();
+                    int rotIndex = int.Parse(hit.collider.name.Substring(hit.collider.name.Length - 1));
+                    CmdRotateElements(rotIndex);
                 }
             }
         }
     }
 
-    public void CheckIfSolved()
+    [Command]
+    public void CmdRotateElements(int index)
     {
-        foreach (var piece in puzzlePieces)
+        RpcRotateElements(index);
+    }
+
+    [ClientRpc]
+    public void RpcRotateElements(int index)
+    {
+        if (isServer) //Rotamos el pilar en el jugador AR
         {
-            if (!piece.isCorrect) return; //Si hay alguna incorrecta finalizamos
+            pillars[index].DOLocalRotate(new Vector3(
+                pillars[index].localEulerAngles.x,
+                pillars[index].localEulerAngles.y + 90f,
+                pillars[index].localEulerAngles.z), 
+                rotationTime).
+                OnComplete(CmdRotationFinished); 
+        }
+        else //Rotamos la pieza en el jugador POV
+        {
+            puzzlePieces[index].DOLocalRotate(new Vector3(
+                puzzlePieces[index].localEulerAngles.x,
+                puzzlePieces[index].localEulerAngles.y,
+                puzzlePieces[index].localEulerAngles.z + 90f),
+                rotationTime);
+        }
+    }
+
+    [Command]
+    public void CmdRotationFinished()
+    {
+        isRotating = false;
+        foreach (var pillar in pillars)
+        {
+            if (pillar.localEulerAngles.y != 0) return;
         }
         SceneObjectsManager.instance.HideObjects();
-        //Si llegamos al final del bucle es que todas son correctas
-
     }
 }

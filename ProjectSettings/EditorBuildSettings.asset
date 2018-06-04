@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GestureElimination.unity
     guid: d6490414a4fc1d348ae251c0f7651bc2
+  - enabled: 1
+    path: Assets/Scenes/RotatingPieces.unity
+    guid: 8e23025ec3d64824daf590808672c47f
   m_configObjects: {}
