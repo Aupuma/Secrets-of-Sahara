@@ -31,6 +31,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
             {
                 if (hit.collider.tag == "RotatingPiece")
                 {
+                    Debug.Log(hit.collider.name);
                     int rotIndex = int.Parse(hit.collider.name.Substring(hit.collider.name.Length - 1));
                     CmdRotateElements(rotIndex);
                 }
