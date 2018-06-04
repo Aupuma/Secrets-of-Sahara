@@ -31,8 +31,8 @@ public class RotatingPuzzleManager : NetworkBehaviour {
             {
                 if (hit.collider.tag == "RotatingPiece")
                 {
-                    Debug.Log(hit.collider.name);
                     int rotIndex = int.Parse(hit.collider.name.Substring(hit.collider.name.Length - 1));
+                    Debug.Log("RotIndex: " + rotIndex);
                     CmdRotateElements(rotIndex);
                 }
             }
@@ -50,6 +50,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
     {
         if (isServer) //Rotamos el pilar en el jugador AR
         {
+            Debug.Log("rotating pillar");
             pillars[index].DOLocalRotate(new Vector3(
                 pillars[index].localEulerAngles.x,
                 pillars[index].localEulerAngles.y + 90f,
@@ -59,6 +60,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         }
         else //Rotamos la pieza en el jugador POV
         {
+            Debug.Log("rotating piece");
             puzzlePieces[index].DOLocalRotate(new Vector3(
                 puzzlePieces[index].localEulerAngles.x,
                 puzzlePieces[index].localEulerAngles.y,
