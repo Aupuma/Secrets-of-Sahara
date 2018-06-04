@@ -9,6 +9,8 @@ public class PlayerInteractions : NetworkBehaviour {
     public Transform drawingTrailPos;
     public PlayerConnectionObject myConnection;
 
+    public static PlayerInteractions instance;
+
 	// Use this for initialization
 	void Start () {
         DontDestroyOnLoad(gameObject);
@@ -19,6 +21,8 @@ public class PlayerInteractions : NetworkBehaviour {
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
         }
+
+        instance = this;
     }
 	
 	// Update is called once per frame
@@ -47,6 +51,7 @@ public class PlayerInteractions : NetworkBehaviour {
             }
         }
         */
+        /*
         RaycastHit hit = new RaycastHit();
         if (Input.GetMouseButtonDown(0))
         {
@@ -60,6 +65,12 @@ public class PlayerInteractions : NetworkBehaviour {
                     myConnection.CmdActivateRemoteTraps();
                 }
             }
-        }
+        }*/
+    }
+    
+    [Command]
+    public void CmdRotationCall(int index)
+    {
+        RotatingPuzzleManager.instance.RpcRotateElements(index);
     }
 }

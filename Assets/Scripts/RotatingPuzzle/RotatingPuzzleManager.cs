@@ -25,43 +25,41 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         if (!isServer && !isRotating && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit = new RaycastHit();
+
             // Detectamos el touch en las piezas
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "RotatingPiece")
                 {
+                    //Comparamos la pieza tocada con las que hay en el array
                     for (int i = 0; i < puzzlePieces.Length; i++)
                     {
                         if(puzzlePieces[i] == hit.collider.transform)
                         {
                             Debug.Log(i);
-                            CmdRotateElements(i);
+                            PlayerInteractions.instance.CmdRotationCall(i);
                             break;
                         }
                     }
-                    /*
-                    int rotIndex = int.Parse(hit.collider.name.Substring(hit.collider.name.Length - 1));
-                    Debug.Log("RotIndex: " + rotIndex);
-                    */
                 }
             }
         }
     }
 
-    [Command]
-    public void CmdRotateElements(int index)
-    {
-        isRotating = true;
-        RpcRotateElements(index);
-    }
+    //[Command]
+    //public void CmdRotateElements(int index)
+    //{
+    //    isRotating = true;
+    //    RpcRotateElements(index);
+    //}
 
     [ClientRpc]
     public void RpcRotateElements(int index)
     {
         if (isServer) //Rotamos el pilar en el jugador AR
         {
-            Debug.Log("rotating pillar");
+            isRotating = true;
             pillars[index].DOLocalRotate(new Vector3(
                 pillars[index].localEulerAngles.x,
                 pillars[index].localEulerAngles.y + 90f,
