@@ -54,9 +54,9 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         {
             isRotating = true;
             pillars[index].DOLocalRotate(new Vector3(
-                pillars[index].rotation.x,
-                pillars[index].rotation.y + 90f,
-                pillars[index].rotation.z), 
+                pillars[index].localRotation.x,
+                pillars[index].localRotation.y + 90f,
+                pillars[index].localRotation.z), 
                 rotationTime).
                 OnComplete(CmdRotationFinished); 
         }
