@@ -6,24 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/GesturePuzzleScene.unity
+    guid: d6490414a4fc1d348ae251c0f7651bc2
+  - enabled: 1
+    path: Assets/Scenes/Maze1.unity
+    guid: 57407896835baa6409817ec45e804209
+  - enabled: 1
+    path: Assets/Scenes/PerspectivePuzzleScene.unity
+    guid: 8e23025ec3d64824daf590808672c47f
+  - enabled: 1
     path: Assets/Scenes/PlayerSelectionScene.unity
     guid: c742a5ed976b7944d8feaefa2d61d116
   - enabled: 1
-    path: Assets/Scenes/Old/DummyScene.unity
-    guid: c4100fe63762e8e47a3a38223f178de0
-  - enabled: 1
-    path: Assets/Scenes/GameTestScene.unity
-    guid: 57407896835baa6409817ec45e804209
-  - enabled: 1
-    path: Assets/Scenes/SequencePuzzle.unity
+    path: Assets/Scenes/SequencePuzzleScene.unity
     guid: 05b648c9f4ebfe349bb034ed07d3c2eb
   - enabled: 1
-    path: Assets/Scenes/MasterScene.unity
-    guid: f61a4a54b51d0c94084c92ebb9400e57
-  - enabled: 1
-    path: Assets/Scenes/GestureElimination.unity
-    guid: d6490414a4fc1d348ae251c0f7651bc2
-  - enabled: 1
-    path: Assets/Scenes/RotatingPieces.unity
-    guid: 8e23025ec3d64824daf590808672c47f
+    path: Assets/Scenes/WirePuzzleScene.unity
+    guid: 7fece825f0f1f0b43b4321554880f535
   m_configObjects: {}
