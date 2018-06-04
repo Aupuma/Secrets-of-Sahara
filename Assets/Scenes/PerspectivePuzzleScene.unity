@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8859eb782f7ea49967c1445dc5875e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationTime: 0.35
+  rotationTime: 0.5
   puzzlePieces:
   - {fileID: 1352338825}
   - {fileID: 742192819}

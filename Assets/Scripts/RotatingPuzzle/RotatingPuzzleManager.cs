@@ -54,9 +54,9 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         {
             isRotating = true;
             pillars[index].DOLocalRotate(new Vector3(
-                pillars[index].localEulerAngles.x,
-                pillars[index].localEulerAngles.y + 90f,
-                pillars[index].localEulerAngles.z), 
+                pillars[index].rotation.x,
+                pillars[index].rotation.y + 90f,
+                pillars[index].rotation.z), 
                 rotationTime).
                 OnComplete(CmdRotationFinished); 
         }
@@ -77,7 +77,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         isRotating = false;
         foreach (var pillar in pillars)
         {
-            if (pillar.localEulerAngles.y != 0) return;
+            if (pillar.rotation.y != 0) return;
         }
         SceneObjectsManager.instance.HideObjects();
     }
