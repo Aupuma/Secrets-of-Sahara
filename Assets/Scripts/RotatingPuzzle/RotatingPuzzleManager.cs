@@ -31,9 +31,19 @@ public class RotatingPuzzleManager : NetworkBehaviour {
             {
                 if (hit.collider.tag == "RotatingPiece")
                 {
+                    for (int i = 0; i < puzzlePieces.Length; i++)
+                    {
+                        if(puzzlePieces[i] == hit.collider.transform)
+                        {
+                            Debug.Log(i);
+                            CmdRotateElements(i);
+                            break;
+                        }
+                    }
+                    /*
                     int rotIndex = int.Parse(hit.collider.name.Substring(hit.collider.name.Length - 1));
                     Debug.Log("RotIndex: " + rotIndex);
-                    CmdRotateElements(rotIndex);
+                    */
                 }
             }
         }
@@ -42,6 +52,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
     [Command]
     public void CmdRotateElements(int index)
     {
+        isRotating = true;
         RpcRotateElements(index);
     }
 
