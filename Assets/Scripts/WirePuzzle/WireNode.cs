@@ -2,35 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WireNode : WireObj {
+public class WireNode : MonoBehaviour {
 
     public WireNode internalConnection; //Nodo del lado opuesto del cable
+    [HideInInspector] public WireNode externalConnection; //Nodo que se conectará externamente
+    [HideInInspector] public MeshRenderer wireRenderer;
+    [HideInInspector] public Material originalMaterial;
+    [HideInInspector] public Material currentConnexionMaterial;
+    [HideInInspector] public bool connected = false;
+    [HideInInspector] public int connectionOrder = -1;
 
-    [HideInInspector]
-    public WireNode externalConnection; //Nodo que se conectará externamente
-
-    private WireEnd currentWireEnd; 
-
-    public bool connected = false;
-
-    private MeshRenderer wireRenderer;
-    private Material originalMaterial;
-    private Material currentConnexionMaterial;
-
-    public int connectionOrder;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public virtual void Start () {
         wireRenderer = transform.parent.GetComponent<MeshRenderer>();
         originalMaterial = wireRenderer.material;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void Connect(WireObj callNode,int callOrder, Material conexMaterial)
+    public virtual void Connect(WireNode callNode,int callOrder, Material conexMaterial)
     {
         connected = true;
         currentConnexionMaterial = conexMaterial;
@@ -41,7 +29,6 @@ public class WireNode : WireObj {
             //Si el nodo que dice que nos conectemos es el del otro lado del cable
             //le decimos al nodo externo (si hay) que se conecte
             if (externalConnection != null) externalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
-            else if (currentWireEnd != null) currentWireEnd.ConnectAndCheckIfSolved(currentConnexionMaterial);
         }
         else 
         {
@@ -52,47 +39,42 @@ public class WireNode : WireObj {
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if(other.tag == "WireNode")
         {
             externalConnection = other.GetComponent<WireNode>();
-            if (connected && externalConnection.connected==false) externalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
-        }
-        else if(other.tag == "WireEnd")
-        {
-            currentWireEnd = other.GetComponent<WireEnd>();
-            if (connected) currentWireEnd.ConnectAndCheckIfSolved(currentConnexionMaterial);
+
+            if (connected && externalConnection.connected==false)
+                externalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
         }
     }
 
-    public void Disconnect(WireObj callNode)
+    public virtual void Disconnect(WireNode callNode)
     {
         connected = false;
-        if(callNode == internalConnection)
+        connectionOrder = -1;
+
+        if (callNode == internalConnection) //Si la desconexión se llama desde el nodo interno
         {
             if (externalConnection != null) externalConnection.Disconnect(this);
-            else if (currentWireEnd != null) currentWireEnd.Disconnect();
         }
-        else
+        else //Si la desconexión se ha pedido desde el nodo externo
         {
             wireRenderer.material = originalMaterial;
             internalConnection.Disconnect(this);
         }
-        connectionOrder = -1;
     }
 
-    public void OnTriggerExit(Collider other)
+    public virtual void OnTriggerExit(Collider other)
     {
         if (other.tag == "WireNode")
         {
-            if (connected && externalConnection.connectionOrder>connectionOrder)
+            //Si estamos conectados y hay nodo externo conectado a nosotros 
+            //si su orden de conexion es posterior le mandamos a desconectar
+            if (connected && externalConnection.connectionOrder > connectionOrder)
                 externalConnection.Disconnect(this);
             externalConnection = null;
-        }
-        else if(other.tag == "WireEnd")
-        {
-            if (connected) currentWireEnd.Disconnect();
         }
     }
 }

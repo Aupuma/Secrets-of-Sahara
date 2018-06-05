@@ -3,31 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WireEnd : WireObj {
+public class WireEnd : WireNode {
 
-    public MeshRenderer endMesh;
     public Material solutionConnexionMaterial;
-    private Material originalMaterial;
-    public bool connected = false;
 
-    private void Start()
+    public override void Start()
     {
-        originalMaterial = endMesh.material;    
+        base.Start();
     }
 
-    public void ConnectAndCheckIfSolved(Material mat)
+    public override void Connect(WireNode callNode, int callOrder, Material conexMaterial)
     {
-        if(mat == solutionConnexionMaterial)
-        {
+        if (conexMaterial == solutionConnexionMaterial) {
+            wireRenderer.material = conexMaterial;
             connected = true;
-            WirePuzzleManager.instance.CheckIfSolved();
-            endMesh.material = mat;
+            connectionOrder = callOrder;
+            //DESHABILITARIAMOS TODOS LOS HANDLES PARA QUE YA NO SE PUEDA MOVER
         }
     }
 
-    public void Disconnect()
+    public override void Disconnect(WireNode callNode)
     {
         connected = false;
-        endMesh.material = originalMaterial;
+        connectionOrder = -1;
+        wireRenderer.material = originalMaterial;
     }
 }

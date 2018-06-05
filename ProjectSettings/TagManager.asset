@@ -10,8 +10,8 @@ TagManager:
   - Handle
   - RotatingPiece
   - WireNode
-  - WireEnd
   - Enemy
+  - TrapButton
   layers:
   - Default
   - TransparentFX
