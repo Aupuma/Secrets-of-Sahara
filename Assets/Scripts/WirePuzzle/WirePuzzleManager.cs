@@ -16,6 +16,7 @@ public class WirePuzzleManager : NetworkBehaviour {
 
 	void Start () {
         instance = this;
+        lightsOn = new bool[panelLights.Length];
 	}
 
     void OnChangeIndex(int index)
@@ -24,10 +25,13 @@ public class WirePuzzleManager : NetworkBehaviour {
         {
             for (int i = 0; i < panelLights.Length; i++)
             {
-                if(i < currentPuzzleIndex && lightsOn[i] == false)
+                if(i < currentPuzzleIndex)
                 {
-                    lightsOn[i] = true;
-                    panelLights[i].GetComponent<Animator>().SetTrigger("fadeIn");
+                    if(lightsOn[i] == false)
+                    {
+                        lightsOn[i] = true;
+                        panelLights[i].GetComponent<Animator>().SetTrigger("fadeIn");
+                    }
                 }
                 else if(lightsOn[i] == true)
                 {
