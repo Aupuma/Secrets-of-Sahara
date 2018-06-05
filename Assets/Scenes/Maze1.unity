@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - PerspectivePuzzleScene
+  - SequencePuzzleScene
   - GestureElimination
 --- !u!114 &368026125
 MonoBehaviour:

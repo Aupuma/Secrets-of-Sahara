@@ -5,7 +5,6 @@ using UnityEngine;
 public class WireStart : WireNode {
 
     public Material connectionMaterial;
-    private WireNode currentConnectedNode;
 
     public override void Start()
     {
