@@ -19,10 +19,16 @@ public class WirePuzzleManager : NetworkBehaviour {
         lightsOn = new bool[panelLights.Length];
 	}
 
+    public override void OnStartServer()
+    {
+        NetDiscovery.instance.StartAsServer();
+    }
+
     void OnChangeIndex(int index)
     {
         if(!isServer)
         {
+            currentPuzzleIndex = index;
             for (int i = 0; i < panelLights.Length; i++)
             {
                 if(i < currentPuzzleIndex)
