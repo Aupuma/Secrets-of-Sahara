@@ -26,7 +26,9 @@ public class WirePuzzleManager : NetworkBehaviour {
 
     void OnChangeIndex(int index)
     {
-        if(!isServer)
+        if(isServer) 
+            if(index == panelLights.Length) SceneObjectsManager.instance.HideObjects();
+        else
         {
             currentPuzzleIndex = index;
             for (int i = 0; i < panelLights.Length; i++)
@@ -46,12 +48,5 @@ public class WirePuzzleManager : NetworkBehaviour {
                 }
             }
         }
-    }
-
-    public void CheckIfSolved()
-    {
-        SceneObjectsManager.instance.HideObjects();
-        //Si llegamos al final del bucle es que todas son correctas
-
     }
 }
