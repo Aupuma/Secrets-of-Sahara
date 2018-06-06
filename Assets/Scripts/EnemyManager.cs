@@ -81,6 +81,7 @@ public class EnemyManager : NetworkBehaviour {
             {
                 if (hit.collider.tag == "TrapButton")
                 {
+                    Debug.Log("Button hit");
                     hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
                     POVPlayerInteractions.instance.connection.CmdRemoteTrapCall();
                 }
@@ -176,6 +177,7 @@ public class EnemyManager : NetworkBehaviour {
     {
         if (isServer)
         {
+            Debug.Log("Moving traps");
             foreach (var t in traps)
             {
                 t.GetComponent<Animator>().SetTrigger("Move");
