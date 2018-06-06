@@ -2812,6 +2812,10 @@ Prefab:
       propertyPath: m_Name
       value: TrapButton
       objectReference: {fileID: 0}
+    - target: {fileID: 1292138465803528, guid: 30d74ce9add13b343aa249293f1a8b81, type: 2}
+      propertyPath: m_TagString
+      value: TrapButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d74ce9add13b343aa249293f1a8b81, type: 2}
   m_IsPrefabParent: 0
@@ -3850,7 +3854,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1109480
+  m_Name: pb_Mesh-1185990
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12380,7 +12384,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1109478
+  m_Name: pb_Mesh-1185988
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

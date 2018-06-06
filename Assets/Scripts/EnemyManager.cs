@@ -55,10 +55,13 @@ public class EnemyManager : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         instance = this;
-        currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
-        selectionNumbers = new int[] { 0, 1, 2, 3 };
-        enemyQueue = new Queue<Enemy>();
-        ChangeEnemyToDestroy();
+        if (isServer)
+        {
+            currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
+            selectionNumbers = new int[] { 0, 1, 2, 3 };
+            enemyQueue = new Queue<Enemy>();
+            ChangeEnemyToDestroy();
+        }
     }
 	
 	// Update is called once per frame
