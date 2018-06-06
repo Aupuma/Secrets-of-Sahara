@@ -130,7 +130,7 @@ public class EnemyManager : NetworkBehaviour {
 
         enemyToDestroy = rand; //Encolamos el nuevo enemigo
         currentEnemy = normalEnemies[rand].type;
-        symbolTextures[rand].GetComponent<Animator>().SetTrigger("fadeIn");
+        RpcFadeInSymbol(enemyToDestroy);
         enemyQueue.Enqueue(normalEnemies[rand]);
     }
 
@@ -141,7 +141,7 @@ public class EnemyManager : NetworkBehaviour {
         {
             //Hemos usado el símbolo en el enemigo correcto, sumamos puntuación
             pointsScored += pointsCorrect;
-            symbolTextures[enemyToDestroy].GetComponent<Animator>().SetTrigger("fadeOut");
+            RpcFadeOutSymbol(enemyToDestroy);
             Invoke("ChangeEnemyToDestroy", 3f);
         }
         else
@@ -169,6 +169,25 @@ public class EnemyManager : NetworkBehaviour {
             int r = UnityEngine.Random.Range(t, numbers.Length);
             numbers[t] = numbers[r];
             numbers[r] = tmp;
+        }
+    }
+
+
+    [ClientRpc]
+    public void RpcFadeInSymbol(int index)
+    {
+        if (!isServer)
+        {
+            symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeIn");
+        }
+    }
+
+    [ClientRpc]
+    public void RpcFadeOutSymbol(int index)
+    {
+        if (!isServer)
+        {
+            symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeOut");
         }
     }
 
