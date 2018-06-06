@@ -13,16 +13,17 @@ public enum TransformationType
 
 public class Draggable : MonoBehaviour {
 
+    [Header("General parameters")]//---------------------------------------------
     public TransformationType transfChoice;
     public bool autoSnaps = true;
     public bool detectsCollisions = false;
 
-    [Header("Rotation parameters")]
+    [Header("Rotation parameters")]//---------------------------------------------
     public float userRotSpeed = 2.5f;
     public float snapRotSpeed = 2.5f;
     private bool onRotationInterval = true;
 
-    [Header("Movement parameters")]
+    [Header("Movement parameters")]//---------------------------------------------
     public float userMovSpeed = 2.5f;
     public float snapMovSpeed = 2.5f;
     public float minPosition;

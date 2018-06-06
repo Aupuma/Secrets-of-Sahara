@@ -6,19 +6,13 @@ public class GesturePlatform : MonoBehaviour {
 
     public string gestureType;
     public List<Enemy> enemiesInside;
-
     private MeshRenderer renderer;
-
+    
 	// Use this for initialization
 	void Start () {
         enemiesInside = new List<Enemy>();
         renderer = GetComponent<MeshRenderer>();
         renderer.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -26,10 +20,7 @@ public class GesturePlatform : MonoBehaviour {
         if(other.tag == "Enemy")
         {
             Enemy newEnemy = other.GetComponent<Enemy>();
-            if(newEnemy.gestureType == gestureType)
-            {
-                enemiesInside.Add(newEnemy);
-            }
+            enemiesInside.Add(newEnemy);
         }
     }
 
@@ -38,19 +29,19 @@ public class GesturePlatform : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             Enemy oldEnemy = other.GetComponent<Enemy>();
-            if (oldEnemy.gestureType == gestureType)
-            {
-                enemiesInside.Remove(oldEnemy);
-            }
+            EnemyManager.instance.OnEnemyFinishedPath(oldEnemy);
+            enemiesInside.Remove(oldEnemy);
+            Destroy(oldEnemy.gameObject);
         }
     }
 
-    public void DestroyEnemiesInside()
+    public void GestureUsed()
     {
         renderer.enabled = true;
         for (int i = enemiesInside.Count - 1; i >= 0; i--)
         {
             Enemy enemyToDestroy = enemiesInside[i];
+            EnemyManager.instance.OnGestureUsedInEnemy(enemyToDestroy);
             enemiesInside.RemoveAt(i);
             Destroy(enemyToDestroy.gameObject);
         }

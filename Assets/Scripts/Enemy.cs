@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyType
+{
+    BLUE,
+    RED,
+    GREEN,
+    YELLOW,
+    SUPER
+}
+
 public class Enemy : MonoBehaviour {
 
-    public string gestureType;
+    public EnemyType type;
     private NavMeshAgent agent;
-
-    [HideInInspector]
-    public Transform objective;
+    [HideInInspector] public Transform objective;
 
 	// Use this for initialization
 	void Start () {
         agent = GetComponent<NavMeshAgent>();
-        //agent.SetDestination(objective.transform.position);
     }
 
     // Update is called once per frame
     void Update () {
 		
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trap")
+        {
+            Destroy(gameObject);
+        }
+    }
 
 }

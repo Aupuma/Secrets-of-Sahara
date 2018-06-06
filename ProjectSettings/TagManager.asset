@@ -12,6 +12,7 @@ TagManager:
   - WireNode
   - Enemy
   - TrapButton
+  - Trap
   layers:
   - Default
   - TransparentFX

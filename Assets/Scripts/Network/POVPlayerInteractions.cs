@@ -14,8 +14,11 @@ public enum SwipeDirection
     Down = 8,
 }
 
-public class PlayerMovement : NetworkBehaviour {
+public class POVPlayerInteractions : NetworkBehaviour {
 
+    public static POVPlayerInteractions instance;
+
+    [Header("Parameters")]
     bool canAct = true;
     public float actionTime = 0.5f;
     public float movementDistance = 1.5f;
@@ -35,6 +38,8 @@ public class PlayerMovement : NetworkBehaviour {
     Vector3 lowPassValue;
 
     private Transform raycastInitialPos;
+
+    public PlayerConnectionObject connection;
 
     private void Start()
     {

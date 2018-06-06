@@ -21,17 +21,18 @@ public class GestureManager : MonoBehaviour
 {
     public static GestureManager instance;
 
+    //--Drawing objects------------------------------------------------------------
     List<Point> points = new List<Point>();   // mouse points acquired from the user
-    Gesture[] trainingSet = null;   // training set loaded from XML files
+    Gesture[] trainingSet = null;             // training set loaded from XML files
+    GameObject thisTrail;   //Trazo actual que se está dibujando
+    Vector3 startPos;       //Posición inicial de trazo
+    Plane objPlane;
+    bool drawingTrail;
+    float drawingStartingTime;
+    Transform drawingPos;
 
-    public  GameObject       trailPrefab; //Prefab de trazo
-    private GameObject       thisTrail;   //Trazo actual que se está dibujando
-    private Vector3          startPos;    //Posición inicial de trazo
-    private Plane            objPlane;
-    private bool             drawingTrail;
-    private float            drawingStartingTime;
-    private Transform drawingPos;
-
+    [Header("References")]//--------------------------------------------------------
+    public GameObject trailPrefab; //Prefab de trazo
     public GesturePlatform[] gesturePlatforms;
 
     void Start()
@@ -145,7 +146,7 @@ public class GestureManager : MonoBehaviour
             foreach (var platform in gesturePlatforms)
             {
                 if (platform.gestureType == result.name)
-                    platform.DestroyEnemiesInside();
+                    platform.GestureUsed();
             }
         }
     } 

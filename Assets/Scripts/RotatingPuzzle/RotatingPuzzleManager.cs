@@ -8,6 +8,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
 
     public static RotatingPuzzleManager instance;
 
+    [Header("References")]//--------------------------------------------------------
     public float rotationTime = 0.35f;
     public Transform[] puzzlePieces;
     public Transform[] pillars;
@@ -38,7 +39,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
                         if(puzzlePieces[i] == hit.collider.transform)
                         {
                             Debug.Log(i);
-                            PlayerInteractions.instance.CmdRotationCall(i);
+                            POVPlayerInteractions.instance.connection.CmdRotationCall(i);
                             break;
                         }
                     }

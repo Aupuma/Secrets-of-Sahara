@@ -37,24 +37,23 @@ public class PlayerConnectionObject : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdActivateRemoteTraps()
+    public void CmdRemoteTrapCall()
     {
-        RpcActivateRemoteTraps();
+        EnemyManager.instance.RpcTrapsOnOff();
     }
 
+    [Command]
+    public void CmdRotationCall(int index)
+    {
+        RotatingPuzzleManager.instance.RpcRotateElements(index);
+    }
 
     //-------------------------------------RPC
     //RPCs son funciones especiales que SOLO se ejecutan en los clientes
     [ClientRpc]
     void RpcAssignConnectionToPOVPlayer(GameObject playerObject)
     {
-        if (!isServer) playerObject.GetComponent<PlayerInteractions>().myConnection = this;
-    }
-
-    [ClientRpc]
-    void RpcActivateRemoteTraps()
-    {
-        if (isServer) TrapManager.instance.TrapsOnOff();
+        if (!isServer) playerObject.GetComponent<POVPlayerInteractions>().connection = this;
     }
     //---------------------------------------
 }
