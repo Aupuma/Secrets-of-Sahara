@@ -186,6 +186,7 @@ public class EnemyManager : NetworkBehaviour {
     {
         if (!isServer)
         {
+            Debug.Log("Fading in");
             symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeIn");
         }
     }
@@ -201,6 +202,7 @@ public class EnemyManager : NetworkBehaviour {
     {
         if (!isServer)
         {
+            Debug.Log("Fading out");
             symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeOut");
         }
     }
