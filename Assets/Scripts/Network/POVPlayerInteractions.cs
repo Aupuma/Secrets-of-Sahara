@@ -17,6 +17,7 @@ public enum SwipeDirection
 public class POVPlayerInteractions : NetworkBehaviour {
 
     public static POVPlayerInteractions instance;
+    public PlayerConnectionObject connection;
 
     [Header("Parameters")]
     bool canAct = true;
@@ -39,10 +40,12 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     private Transform raycastInitialPos;
 
-    public PlayerConnectionObject connection;
-
     private void Start()
     {
+        if (isServer)
+        {
+            GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        }
         SetAccelerometer();
         raycastInitialPos = transform.GetChild(1);
     }

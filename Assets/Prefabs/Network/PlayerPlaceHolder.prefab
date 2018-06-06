@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 23964876333191062}
   - component: {fileID: 65769478572860824}
   - component: {fileID: 114540766371949242}
-  - component: {fileID: 114054684213386806}
   - component: {fileID: 54965912507620636}
   - component: {fileID: 114324446085803668}
   m_Layer: 0
@@ -219,19 +218,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1467442268370714}
   m_Enabled: 1
---- !u!114 &114054684213386806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795607309147032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 715453f35eeb7c940b98919404a7f6fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawingTrailPos: {fileID: 0}
-  myConnection: {fileID: 0}
 --- !u!114 &114324446085803668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610a347cb252af14f89d3e7cbd75679e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connection: {fileID: 0}
   actionTime: 0.2
   movementDistance: 1.5
   dashDistance: 3
