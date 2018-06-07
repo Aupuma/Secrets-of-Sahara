@@ -9,6 +9,11 @@ public class PlayerConnectionObject : NetworkBehaviour {
     public GameObject PlayerUnitPrefab;
     public GameObject ARPlayerCamera;
 
+    private void Awake()
+    {
+        if (!isServer) CmdSpawnPOVPlayerObj();
+    }
+
     void Start () {
         DontDestroyOnLoad(gameObject);
 
@@ -20,7 +25,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
         if(!isServer) //Soy el jugador en primera persona
         {
-            CmdSpawnPOVPlayerObj();
+            //CmdSpawnPOVPlayerObj();
         }
         //FindObjectOfType<GameManager>().connection = this;
     }
