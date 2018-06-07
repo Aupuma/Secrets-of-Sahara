@@ -132,20 +132,21 @@ public class EnemyManager : NetworkBehaviour {
         //Spawneamos en cada carril un enemigo distinto
         for (int i = 0; i < enemyPaths.Length; i++)
         {
+            GameObject enemyToSpawn = null;
             if (i == superEnemyPath)
             {
-                pooler.SpawnFromPool(superEnemy.type.ToString(), 
+                enemyToSpawn = pooler.SpawnFromPool(superEnemy.type.ToString(), 
                     enemyPaths[i].spawnPoint.position, 
-                    Quaternion.identity, 
-                    enemyPaths[i].objective.position);
+                    Quaternion.identity);
             }
             else
             {
-                pooler.SpawnFromPool(normalEnemies[selectionNumbers[i]].type.ToString(), 
+                enemyToSpawn = pooler.SpawnFromPool(normalEnemies[selectionNumbers[i]].type.ToString(), 
                     enemyPaths[i].spawnPoint.position, 
-                    Quaternion.identity, 
-                    enemyPaths[i].objective.position);
+                    Quaternion.identity);
             }
+
+            enemyToSpawn.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[i].objective.position);
         }
     }
 

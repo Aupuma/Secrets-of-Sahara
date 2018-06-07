@@ -46,7 +46,7 @@ public class ObjectPooler : MonoBehaviour {
         }
 	}
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, Vector3 destination)
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -59,8 +59,6 @@ public class ObjectPooler : MonoBehaviour {
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-
-        objectToSpawn.GetComponent<NavMeshAgent>().SetDestination(destination);
 
         //IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
 
