@@ -159,6 +159,7 @@ public class EnemyManager : NetworkBehaviour {
     private void ChangeEnemyToDestroy()
     {
         if (enemyQueue.Count > 0) enemyQueue.Dequeue();
+        CmdFadeOutSymbol();
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
         int rand = enemyToDestroy;
@@ -171,8 +172,13 @@ public class EnemyManager : NetworkBehaviour {
         //CANBIAMOS EL TIPO DE ENEMIGO Y ENCENDEMOS SU LUZ
         currentEnemy = normalEnemies[enemyToDestroy].type;
         CmdFadeInSymbol();
-        enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
+        Invoke("AssignNewEnemy", 1f);
     } 
+
+    private void AssignNewEnemy()
+    {
+        enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
+    }
 
     #endregion //ENEMY SPAWNING
 
@@ -188,8 +194,7 @@ public class EnemyManager : NetworkBehaviour {
             else
             {
                 pointsScored += pointsCorrect;
-                CmdFadeOutSymbol();
-                Invoke("ChangeEnemyToDestroy", 3f);
+                ChangeEnemyToDestroy();
             }
         }
         else
