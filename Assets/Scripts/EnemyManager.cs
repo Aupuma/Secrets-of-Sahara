@@ -81,6 +81,7 @@ public class EnemyManager : NetworkBehaviour {
         {
             RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
+            Debug.Log(POVPlayerInteractions.instance.povCamera);
             Ray ray = POVPlayerInteractions.instance.povCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
