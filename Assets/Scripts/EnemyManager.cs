@@ -81,7 +81,7 @@ public class EnemyManager : NetworkBehaviour {
         {
             RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = POVPlayerInteractions.instance.povCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "TrapButton")

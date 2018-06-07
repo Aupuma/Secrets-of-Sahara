@@ -18,6 +18,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     public static POVPlayerInteractions instance;
     public PlayerConnectionObject connection;
+    public Camera povCamera;
 
     [Header("Parameters")]
     bool canAct = true;
