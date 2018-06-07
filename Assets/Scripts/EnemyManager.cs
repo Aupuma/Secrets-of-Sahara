@@ -40,6 +40,7 @@ public class EnemyManager : NetworkBehaviour {
     public GameObject[] symbolTextures;
     public GameObject sceneCamera;
     public Slider uiProgressBar;
+    private ObjectPooler pooler;
 
     [Header("Score parameters")]//-------------------------------------------------
     public int pointsToWin = 10;
@@ -70,6 +71,7 @@ public class EnemyManager : NetworkBehaviour {
             currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             selectionNumbers = new int[] { 0, 1, 2, 3 };
             enemyQueue = new Queue<Enemy>();
+            pooler = GetComponent<ObjectPooler>();
             //sceneCamera.SetActive(true);
         }
         else
@@ -130,17 +132,20 @@ public class EnemyManager : NetworkBehaviour {
         //Spawneamos en cada carril un enemigo distinto
         for (int i = 0; i < enemyPaths.Length; i++)
         {
-            Enemy enemy = null;
             if (i == superEnemyPath)
             {
-                enemy = Instantiate(superEnemy, enemyPaths[i].spawnPoint.position, Quaternion.identity);
+                pooler.SpawnFromPool(superEnemy.type.ToString(), 
+                    enemyPaths[i].spawnPoint.position, 
+                    Quaternion.identity, 
+                    enemyPaths[i].objective.position);
             }
             else
             {
-                enemy = Instantiate(normalEnemies[selectionNumbers[i]], enemyPaths[i].spawnPoint.position, Quaternion.identity);
+                pooler.SpawnFromPool(normalEnemies[selectionNumbers[i]].type.ToString(), 
+                    enemyPaths[i].spawnPoint.position, 
+                    Quaternion.identity, 
+                    enemyPaths[i].objective.position);
             }
-
-            enemy.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[i].objective.position);
         }
     }
 

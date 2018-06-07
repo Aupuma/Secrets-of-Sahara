@@ -2146,6 +2146,7 @@ GameObject:
   - component: {fileID: 156069491}
   - component: {fileID: 156069492}
   - component: {fileID: 156069490}
+  - component: {fileID: 156069493}
   - component: {fileID: 156069494}
   m_Layer: 0
   m_Name: PuzzleManager
@@ -2237,6 +2238,33 @@ MonoBehaviour:
   - {fileID: 941759704}
   - {fileID: 1600215090}
   - {fileID: 1199599769}
+--- !u!114 &156069493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 156069489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b44cde853e1b0488629544d746a52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: SNAKE
+    prefab: {fileID: 1604736872857268, guid: f96b2ce6670f71b42b0a90cec25dbb0d, type: 2}
+    size: 4
+  - tag: BIRD
+    prefab: {fileID: 1604736872857268, guid: a8667ab0c5b10954db9c1d0f7521cb5b, type: 2}
+    size: 4
+  - tag: LION
+    prefab: {fileID: 1604736872857268, guid: 97b4040fa628b1946807ce19203611ee, type: 2}
+    size: 4
+  - tag: CAT
+    prefab: {fileID: 1604736872857268, guid: b75a0271273d2014ab22936d2ad28c9d, type: 2}
+    size: 4
+  - tag: SUPER
+    prefab: {fileID: 1604736872857268, guid: 840e3b897dc987b44969f3c5943cef74, type: 2}
+    size: 4
 --- !u!114 &156069494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23979,6 +24007,47 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &2118910487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2118910489}
+  - component: {fileID: 2118910488}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2118910488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118910487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b44cde853e1b0488629544d746a52c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools: []
+--- !u!4 &2118910489
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118910487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2120148458
 Mesh:
   m_ObjectHideFlags: 0

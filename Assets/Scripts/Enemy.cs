@@ -18,21 +18,11 @@ public class Enemy : MonoBehaviour {
     private NavMeshAgent agent;
     [HideInInspector] public Transform objective;
 
-	// Use this for initialization
-	void Start () {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Trap")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
