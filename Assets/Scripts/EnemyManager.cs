@@ -61,7 +61,7 @@ public class EnemyManager : NetworkBehaviour {
             currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             selectionNumbers = new int[] { 0, 1, 2, 3 };
             enemyQueue = new Queue<Enemy>();
-            sceneCamera.SetActive(true);
+            //sceneCamera.SetActive(true);
             ChangeEnemyToDestroy();
         }
     }
