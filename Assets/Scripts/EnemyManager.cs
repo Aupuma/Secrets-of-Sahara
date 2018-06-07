@@ -162,7 +162,6 @@ public class EnemyManager : NetworkBehaviour {
         {
             enemyQueue.Dequeue();
             CmdFadeOutSymbol();
-            checkAllowed = false;
         }
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
