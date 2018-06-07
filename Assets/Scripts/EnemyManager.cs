@@ -137,16 +137,18 @@ public class EnemyManager : NetworkBehaviour {
             {
                 enemyToSpawn = pooler.SpawnFromPool(superEnemy.type.ToString(), 
                     enemyPaths[i].spawnPoint.position, 
-                    Quaternion.identity);
+                    Quaternion.identity,
+                    enemyPaths[i].objective.position);
             }
             else
             {
                 enemyToSpawn = pooler.SpawnFromPool(normalEnemies[selectionNumbers[i]].type.ToString(), 
                     enemyPaths[i].spawnPoint.position, 
-                    Quaternion.identity);
+                    Quaternion.identity,
+                    enemyPaths[i].objective.position);
             }
 
-            enemyToSpawn.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[i].objective.position);
+           // enemyToSpawn.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[i].objective.position);
         }
     }
 
