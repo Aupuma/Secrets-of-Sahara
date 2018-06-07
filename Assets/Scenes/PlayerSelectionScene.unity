@@ -1251,7 +1251,7 @@ Prefab:
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_OnlineScene
-      value: GesturePuzzleScene
+      value: Maze1
       objectReference: {fileID: 0}
     - target: {fileID: 114215250936453796, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
@@ -1293,20 +1293,17 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 1880119682079996, guid: c726882ded2415a4da804364d007fd52,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 1289237359461942, guid: 17394fdfa8676de4db0aac8d05152220,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 1783557126725484, guid: 9e087d8a7fbbef94799cc4178ae3b8cb,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}
       propertyPath: m_AutoCreatePlayer

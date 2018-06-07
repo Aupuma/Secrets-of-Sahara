@@ -11,7 +11,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     private void Awake()
     {
-        if (!isServer) CmdSpawnPOVPlayerObj();
+        //if (!isServer) CmdSpawnPOVPlayerObj();
     }
 
     void Start () {
@@ -25,7 +25,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
         if(!isServer) //Soy el jugador en primera persona
         {
-            //CmdSpawnPOVPlayerObj();
+            CmdSpawnPOVPlayerObj();
         }
         //FindObjectOfType<GameManager>().connection = this;
     }

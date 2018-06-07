@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - WirePuzzleScene
+  - GesturePuzzleScene
 --- !u!114 &368026125
 MonoBehaviour:
   m_ObjectHideFlags: 0
