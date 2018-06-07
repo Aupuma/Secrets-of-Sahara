@@ -44,6 +44,7 @@ public class EnemyManager : NetworkBehaviour {
     private int[] selectionNumbers;
     private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
     public EnemyType currentEnemy;
+    public GameObject sceneCamera;
 
     //-----------------------------------------------------------------------------
 
@@ -60,6 +61,7 @@ public class EnemyManager : NetworkBehaviour {
             currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             selectionNumbers = new int[] { 0, 1, 2, 3 };
             enemyQueue = new Queue<Enemy>();
+            sceneCamera.SetActive(true);
             ChangeEnemyToDestroy();
         }
     }
