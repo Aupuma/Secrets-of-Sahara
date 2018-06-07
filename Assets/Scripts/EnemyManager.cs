@@ -30,7 +30,7 @@ public class EnemyManager : NetworkBehaviour {
     private int enemyToDestroy = -1;
     private int[] selectionNumbers;
     private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
-    public EnemyType currentEnemy;
+    public EnemyType currentEnemy; //PARA DEBUGGEAR
 
     [Header("References")]//-------------------------------------------------------
     public EnemyPathInfo[] enemyPaths;
@@ -162,6 +162,7 @@ public class EnemyManager : NetworkBehaviour {
         {
             enemyQueue.Dequeue();
             CmdFadeOutSymbol();
+            checkAllowed = false;
         }
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
@@ -175,13 +176,8 @@ public class EnemyManager : NetworkBehaviour {
         //CANBIAMOS EL TIPO DE ENEMIGO Y ENCENDEMOS SU LUZ
         currentEnemy = normalEnemies[enemyToDestroy].type;
         CmdFadeInSymbol();
-        Invoke("AssignNewEnemy", 1f);
-    } 
-
-    private void AssignNewEnemy()
-    {
         enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
-    }
+    } 
 
     #endregion //ENEMY SPAWNING
 
