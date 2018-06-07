@@ -43,6 +43,8 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     private void Start()
     {
+        instance = this;
+
         if (isServer)
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
