@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public enum EnemyType
 {
-    BLUE,
-    RED,
-    GREEN,
-    YELLOW,
+    SNAKE,
+    BIRD,
+    CAT,
+    LION,
     SUPER
 }
 
