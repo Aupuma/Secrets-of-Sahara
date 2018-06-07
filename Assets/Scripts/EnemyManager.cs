@@ -158,8 +158,11 @@ public class EnemyManager : NetworkBehaviour {
 
     private void ChangeEnemyToDestroy()
     {
-        if (enemyQueue.Count > 0) enemyQueue.Dequeue();
-        CmdFadeOutSymbol();
+        if (enemyQueue.Count > 0)
+        {
+            enemyQueue.Dequeue();
+            CmdFadeOutSymbol();
+        }
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
         int rand = enemyToDestroy;
