@@ -17,7 +17,7 @@ public class EnemyManager : NetworkBehaviour {
     public static EnemyManager instance;
 
     private int lastEnemySpawned = -1;
-    private bool ready = true;
+    private bool ready = false;
 
     [Header("Spawn parameters")]//-------------------------------------------------
     public float minTimeBetweenSpawns;
@@ -243,7 +243,11 @@ public class EnemyManager : NetworkBehaviour {
     [ClientRpc]
     public void RpcStartSpawningEnemies()
     {
-        if (isServer) ChangeEnemyToDestroy();
+        if (isServer)
+        {
+            ready = true;
+            ChangeEnemyToDestroy();
+        }
     } 
 
     #endregion //NETWORK METHODS
