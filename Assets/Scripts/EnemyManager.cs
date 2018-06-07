@@ -52,10 +52,15 @@ public class EnemyManager : NetworkBehaviour {
     {
         NetDiscovery.instance.StartAsServer();
     }
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Use this for initialization
     void Start () {
-        instance = this;
+
         if (isServer)
         {
             currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
@@ -65,10 +70,15 @@ public class EnemyManager : NetworkBehaviour {
         }
         else
         {
-            POVPlayerInteractions.instance.connection.CmdStartSpawningEnemies();
+            Invoke("StartSpawning", 1f);
         }
     }
 	
+    void StartSpawning()
+    {
+        POVPlayerInteractions.instance.connection.CmdStartSpawningEnemies();
+    }
+
 	// Update is called once per frame
 	void Update () {
         if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS

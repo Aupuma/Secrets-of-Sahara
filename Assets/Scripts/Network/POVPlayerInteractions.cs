@@ -41,10 +41,13 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     private Transform raycastInitialPos;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
+    }
 
+    private void Start()
+    {
         if (isServer)
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
