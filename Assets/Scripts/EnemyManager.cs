@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class EnemyPathInfo
@@ -38,13 +39,16 @@ public class EnemyManager : NetworkBehaviour {
     public GameObject[] traps;
     public GameObject[] symbolTextures;
     public GameObject sceneCamera;
+    public Slider uiProgressBar;
 
     [Header("Score parameters")]//-------------------------------------------------
     public int pointsToWin = 10;
     public int pointsCorrect = 1;
     public int pointsIncorrect = -1;
     public int pointsSuperEnemyFailed = -5;
-    [SyncVar] public int pointsScored;
+
+    [SyncVar(hook = "OnScoreChanged")]
+    public int pointsScored;
 
     //-----------------------------------------------------------------------------
 
@@ -180,14 +184,19 @@ public class EnemyManager : NetworkBehaviour {
         if (enemyToCompare.type == firstEnemyInQueue.type)
         {
             //Hemos usado el símbolo en el enemigo correcto, sumamos puntuación
-            pointsScored += pointsCorrect;
-            CmdFadeOutSymbol();
-            Invoke("ChangeEnemyToDestroy", 3f);
+            if (pointsScored + pointsCorrect >= pointsToWin) pointsScored = pointsToWin;
+            else
+            {
+                pointsScored += pointsCorrect;
+                CmdFadeOutSymbol();
+                Invoke("ChangeEnemyToDestroy", 3f);
+            }
         }
         else
         {
             //Hemos usado el símbolo en el enemigo incorrecto, restamos puntuación
-            pointsScored += pointsIncorrect;
+            if (pointsScored + pointsIncorrect < 0) pointsScored = 0;
+            else pointsScored += pointsIncorrect;
         }
     }
 
@@ -197,9 +206,23 @@ public class EnemyManager : NetworkBehaviour {
         if (enemyToCompare.type == EnemyType.SUPER)
         {
             //Si el superenemigo llega al final restamos muchos puntos
-            pointsScored += pointsSuperEnemyFailed;
+            if (pointsScored + pointsSuperEnemyFailed < 0) pointsScored = 0;
+            else pointsScored += pointsSuperEnemyFailed;
         }
-    } 
+    }
+
+    public void OnScoreChanged(int newScore)
+    {
+        if (isServer)
+        {
+            if (newScore == pointsToWin) Debug.Log("gameFinished");
+        }
+        else
+        {
+            pointsScored = newScore;
+            uiProgressBar.value = pointsScored;
+        }
+    }
 
     #endregion //SCORE METHODS
 
