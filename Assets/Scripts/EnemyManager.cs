@@ -26,12 +26,18 @@ public class EnemyManager : NetworkBehaviour {
     private float currentTimeBetweenSpawns;
     private float lastSpawnTime = 0;
 
+    private int enemyToDestroy = -1;
+    private int[] selectionNumbers;
+    private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
+    public EnemyType currentEnemy;
+
     [Header("References")]//-------------------------------------------------------
     public EnemyPathInfo[] enemyPaths;
     public Enemy[] normalEnemies;
     public Enemy superEnemy;
     public GameObject[] traps;
     public GameObject[] symbolTextures;
+    public GameObject sceneCamera;
 
     [Header("Score parameters")]//-------------------------------------------------
     public int pointsToWin = 10;
@@ -39,12 +45,6 @@ public class EnemyManager : NetworkBehaviour {
     public int pointsIncorrect = -1;
     public int pointsSuperEnemyFailed = -5;
     [SyncVar] public int pointsScored;
-
-    private int enemyToDestroy = -1;
-    private int[] selectionNumbers;
-    private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
-    public EnemyType currentEnemy;
-    public GameObject sceneCamera;
 
     //-----------------------------------------------------------------------------
 
@@ -62,13 +62,16 @@ public class EnemyManager : NetworkBehaviour {
             selectionNumbers = new int[] { 0, 1, 2, 3 };
             enemyQueue = new Queue<Enemy>();
             //sceneCamera.SetActive(true);
-            ChangeEnemyToDestroy();
+        }
+        else
+        {
+            POVPlayerInteractions.instance.connection.CmdStartSpawningEnemies();
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (isServer)
+        if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS
         {
             if (ready && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
             {
@@ -77,10 +80,11 @@ public class EnemyManager : NetworkBehaviour {
                 SpawnEnemies();
             }
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButtonDown(0)) //DETECTAMOS SI JUGADOR POV PULSA BOTÓN DEL PANEL
         {
             RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
+            //ESTO HAY QUE ARREGLARLO
             Debug.Log(POVPlayerInteractions.instance.povCamera);
             Ray ray = POVPlayerInteractions.instance.povCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -94,6 +98,8 @@ public class EnemyManager : NetworkBehaviour {
             }
         }
 	}
+
+    #region ENEMY SPAWNING
 
     private void SpawnEnemies()
     {
@@ -124,21 +130,39 @@ public class EnemyManager : NetworkBehaviour {
         }
     }
 
+    //REDISTRIBUYE EL ARRAY DE MANERA ALEATORIA
+    void ReshuffleArray(int[] numbers)
+    {
+        for (int t = 0; t < numbers.Length; t++)
+        {
+            int tmp = numbers[t];
+            int r = UnityEngine.Random.Range(t, numbers.Length);
+            numbers[t] = numbers[r];
+            numbers[r] = tmp;
+        }
+    }
+
     private void ChangeEnemyToDestroy()
     {
-        if(enemyQueue.Count>0) enemyQueue.Dequeue(); //Desencolamos el enemigo antiguo y apagaríamos su símbolo
+        if (enemyQueue.Count > 0) enemyQueue.Dequeue();
 
+        //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
         int rand = enemyToDestroy;
-        while(rand == enemyToDestroy)
+        while (rand == enemyToDestroy)
         {
             rand = UnityEngine.Random.Range(0, normalEnemies.Length);
         }
         enemyToDestroy = rand;
 
+        //CANBIAMOS EL TIPO DE ENEMIGO Y ENCENDEMOS SU LUZ
         currentEnemy = normalEnemies[enemyToDestroy].type;
         CmdFadeInSymbol();
         enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
-    }
+    } 
+
+    #endregion //ENEMY SPAWNING
+
+    #region SCORE METHODS
 
     public void OnGestureUsedInEnemy(Enemy enemyToCompare)
     {
@@ -165,18 +189,11 @@ public class EnemyManager : NetworkBehaviour {
             //Si el superenemigo llega al final restamos muchos puntos
             pointsScored += pointsSuperEnemyFailed;
         }
-    }
+    } 
 
-    void ReshuffleArray(int[] numbers)
-    {
-        for (int t = 0; t < numbers.Length; t++)
-        {
-            int tmp = numbers[t];
-            int r = UnityEngine.Random.Range(t, numbers.Length);
-            numbers[t] = numbers[r];
-            numbers[r] = tmp;
-        }
-    }
+    #endregion //SCORE METHODS
+
+    #region NETWORK METHODS
 
     [Command]
     public void CmdFadeInSymbol()
@@ -222,4 +239,12 @@ public class EnemyManager : NetworkBehaviour {
             }
         }
     }
+
+    [ClientRpc]
+    public void RpcStartSpawningEnemies()
+    {
+        if (isServer) ChangeEnemyToDestroy();
+    } 
+
+    #endregion //NETWORK METHODS
 }

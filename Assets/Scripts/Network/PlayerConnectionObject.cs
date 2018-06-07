@@ -36,6 +36,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         RpcAssignConnectionToPOVPlayer(playerObject);
     }
 
+    //---------GESTURES ENEMIES PUZZLE----------------------
     [Command]
     public void CmdRemoteTrapCall()
     {
@@ -43,11 +44,17 @@ public class PlayerConnectionObject : NetworkBehaviour {
     }
 
     [Command]
+    public void CmdStartSpawningEnemies()
+    {
+        EnemyManager.instance.RpcStartSpawningEnemies();
+    }
+
+    //---------PERSPECTIVE PUZZLE----------------------
+    [Command]
     public void CmdRotationCall(int index)
     {
         RotatingPuzzleManager.instance.RpcRotateElements(index);
     }
-
     //-------------------------------------RPC
     //RPCs son funciones especiales que SOLO se ejecutan en los clientes
     [ClientRpc]

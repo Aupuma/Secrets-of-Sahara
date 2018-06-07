@@ -2178,8 +2178,8 @@ MonoBehaviour:
   - spawnPoint: {fileID: 1513866543}
     objective: {fileID: 666943065}
   normalEnemies:
-  - {fileID: 114961919249695258, guid: a8667ab0c5b10954db9c1d0f7521cb5b, type: 2}
   - {fileID: 114961919249695258, guid: f96b2ce6670f71b42b0a90cec25dbb0d, type: 2}
+  - {fileID: 114961919249695258, guid: a8667ab0c5b10954db9c1d0f7521cb5b, type: 2}
   - {fileID: 114961919249695258, guid: b75a0271273d2014ab22936d2ad28c9d, type: 2}
   - {fileID: 114961919249695258, guid: 97b4040fa628b1946807ce19203611ee, type: 2}
   superEnemy: {fileID: 114961919249695258, guid: 840e3b897dc987b44969f3c5943cef74,
