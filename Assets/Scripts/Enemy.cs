@@ -12,7 +12,7 @@ public enum EnemyType
     SUPER
 }
 
-public class Enemy : MonoBehaviour, IPooledObject {
+public class Enemy : MonoBehaviour {
 
     public EnemyType type;
     private NavMeshAgent agent;
@@ -24,10 +24,5 @@ public class Enemy : MonoBehaviour, IPooledObject {
         {
             gameObject.SetActive(false);
         }
-    }
-
-    public void OnObjectSpawn(Vector3 destination)
-    {
-        GetComponent<NavMeshAgent>().SetDestination(destination);
     }
 }
