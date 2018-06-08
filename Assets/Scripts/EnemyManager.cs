@@ -146,7 +146,7 @@ public class EnemyManager : NetworkBehaviour {
                     Quaternion.identity);
             }
 
-            enemyToSpawn.GetComponent<NavMeshAgent>().nextPosition = enemyToSpawn.transform.position;
+            enemyToSpawn.GetComponent<NavMeshAgent>().enabled = true;
             enemyToSpawn.GetComponent<NavMeshAgent>().SetDestination(enemyPaths[i].objective.position);
         }
     }

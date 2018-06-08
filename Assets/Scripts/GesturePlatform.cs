@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GesturePlatform : MonoBehaviour {
 
@@ -31,7 +32,8 @@ public class GesturePlatform : MonoBehaviour {
             Enemy oldEnemy = other.GetComponent<Enemy>();
             EnemyManager.instance.OnEnemyFinishedPath(oldEnemy);
             enemiesInside.Remove(oldEnemy);
-            Destroy(oldEnemy.gameObject);
+            oldEnemy.GetComponent<NavMeshAgent>().enabled = false;
+            oldEnemy.gameObject.SetActive(false);
         }
     }
 
