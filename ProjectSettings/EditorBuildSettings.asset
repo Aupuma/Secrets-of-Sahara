@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PlayerSelectionScene.unity
+    guid: c742a5ed976b7944d8feaefa2d61d116
+  - enabled: 1
+    path: Assets/Scenes/PerspectivePuzzleScene.unity
+    guid: 8e23025ec3d64824daf590808672c47f
+  - enabled: 0
     path: Assets/Scenes/ARSetupScene.unity
     guid: 6fe3946e3bdc20e428b372559256545a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARTestScene2.unity
     guid: ccabaf4a4ad678a4e8797b83093461a1
   - enabled: 0
@@ -17,12 +23,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Maze1.unity
     guid: 57407896835baa6409817ec45e804209
-  - enabled: 0
-    path: Assets/Scenes/PerspectivePuzzleScene.unity
-    guid: 8e23025ec3d64824daf590808672c47f
-  - enabled: 0
-    path: Assets/Scenes/PlayerSelectionScene.unity
-    guid: c742a5ed976b7944d8feaefa2d61d116
   - enabled: 0
     path: Assets/Scenes/SequencePuzzleScene.unity
     guid: 05b648c9f4ebfe349bb034ed07d3c2eb
