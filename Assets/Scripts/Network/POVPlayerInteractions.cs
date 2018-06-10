@@ -19,6 +19,8 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public static POVPlayerInteractions instance;
     public PlayerConnectionObject connection;
     public Camera povCamera;
+    private Vector3 originalPos;
+    private Quaternion originalRotation;
 
     [Header("Parameters")]
     bool canAct = true;
@@ -52,8 +54,14 @@ public class POVPlayerInteractions : NetworkBehaviour {
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
         }
-        SetAccelerometer();
-        raycastInitialPos = transform.GetChild(1);
+        else
+        {
+            SetAccelerometer();
+            raycastInitialPos = transform.GetChild(1);
+        }
+
+        originalPos = transform.position;
+        originalRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -204,9 +212,48 @@ public class POVPlayerInteractions : NetworkBehaviour {
         transform.DOMove(transform.position + transform.forward * dashDistance, actionTime).OnComplete(ActionFinished);
     }
 
+    [Command]
+    public void CmdActivateTrapAndRestart(GameObject trap)
+    {
+        RpcActivateTrapAndRestart(trap);
+    }
+
+    [ClientRpc]
+    public void RpcActivateTrapAndRestart(GameObject trap)
+    {
+        trap.GetComponent<Animator>().SetTrigger("Move");
+        Invoke("Restart", 1f);
+    }
+
+    private void Restart()
+    {
+        transform.position = originalPos;
+        transform.rotation = originalRotation;
+    }
+
     void ActionFinished()
     {
         canAct = true;
-    } 
+    }
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isServer)
+        {
+            if (other.gameObject.tag == "Key")
+            {
+                NetworkServer.Destroy(other.gameObject);
+                MazeManager.instance.CmdUnlockElements();
+            }
+            else if (other.gameObject.tag == "Door")
+            {
+                MazeManager.instance.CmdMazeCompleted();
+            }
+            else if (other.gameObject.tag == "Trap")
+            {
+                CmdActivateTrapAndRestart(other.gameObject);
+            }
+        }
+    }
 }

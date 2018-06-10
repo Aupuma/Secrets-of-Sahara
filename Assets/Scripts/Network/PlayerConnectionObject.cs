@@ -33,12 +33,14 @@ public class PlayerConnectionObject : NetworkBehaviour {
     //--------------------------------------COMMANDS
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor
 
+    //---------MAZE----------------------
     [Command]
     void CmdSpawnPOVPlayerObj()
     {
         GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
         NetworkServer.SpawnWithClientAuthority(playerObject,connectionToClient);
         RpcAssignConnectionToPOVPlayer(playerObject);
+        MazeManager.instance.CmdEnableFirstTraps();
     }
 
     //---------GESTURES ENEMIES PUZZLE----------------------
@@ -60,6 +62,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     {
         RotatingPuzzleManager.instance.RpcRotateElements(index);
     }
+
     //-------------------------------------RPC
     //RPCs son funciones especiales que SOLO se ejecutan en los clientes
     [ClientRpc]
