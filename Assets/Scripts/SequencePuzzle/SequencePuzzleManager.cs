@@ -24,6 +24,11 @@ public class SequencePuzzleManager : NetworkBehaviour {
     public Material correctBoolMaterial;
     private SequenceButton[] buttons;
     private int[] btnIds;
+    
+    [Header("Scene objects with movement")]
+    private Transform[] objectsRightRotation;
+    private Transform[] objectsLeftRotation;
+    private Transform[] objectsVerticalMovement;
 
     void Start () {
         instance = this;
@@ -36,10 +41,32 @@ public class SequencePuzzleManager : NetworkBehaviour {
             buttons = FindObjectsOfType<SequenceButton>();
             //CmdGenerateNewSequence();
         }
+    }
 
-        //Sequence mySequence = DOTween.Sequence();
+    private void StartSceneMovementLoop()
+    {
+        Sequence mySequence = DOTween.Sequence();
 
-       // mySequence.SetLoops(-1);
+        Vector3 newRightRotation = new Vector3(0, 360, 0);
+        for (int i = 0; i < objectsRightRotation.Length; i++)
+        {
+            if (i == 0) mySequence.Append(objectsRightRotation[i].DORotate(newRightRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
+            else mySequence.Join(objectsRightRotation[i].DORotate(newRightRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
+        }
+
+        Vector3 newLeftRotation = new Vector3(0, -360, 0);
+        for (int i = 0; i < objectsLeftRotation.Length; i++)
+        {
+            mySequence.Join(objectsLeftRotation[i].DORotate(newLeftRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
+        }
+
+        for (int i = 0; i < objectsVerticalMovement.Length; i++)
+        {
+            mySequence.Join(objectsVerticalMovement[i].DOMoveY(objectsVerticalMovement[i].position.y - 1, 1f).SetLoops(1, LoopType.Yoyo).SetEase(Ease.InSine));
+        }
+
+        mySequence.SetLoops(-1);
+        mySequence.Play();
     }
 
     void Update()
@@ -106,6 +133,8 @@ public class SequencePuzzleManager : NetworkBehaviour {
         RpcAssignSymbolsToPanel(sequence);
 
         GenerateRandomSequence(btnIds);
+
+        StartSceneMovementLoop();
 
         for (int i = 0; i < buttons.Length; i++)
         {
