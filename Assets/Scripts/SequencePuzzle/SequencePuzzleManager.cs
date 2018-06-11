@@ -28,7 +28,8 @@ public class SequencePuzzleManager : NetworkBehaviour {
     [Header("Scene objects with movement")]
     public Transform[] objectsRightRotation;
     public Transform[] objectsLeftRotation;
-    public Transform[] objectsVerticalMovement;
+    public Transform totem1Buttons;
+    public Transform totem2Buttons;
 
     void Start () {
         instance = this;
@@ -39,34 +40,32 @@ public class SequencePuzzleManager : NetworkBehaviour {
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
+            StartSceneMovementLoop();
             //CmdGenerateNewSequence();
         }
     }
 
     private void StartSceneMovementLoop()
     {
-        Sequence mySequence = DOTween.Sequence();
+        Sequence run = DOTween.Sequence();
 
         Vector3 newRightRotation = new Vector3(0, 360, 0);
-        for (int i = 0; i < objectsRightRotation.Length; i++)
+        foreach (var item in objectsRightRotation)
         {
-            if (i == 0) mySequence.Append(objectsRightRotation[i].DORotate(newRightRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
-            else mySequence.Join(objectsRightRotation[i].DORotate(newRightRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
+            Tween rot = item.DORotate(newRightRotation, 10, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            run.Join(rot);
         }
 
         Vector3 newLeftRotation = new Vector3(0, -360, 0);
-        for (int i = 0; i < objectsLeftRotation.Length; i++)
+        foreach (var item in objectsLeftRotation)
         {
-            mySequence.Join(objectsLeftRotation[i].DORotate(newLeftRotation, 1f, RotateMode.FastBeyond360)).SetRelative();
+            Tween rot = item.DORotate(newLeftRotation, 10, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            run.Join(rot);
         }
+        run.SetLoops(-1);
 
-        for (int i = 0; i < objectsVerticalMovement.Length; i++)
-        {
-            mySequence.Join(objectsVerticalMovement[i].DOMoveY(objectsVerticalMovement[i].position.y - 1, 1f).SetLoops(1, LoopType.Yoyo).SetEase(Ease.InSine));
-        }
-
-        mySequence.SetLoops(-1);
-        mySequence.Play();
+        totem1Buttons.DOLocalMoveY(totem1Buttons.position.y - 1, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuart);
+        totem2Buttons.DOLocalMoveY(totem2Buttons.position.y + 1, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuart);
     }
 
     void Update()
@@ -134,7 +133,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
 
         GenerateRandomSequence(btnIds);
 
-        StartSceneMovementLoop();
+        //StartSceneMovementLoop();
 
         for (int i = 0; i < buttons.Length; i++)
         {
