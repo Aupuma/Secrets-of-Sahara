@@ -8,6 +8,7 @@ public class SequenceButton : MonoBehaviour {
     Animator anim;
     MeshRenderer textureRenderer;
     public int id;
+    private Texture nextTexture;
 
     // Use this for initialization
     void Start () {
@@ -15,15 +16,27 @@ public class SequenceButton : MonoBehaviour {
         textureRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
 	}
 
-    public void SetInfo(int n, Material mat)
+    public void SetNewInfo(int n, Texture texture)
     {
         id = n;
-        textureRenderer.material = mat;
+        nextTexture = texture;
+        textureRenderer.material.SetTexture("_Texture2", nextTexture);
+        anim.SetTrigger("CrossFade");
+    }
+
+    public void AssignNewTexture()
+    {
+        textureRenderer.material.SetTexture("_MainTex", nextTexture);
+        textureRenderer.material.SetFloat("_Blend", 0f);
     }
 
     public void ButtonPressed()
     {
-        SequencePuzzleManager.instance.CmdOnButtonPressed(id);
         anim.SetTrigger("Pressed");
+    }
+
+    public void CheckIfButtonIsCorrect()
+    {
+        SequencePuzzleManager.instance.CmdOnButtonPressed(id);
     }
 }

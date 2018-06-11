@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,24 +10,22 @@ public class SequencePuzzleManager : NetworkBehaviour {
 
     public static SequencePuzzleManager instance;
 
-    //Data
+    [Header("Parameters")]
     public int[] sequence;
     [SyncVar]
-    public int seqIndex = 0;
-    public bool solved = false;
+    private int seqIndex = 0;
     public bool isDebug = false;
 
-    //References
-    private SequenceButton[] buttons;
-    public int[] btnIds;
-    public Material[] symbolTextures;
-    public GameObject sequencePanel;
-    public MeshRenderer[] sequencePanelSymbols;
+    [Header("References")]
+    public SequencePanelSymbol[] sequencePanelSymbols;
     public MeshRenderer[] sequencePanelBooleans;
+    public Texture[] symbolTextures;
     public Material wrongBoolMaterial;
     public Material correctBoolMaterial;
+    private SequenceButton[] buttons;
+    private int[] btnIds;
 
-	void Start () {
+    void Start () {
         instance = this;
         
         if(isServer)
@@ -35,9 +34,13 @@ public class SequencePuzzleManager : NetworkBehaviour {
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
-            //CmdGenerateNewSequence();
+            CmdGenerateNewSequence();
         }
-	}
+
+        Sequence mySequence = DOTween.Sequence();
+
+        mySequence.SetLoops(-1);
+    }
 
     void Update()
     {
@@ -65,27 +68,6 @@ public class SequencePuzzleManager : NetworkBehaviour {
         }
     }
 
-    [Command]
-    public void CmdGenerateNewSequence()
-    {
-        Debug.Log("Generating new sequence");
-
-        seqIndex = 0;
-
-        RpcRestartSequence();
-
-        GenerateRandomSequence(sequence);
-
-        RpcAssignSymbolsToPanel(sequence);
-
-        GenerateRandomSequence(btnIds);
-
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].SetInfo(btnIds[i], symbolTextures[btnIds[i]]);
-        }
-    }
-
 
     public void GenerateRandomSequence(int[] array)
     {
@@ -108,23 +90,47 @@ public class SequencePuzzleManager : NetworkBehaviour {
         }
     }
 
+    #region NETWORK METHODS
+
+    [Command]
+    public void CmdGenerateNewSequence()
+    {
+        Debug.Log("Generating new sequence");
+
+        seqIndex = 0;
+
+        RpcRestartSequence();
+
+        GenerateRandomSequence(sequence);
+
+        RpcAssignSymbolsToPanel(sequence);
+
+        GenerateRandomSequence(btnIds);
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].SetNewInfo(btnIds[i], symbolTextures[btnIds[i]]);
+        }
+    }
+
     [Command]
     public void CmdOnButtonPressed(int id)
     {
-        if(id == sequence[seqIndex])
+        //SI PULSAMOS BOTÓN CORRECTO LO HACEMOS SABER AL JUGADOR POV
+        if (id == sequence[seqIndex])
         {
             RpcMarkSymbolAsCorrect();
             seqIndex += 1;
         }
-        else
+        else //SI NO, REINICIAMOS LA SECUENCIA
         {
             CmdGenerateNewSequence();
             seqIndex = 0;
         }
 
-        if(seqIndex == sequence.Length)
+        //SI SE PULSA TODA LA SECUENCIA CORRECTA, FINALIZAMOS PUZZLE
+        if (seqIndex == sequence.Length)
         {
-            solved = true;
             seqIndex = 0;
             SceneObjectsManager.instance.HideObjects();
         }
@@ -133,12 +139,11 @@ public class SequencePuzzleManager : NetworkBehaviour {
     [ClientRpc]
     private void RpcAssignSymbolsToPanel(int[] seq)
     {
-        Debug.Log(seq);
         if (isServer == false)
         {
             for (int i = 0; i < seq.Length; i++)
             {
-                sequencePanelSymbols[i].material = symbolTextures[seq[i]];
+                sequencePanelSymbols[i].SetNewInfo(symbolTextures[seq[i]]);
             }
         }
     }
@@ -162,5 +167,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
                 rendBool.material = wrongBoolMaterial;
             }
         }
-    }
+    } 
+
+    #endregion //NETWORK METHODS
 }
