@@ -34,12 +34,12 @@ public class SequencePuzzleManager : NetworkBehaviour {
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
-            CmdGenerateNewSequence();
+            //CmdGenerateNewSequence();
         }
 
-        Sequence mySequence = DOTween.Sequence();
+        //Sequence mySequence = DOTween.Sequence();
 
-        mySequence.SetLoops(-1);
+       // mySequence.SetLoops(-1);
     }
 
     void Update()

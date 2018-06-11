@@ -20,6 +20,8 @@ public class SequenceButton : MonoBehaviour {
     {
         id = n;
         nextTexture = texture;
+        Debug.Log("Textura: " + texture);
+        Debug.Log("Renderer: " + textureRenderer);
         textureRenderer.material.SetTexture("_Texture2", nextTexture);
         anim.SetTrigger("CrossFade");
     }

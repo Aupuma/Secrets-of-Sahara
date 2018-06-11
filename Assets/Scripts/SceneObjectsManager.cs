@@ -36,7 +36,7 @@ public class SceneObjectsManager : NetworkBehaviour {
 
     public void StartPuzzle()
     {
-        //SequencePuzzleManager.instance.CmdGenerateNewSequence();
+        SequencePuzzleManager.instance.CmdGenerateNewSequence();
         //MazeManager.instance.Ready();
     }
 
