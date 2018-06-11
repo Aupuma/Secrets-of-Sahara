@@ -26,9 +26,9 @@ public class SequencePuzzleManager : NetworkBehaviour {
     private int[] btnIds;
     
     [Header("Scene objects with movement")]
-    private Transform[] objectsRightRotation;
-    private Transform[] objectsLeftRotation;
-    private Transform[] objectsVerticalMovement;
+    public Transform[] objectsRightRotation;
+    public Transform[] objectsLeftRotation;
+    public Transform[] objectsVerticalMovement;
 
     void Start () {
         instance = this;
