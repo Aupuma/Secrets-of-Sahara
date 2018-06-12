@@ -57,9 +57,9 @@ public class Draggable : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        objTrans = transform.GetChild(0);
-        rb = objTrans.GetComponent<Rigidbody>();
-        objCollider = objTrans.GetComponent<Collider>();
+        objTrans = transform;
+        rb = GetComponent<Rigidbody>();
+        objCollider = GetComponent<Collider>();
         SetRigidbodyConstraints();
     }
 
@@ -82,6 +82,7 @@ public class Draggable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(selected);
         if (selected)
         {
             if (transfChoice == TransformationType.rotation) CheckRotation();
@@ -118,10 +119,11 @@ public class Draggable : MonoBehaviour {
         onPositionInterval = false;
 
         Vector3 lastPos = objTrans.localPosition;
+        var localRight = objTrans.InverseTransformDirection(objTrans.right);
 
         float movX = Input.GetAxis("Mouse X") * userMovSpeed;
-        if (detectsCollisions) rb.velocity = objTrans.right * movX;
-        else objTrans.Translate(movX * Time.deltaTime, 0, 0);
+        if (detectsCollisions) rb.velocity = localRight * movX;
+        else objTrans.Translate(movX * Time.deltaTime, 0, 0,Space.Self);
 
         CorrectPositionX();
     }
@@ -243,8 +245,8 @@ public class Draggable : MonoBehaviour {
 
         Vector3 lastPos = objTrans.localPosition;
 
-        if (objTrans.localPosition.x < nearestIntervalPos) objTrans.Translate(snapMovSpeed * Time.deltaTime, 0, 0);
-        else if (objTrans.localPosition.x > nearestIntervalPos) objTrans.Translate(-snapMovSpeed * Time.deltaTime, 0, 0);
+        if (objTrans.localPosition.x < nearestIntervalPos) objTrans.Translate(snapMovSpeed * Time.deltaTime, 0, 0, Space.Self);
+        else if (objTrans.localPosition.x > nearestIntervalPos) objTrans.Translate(-snapMovSpeed * Time.deltaTime, 0, 0, Space.Self);
 
         CorrectPositionX();
     }

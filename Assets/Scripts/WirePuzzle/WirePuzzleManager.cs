@@ -13,11 +13,41 @@ public class WirePuzzleManager : NetworkBehaviour {
 
     public GameObject[] panelLights;
     private bool[] lightsOn;
+    private Draggable currentDraggedObject;
 
-	void Start () {
+    void Start () {
         instance = this;
         lightsOn = new bool[panelLights.Length];
 	}
+
+    private void Update()
+    {
+        if (currentDraggedObject != null) //Estamos moviendo un objeto
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                currentDraggedObject.Selected = false;
+                currentDraggedObject = null;
+            }
+        }
+        else //Lanzamos raycast para saber si estamos tocando un handle
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit = new RaycastHit();
+                // Construct a ray from the current touch coordinates
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider.tag == "Handle")
+                    {
+                        currentDraggedObject = hit.transform.GetComponentInParent<Draggable>();
+                        currentDraggedObject.Selected = true;
+                    }
+                }
+            }
+        }
+    }
 
     public override void OnStartServer()
     {
