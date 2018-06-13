@@ -78,7 +78,7 @@ public class GestureManager : MonoBehaviour
         }
     }
 
-    #region Drawing the trail
+    #region DRAWING THE TRAIL
     private void StartDrawing()
     {
         points = new List<Point>();
@@ -131,7 +131,7 @@ public class GestureManager : MonoBehaviour
     }
     #endregion
 
-    #region Getting the result
+    #region GETTING THE RESULT
     public GestureResult RecognizeGesture()
     {
         Gesture candidate = new Gesture(points.ToArray());
