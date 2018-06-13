@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Puzzle : NetworkBehaviour {
 
-    public virtual void StartPuzzle()
+    public virtual void OnPuzzleReady()
     {
 
     }

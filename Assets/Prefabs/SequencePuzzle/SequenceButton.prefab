@@ -24,10 +24,9 @@ GameObject:
   - component: {fileID: 114118693088898838}
   - component: {fileID: 64320697677327570}
   - component: {fileID: 95537749138052764}
-  - component: {fileID: 114045142443015654}
   m_Layer: 0
   m_Name: Button
-  m_TagString: SequenceButton
+  m_TagString: TrapButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +41,7 @@ GameObject:
   - component: {fileID: 4067447631272378}
   m_Layer: 0
   m_Name: SequenceButton
-  m_TagString: Untagged
+  m_TagString: TrapButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,15 +88,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292138465803528}
-  m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 4.4, z: -0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.0000020116565, y: -0.7071069, z: -0.7071067, w: 0.0000020489094}
+  m_LocalPosition: {x: 0.395, y: -0.3648649, z: 0.5}
+  m_LocalScale: {x: 0.17582433, y: 0.79999995, z: 0.21621622}
   m_Children:
   - {fileID: 4204947333150856}
   - {fileID: 4342642930438826}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -180.00002}
 --- !u!4 &4204947333150856
 Transform:
   m_ObjectHideFlags: 1
@@ -301,7 +300,7 @@ Animator:
   m_GameObject: {fileID: 1229722105205698}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f8c6fa99714432346a0108833c45c7a3, type: 2}
+  m_Controller: {fileID: 22100000, guid: ee1ba7a2021e6854fa20604c29cdd532, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -310,18 +309,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114045142443015654
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1229722105205698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af652b5719604344bc9bf10382888a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
 --- !u!114 &114118693088898838
 MonoBehaviour:
   m_ObjectHideFlags: 1

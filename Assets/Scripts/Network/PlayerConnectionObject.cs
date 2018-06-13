@@ -73,12 +73,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
         EnemyManager.instance.RpcTrapsOnOff(index);
     }
 
-    [Command]
-    public void CmdStartSpawningEnemies()
-    {
-        EnemyManager.instance.RpcStartSpawningEnemies();
-    }
-
     //---------PERSPECTIVE PUZZLE----------------------
     [Command]
     public void CmdRotationCall(int index)

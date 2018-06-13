@@ -13,12 +13,11 @@ public class EnemyPathInfo
     public Transform objective;
 }
 
-public class EnemyManager : NetworkBehaviour {
+public class EnemyManager : Puzzle {
 
     public static EnemyManager instance;
 
     private int lastEnemySpawned = -1;
-    private bool ready = false;
 
     [Header("Spawn parameters")]//-------------------------------------------------
     public float minTimeBetweenSpawns;
@@ -73,24 +72,19 @@ public class EnemyManager : NetworkBehaviour {
             selectionNumbers = new int[] { 0, 1, 2, 3 };
             enemyQueue = new Queue<Enemy>();
             pooler = GetComponent<ObjectPooler>();
-            //sceneCamera.SetActive(true);
-        }
-        else
-        {
-            Invoke("StartSpawning", 1f);
         }
     }
-	
-    void StartSpawning()
+
+    public override void OnPuzzleReady()
     {
-        GameManager.instance.POVPlayerConnection.CmdStartSpawningEnemies();
+        ChangeEnemyToDestroy();
     }
 
 	// Update is called once per frame
 	void Update () {
         if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS
         {
-            if (ready && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
+            if (Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
             {
                 currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
                 lastSpawnTime = Time.unscaledTime;
@@ -230,7 +224,7 @@ public class EnemyManager : NetworkBehaviour {
     {
         if (isServer)
         {
-            if (newScore == pointsToWin) Debug.Log("gameFinished");
+            if (newScore == pointsToWin) PuzzleCompleted();
         }
         else
         {
@@ -286,17 +280,6 @@ public class EnemyManager : NetworkBehaviour {
                 a.SetTrigger("Move");
             }
         }
-    }
-
-    [ClientRpc]
-    public void RpcStartSpawningEnemies()
-    {
-        if (isServer)
-        {
-            ready = true;
-            ChangeEnemyToDestroy();
-        }
     } 
-
     #endregion //NETWORK METHODS
 }

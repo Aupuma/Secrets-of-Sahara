@@ -36,7 +36,7 @@ public class SceneObjectsManager : NetworkBehaviour {
 
     public void StartPuzzle()
     {
-        puzzle.StartPuzzle();
+        puzzle.OnPuzzleReady();
     }
 
     public void HideObjects()
