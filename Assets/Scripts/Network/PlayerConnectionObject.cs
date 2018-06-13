@@ -9,6 +9,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
     public GameObject PlayerUnitPrefab;
     public GameObject ARPlayerCamera;
 
+    public GameObject gameManager;
+
     private void Awake()
     {
         //if (!isServer) CmdSpawnPOVPlayerObj();
@@ -23,15 +25,30 @@ public class PlayerConnectionObject : NetworkBehaviour {
             return;
         }
 
-        if(!isServer) //Soy el jugador en primera persona
+        if(isServer) //Soy el jugador en primera persona
         {
-            CmdSpawnPOVPlayerObj();
+            if(GameManager.instance == null)
+            {
+                CmdSpawnGameManager();
+            }
+        }
+        else if (GameManager.instance == null)
+        {
+            GameManager.instance.POVPlayerConnection = this;
         }
         //FindObjectOfType<GameManager>().connection = this;
     }
 
     //--------------------------------------COMMANDS
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor
+
+    [Command]
+    void CmdSpawnGameManager()
+    {
+        GameObject gm = Instantiate(gameManager, this.transform.position, Quaternion.identity);
+        NetworkServer.Spawn(gm);
+    }
+
 
     //---------MAZE----------------------
     [Command]

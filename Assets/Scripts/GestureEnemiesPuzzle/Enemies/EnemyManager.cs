@@ -83,7 +83,7 @@ public class EnemyManager : NetworkBehaviour {
 	
     void StartSpawning()
     {
-        POVPlayerInteractions.instance.connection.CmdStartSpawningEnemies();
+        GameManager.instance.POVPlayerConnection.CmdStartSpawningEnemies();
     }
 
 	// Update is called once per frame
@@ -102,8 +102,7 @@ public class EnemyManager : NetworkBehaviour {
             RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
             //ESTO HAY QUE ARREGLARLO
-            Debug.Log(POVPlayerInteractions.instance.povCamera);
-            Ray ray = POVPlayerInteractions.instance.povCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "TrapButton")
@@ -113,7 +112,7 @@ public class EnemyManager : NetworkBehaviour {
                         if(trapButtons[i] == hit.collider.gameObject)
                         {
                             hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
-                            POVPlayerInteractions.instance.connection.CmdRemoteTrapCall(i);
+                            GameManager.instance.POVPlayerConnection.CmdRemoteTrapCall(i);
                         }
                     }
                 }

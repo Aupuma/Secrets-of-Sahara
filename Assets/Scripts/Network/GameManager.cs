@@ -11,10 +11,13 @@ public class GameManager : NetworkBehaviour {
     public string[] scenes;
     private int sceneIndex;
 
+    public PlayerConnectionObject POVPlayerConnection;
+
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
         sceneIndex = 0;
     }
 
