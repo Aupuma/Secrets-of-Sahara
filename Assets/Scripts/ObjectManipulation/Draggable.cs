@@ -132,7 +132,7 @@ public class Draggable : MonoBehaviour {
     {
         onRotationInterval = false;
 
-        float rotY = -Input.GetAxis("Mouse X") * userRotSpeed * Time.deltaTime;
+        float rotY = -Input.GetAxis("Mouse X") * userRotSpeed;
         objTrans.Rotate(Vector3.up, rotY);
 
         CorrectRotation();
@@ -275,11 +275,11 @@ public class Draggable : MonoBehaviour {
 
         if (nearestAngle > rotY)
         {
-            objTrans.Rotate(Vector3.up, snapRotSpeed * Time.deltaTime);
+            objTrans.Rotate(Vector3.up, snapRotSpeed);
         }
         else
         {
-            objTrans.Rotate(Vector3.up, -snapRotSpeed * Time.deltaTime);
+            objTrans.Rotate(Vector3.up, -snapRotSpeed);
         }
 
         CorrectRotation();
