@@ -36,6 +36,7 @@ public class EnemyManager : NetworkBehaviour {
     public EnemyPathInfo[] enemyPaths;
     public Enemy[] normalEnemies;
     public Enemy superEnemy;
+    public GameObject[] trapButtons;
     public GameObject[] traps;
     public GameObject[] symbolTextures;
     public GameObject sceneCamera;
@@ -107,9 +108,14 @@ public class EnemyManager : NetworkBehaviour {
             {
                 if (hit.collider.tag == "TrapButton")
                 {
-                    Debug.Log("Button hit");
-                    hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
-                    POVPlayerInteractions.instance.connection.CmdRemoteTrapCall();
+                    for (int i = 0; i < trapButtons.Length; i++)
+                    {
+                        if(trapButtons[i] == hit.collider.gameObject)
+                        {
+                            hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
+                            POVPlayerInteractions.instance.connection.CmdRemoteTrapCall(i);
+                        }
+                    }
                 }
             }
         }
@@ -271,14 +277,14 @@ public class EnemyManager : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcTrapsOnOff()
+    public void RpcTrapsOnOff(int index)
     {
         if (isServer)
         {
-            Debug.Log("Moving traps");
-            foreach (var t in traps)
+            Animator[] animators = traps[index].GetComponentsInChildren<Animator>();
+            foreach (var a in animators)
             {
-                t.GetComponent<Animator>().SetTrigger("Move");
+                a.SetTrigger("Move");
             }
         }
     }

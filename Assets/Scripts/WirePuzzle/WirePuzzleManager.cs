@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using DG.Tweening;
 
-public class WirePuzzleManager : NetworkBehaviour {
+public class WirePuzzleManager : Puzzle {
 
     public static WirePuzzleManager instance;
 
@@ -52,6 +52,12 @@ public class WirePuzzleManager : NetworkBehaviour {
     public override void OnStartServer()
     {
         NetDiscovery.instance.StartAsServer();
+    }
+
+    public override void PuzzleCompleted()
+    {
+        if (currentDraggedObject != null) currentDraggedObject.Selected = false;
+        base.PuzzleCompleted();
     }
 
     void OnChangeIndex(int index)

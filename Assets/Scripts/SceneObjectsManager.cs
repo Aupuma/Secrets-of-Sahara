@@ -9,7 +9,7 @@ public class SceneObjectsManager : NetworkBehaviour {
 
     public GameObject[] AR_Player_Objects;
     public GameObject[] POV_Player_Objects;
-    public GameObject puzzle;
+    public Puzzle puzzle;
     private bool hasStarted = false;
     private Animator animator;
 
@@ -36,8 +36,7 @@ public class SceneObjectsManager : NetworkBehaviour {
 
     public void StartPuzzle()
     {
-        //SequencePuzzleManager.instance.CmdGenerateNewSequence();
-        MazeManager.instance.Ready();
+        puzzle.StartPuzzle();
     }
 
     public void HideObjects()

@@ -9,7 +9,7 @@ public class WireNode : MonoBehaviour {
     [HideInInspector] public MeshRenderer wireRenderer;
     [HideInInspector] public Material originalMaterial;
     [HideInInspector] public Material currentConnexionMaterial;
-    [HideInInspector] public bool connected = false;
+     public bool connected = false;
     [HideInInspector] public int connectionOrder = -1;
 
     // Use this for initialization

@@ -7,7 +7,7 @@ using DG.Tweening;
 public enum TransformationType
 {
     rotation,
-    movementX,
+    movementZ,
     movementY
 }
 
@@ -69,7 +69,7 @@ public class Draggable : MonoBehaviour {
         {
             rb.constraints = RigidbodyConstraints.FreezePosition;
         }
-        else if (transfChoice == TransformationType.movementX)
+        else if (transfChoice == TransformationType.movementZ)
         {
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
@@ -82,17 +82,16 @@ public class Draggable : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(selected);
         if (selected)
         {
             if (transfChoice == TransformationType.rotation) CheckRotation();
-            else if (transfChoice == TransformationType.movementX) CheckMovementX();
+            else if (transfChoice == TransformationType.movementZ) CheckMovementZ();
             else if (transfChoice == TransformationType.movementY) CheckMovementY();
         }
         else if(autoSnaps) //Si no está seleccionado, movemos a lo más próximo
         {
             if (transfChoice == TransformationType.rotation && !onRotationInterval) RotateToNearest();
-            else if (transfChoice == TransformationType.movementX && !onPositionInterval) MoveToNearestX();
+            else if (transfChoice == TransformationType.movementZ && !onPositionInterval) MoveToNearestZ();
             else if (transfChoice == TransformationType.movementY && !onPositionInterval) MoveToNearestY();
         }
     }
@@ -104,28 +103,29 @@ public class Draggable : MonoBehaviour {
         nearestIntervalPosObtained = false;
         onPositionInterval = false;
 
+        var localUp = objTrans.InverseTransformDirection(objTrans.up);
+
         //Obtenemos input del player
         float movY = Input.GetAxis("Mouse Y") * userMovSpeed;
-        if (detectsCollisions) rb.velocity = objTrans.up * movY;
-        else objTrans.Translate(0, movY * Time.deltaTime, 0);
+        if (detectsCollisions) rb.velocity = localUp * movY;
+        else objTrans.Translate(0, movY * Time.deltaTime, 0, Space.Self);
 
         //Corregimos la posicion si nos pasamos del límite
         CorrectPositionY();
     }
 
-    private void CheckMovementX()
+    private void CheckMovementZ()
     {
         nearestIntervalPosObtained = false;
         onPositionInterval = false;
 
-        Vector3 lastPos = objTrans.localPosition;
-        var localRight = objTrans.InverseTransformDirection(objTrans.right);
+        var localDir = objTrans.InverseTransformDirection(objTrans.forward);
 
-        float movX = Input.GetAxis("Mouse X") * userMovSpeed;
-        if (detectsCollisions) rb.velocity = localRight * movX;
-        else objTrans.Translate(movX * Time.deltaTime, 0, 0,Space.Self);
+        float movZ = Input.GetAxis("Mouse X") * userMovSpeed;
+        if (detectsCollisions) rb.velocity = localDir * movZ * -1;
+        else objTrans.Translate(0, 0, movZ * Time.deltaTime *-1, Space.Self);
 
-        CorrectPositionX();
+        CorrectPositionZ();
     }
 
     private void CheckRotation()
@@ -176,22 +176,22 @@ public class Draggable : MonoBehaviour {
         }
     }
 
-    private void CorrectPositionX()
+    private void CorrectPositionZ()
     {
-        if (!selected && Mathf.Abs(objTrans.localPosition.x - nearestIntervalPos) < 0.05f)
+        if (!selected && Mathf.Abs(objTrans.localPosition.z - nearestIntervalPos) < 0.05f)
         {
-            objTrans.localPosition = new Vector3(nearestIntervalPos, objTrans.localPosition.y, objTrans.localPosition.z);
+            objTrans.localPosition = new Vector3(objTrans.localPosition.x, objTrans.localPosition.y, nearestIntervalPos);
             onPositionInterval = true;
         }
 
-        if (objTrans.localPosition.x > maxPosition)
+        if (objTrans.localPosition.z > maxPosition)
         {
-            objTrans.localPosition = new Vector3(maxPosition, objTrans.localPosition.y, objTrans.localPosition.z);
+            objTrans.localPosition = new Vector3(objTrans.localPosition.x, objTrans.localPosition.y, maxPosition);
             onPositionInterval = true;
         }
-        else if (objTrans.localPosition.x < minPosition)
+        else if (objTrans.localPosition.z < minPosition)
         {
-            objTrans.localPosition = new Vector3(minPosition, objTrans.localPosition.y, objTrans.localPosition.z);
+            objTrans.localPosition = new Vector3(objTrans.localPosition.x, objTrans.localPosition.y, minPosition);
             onPositionInterval = true;
         }
     }
@@ -239,16 +239,16 @@ public class Draggable : MonoBehaviour {
         CorrectPositionY();
     }
 
-    private void MoveToNearestX()
+    private void MoveToNearestZ()
     {
-        if (!nearestIntervalPosObtained) GetNearestIntervalPoint(objTrans.localPosition.x);
+        if (!nearestIntervalPosObtained) GetNearestIntervalPoint(objTrans.localPosition.z);
 
         Vector3 lastPos = objTrans.localPosition;
 
-        if (objTrans.localPosition.x < nearestIntervalPos) objTrans.Translate(snapMovSpeed * Time.deltaTime, 0, 0, Space.Self);
-        else if (objTrans.localPosition.x > nearestIntervalPos) objTrans.Translate(-snapMovSpeed * Time.deltaTime, 0, 0, Space.Self);
+        if (objTrans.localPosition.z < nearestIntervalPos) objTrans.Translate(0, 0, snapMovSpeed * Time.deltaTime, Space.Self);
+        else if (objTrans.localPosition.z > nearestIntervalPos) objTrans.Translate(0, 0, -snapMovSpeed * Time.deltaTime, Space.Self);
 
-        CorrectPositionX();
+        CorrectPositionZ();
     }
 
     private void GetNearestIntervalPoint(float currentPos)

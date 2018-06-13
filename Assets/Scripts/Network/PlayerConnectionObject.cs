@@ -45,9 +45,9 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     //---------GESTURES ENEMIES PUZZLE----------------------
     [Command]
-    public void CmdRemoteTrapCall()
+    public void CmdRemoteTrapCall(int index)
     {
-        EnemyManager.instance.RpcTrapsOnOff();
+        EnemyManager.instance.RpcTrapsOnOff(index);
     }
 
     [Command]
