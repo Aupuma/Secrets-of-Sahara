@@ -1268,7 +1268,7 @@ MonoBehaviour:
   superEnemy: {fileID: 114961919249695258, guid: 840e3b897dc987b44969f3c5943cef74,
     type: 2}
   trapButtons:
-  - {fileID: 1967926604}
+  - {fileID: 195805744}
   - {fileID: 562191023}
   - {fileID: 1150529508}
   - {fileID: 1519980696}
@@ -1905,6 +1905,11 @@ Prefab:
 --- !u!4 &195805743 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4067447631272378, guid: 30d74ce9add13b343aa249293f1a8b81,
+    type: 2}
+  m_PrefabInternal: {fileID: 195805742}
+--- !u!1 &195805744 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1229722105205698, guid: 30d74ce9add13b343aa249293f1a8b81,
     type: 2}
   m_PrefabInternal: {fileID: 195805742}
 --- !u!43 &204027143
@@ -3735,7 +3740,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3272984
+  m_Name: pb_Mesh-4183362
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6529,7 +6534,7 @@ Transform:
   m_PrefabInternal: {fileID: 562191021}
 --- !u!1 &562191023 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1292138465803528, guid: 30d74ce9add13b343aa249293f1a8b81,
+  m_PrefabParentObject: {fileID: 1229722105205698, guid: 30d74ce9add13b343aa249293f1a8b81,
     type: 2}
   m_PrefabInternal: {fileID: 562191021}
 --- !u!43 &570406591
@@ -7452,7 +7457,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 666943064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.904465, y: -7.0876513, z: 0.121723175}
+  m_LocalPosition: {x: -11.904465, y: -7.0876513, z: 3.6017227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095648749}
@@ -10002,7 +10007,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927350478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.704465, y: -7.0876513, z: 2.6217222}
+  m_LocalPosition: {x: -4.704465, y: -7.0876513, z: 3.6017227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095648749}
@@ -12228,7 +12233,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3272982
+  m_Name: pb_Mesh-4183360
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -13047,7 +13052,7 @@ Transform:
   m_PrefabInternal: {fileID: 1150529506}
 --- !u!1 &1150529508 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1292138465803528, guid: 30d74ce9add13b343aa249293f1a8b81,
+  m_PrefabParentObject: {fileID: 1229722105205698, guid: 30d74ce9add13b343aa249293f1a8b81,
     type: 2}
   m_PrefabInternal: {fileID: 1150529506}
 --- !u!43 &1164490068
@@ -13248,7 +13253,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1185754141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.095536, y: -7.0876513, z: 2.6217222}
+  m_LocalPosition: {x: 9.095536, y: -7.0876513, z: 3.6017227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095648749}
@@ -15423,7 +15428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1374483478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0955343, y: -7.0876513, z: 2.6217222}
+  m_LocalPosition: {x: 2.0955343, y: -7.0876513, z: 3.6017227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2095648749}
@@ -17592,7 +17597,7 @@ Transform:
   m_PrefabInternal: {fileID: 1519980694}
 --- !u!1 &1519980696 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1292138465803528, guid: 30d74ce9add13b343aa249293f1a8b81,
+  m_PrefabParentObject: {fileID: 1229722105205698, guid: 30d74ce9add13b343aa249293f1a8b81,
     type: 2}
   m_PrefabInternal: {fileID: 1519980694}
 --- !u!43 &1525348067
@@ -23864,11 +23869,6 @@ Transform:
   m_Father: {fileID: 268093959}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1967926604 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1292138465803528, guid: 30d74ce9add13b343aa249293f1a8b81,
-    type: 2}
-  m_PrefabInternal: {fileID: 195805742}
 --- !u!1 &1978284006
 GameObject:
   m_ObjectHideFlags: 0
