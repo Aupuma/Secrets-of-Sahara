@@ -20,10 +20,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
         DontDestroyOnLoad(gameObject);
 
         //Es éste mi PlayerObject local?
-        if (isLocalPlayer == false)
-        {
-            return;
-        }
         /*
         if(isServer) //Soy el jugador en primera persona
         {
