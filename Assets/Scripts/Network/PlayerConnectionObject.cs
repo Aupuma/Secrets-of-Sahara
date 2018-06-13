@@ -24,7 +24,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         {
             return;
         }
-
+        /*
         if(isServer) //Soy el jugador en primera persona
         {
             if(GameManager.instance == null)
@@ -32,8 +32,10 @@ public class PlayerConnectionObject : NetworkBehaviour {
                 CmdSpawnGameManager();
             }
         }
-        else if (GameManager.instance == null)
+        */
+        if (!isServer && GameManager.instance == null)
         {
+            CmdSpawnGameManager();
             GameManager.instance.POVPlayerConnection = this;
         }
         //FindObjectOfType<GameManager>().connection = this;
