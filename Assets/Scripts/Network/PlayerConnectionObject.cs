@@ -32,7 +32,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
         if (!isServer && GameManager.instance == null)
         {
             CmdSpawnGameManager();
-            GameManager.instance.POVPlayerConnection = this;
         }
         //FindObjectOfType<GameManager>().connection = this;
     }
@@ -45,8 +44,17 @@ public class PlayerConnectionObject : NetworkBehaviour {
     {
         GameObject gm = Instantiate(gameManager, this.transform.position, Quaternion.identity);
         NetworkServer.Spawn(gm);
+        RpcAssignConnectionToGM();
     }
 
+    [ClientRpc]
+    void RpcAssignConnectionToGM()
+    {
+        if (!isServer)
+        {
+            GameManager.instance.POVPlayerConnection = this;
+        }
+    }
 
     //---------MAZE----------------------
     [Command]
