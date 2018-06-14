@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 195510598743845526}
   - component: {fileID: 114961919249695258}
   - component: {fileID: 54513390380895492}
+  - component: {fileID: 95706685120510258}
   m_Layer: 0
   m_Name: LION
   m_TagString: Enemy
@@ -60,7 +61,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f79e563c974e59247b5af85328ef0fad, type: 2}
+  - {fileID: 2100000, guid: b155d29d1f9a5cc44a7236cded826d4d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,6 +103,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95706685120510258
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1604736872857268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0f4e133b4da5924796a7d680ffb0634, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114961919249695258
 MonoBehaviour:
   m_ObjectHideFlags: 1

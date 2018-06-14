@@ -25,4 +25,9 @@ public class Enemy : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
+
+    public void DeactivateEnemy()
+    {
+        gameObject.SetActive(false);
+    }
 }

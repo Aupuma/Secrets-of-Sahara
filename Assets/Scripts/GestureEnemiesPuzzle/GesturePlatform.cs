@@ -39,15 +39,18 @@ public class GesturePlatform : MonoBehaviour {
 
     public void GestureUsed()
     {
-        renderer.enabled = true;
+        //renderer.enabled = true;
         for (int i = enemiesInside.Count - 1; i >= 0; i--)
         {
             Enemy enemyToDestroy = enemiesInside[i];
             EnemyManager.instance.OnGestureUsedInEnemy(enemyToDestroy);
             enemiesInside.RemoveAt(i);
-            Destroy(enemyToDestroy.gameObject);
+            if (enemyToDestroy.type != EnemyType.SUPER)
+            {
+                enemyToDestroy.GetComponent<Animator>().SetTrigger("Dissolve");
+            }
         }
-        Invoke("FadeEffect", 1f);
+        //Invoke("FadeEffect", 1f);
     }
 
     public void FadeEffect()

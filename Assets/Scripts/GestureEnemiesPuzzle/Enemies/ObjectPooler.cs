@@ -56,18 +56,7 @@ public class ObjectPooler : MonoBehaviour {
 
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        if(objectToSpawn == null)
-        {
-            foreach (var pool in pools)
-            {
-                if (pool.tag == tag) objectToSpawn = Instantiate(pool.prefab, this.transform);
-            }
-        }
-        else
-        {
-            objectToSpawn.SetActive(true);
-        }
-
+        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 

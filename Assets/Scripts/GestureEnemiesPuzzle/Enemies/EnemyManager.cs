@@ -189,7 +189,10 @@ public class EnemyManager : Puzzle {
     #endregion //ENEMY SPAWNING
 
     #region SCORE METHODS
-
+    /// <summary>
+    /// Vemos que enemigo hemos destruido para dar más o menos puntos
+    /// </summary>
+    /// <param name="enemyToCompare"></param>
     public void OnGestureUsedInEnemy(Enemy enemyToCompare)
     {
         Enemy firstEnemyInQueue = enemyQueue.Peek();
