@@ -13,7 +13,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     private void Awake()
     {
-        //if (!isServer) CmdSpawnPOVPlayerObj();
+        if (!isServer) CmdSpawnPOVPlayerObj();
     }
 
     void Start () {
