@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8859eb782f7ea49967c1445dc5875e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   AR_Player_Objects:
   - {fileID: 1022161973}
   - {fileID: 1448403708}
