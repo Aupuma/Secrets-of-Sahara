@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 114118693088898838}
   - component: {fileID: 64320697677327570}
   - component: {fileID: 95537749138052764}
+  - component: {fileID: 114667778775775328}
   m_Layer: 0
   m_Name: Button
-  m_TagString: TrapButton
+  m_TagString: SequenceButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +42,7 @@ GameObject:
   - component: {fileID: 4067447631272378}
   m_Layer: 0
   m_Name: SequenceButton
-  m_TagString: TrapButton
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292138465803528}
   m_LocalRotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 1, z: 0}
+  m_LocalPosition: {x: -0.5, y: 4.4, z: -0.10000038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4204947333150856}
@@ -1551,3 +1552,15 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114667778775775328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229722105205698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af652b5719604344bc9bf10382888a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
