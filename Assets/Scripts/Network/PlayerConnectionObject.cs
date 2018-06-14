@@ -11,11 +11,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     public GameObject gameManager;
 
-    private void Awake()
-    {
-        if (!isServer) CmdSpawnPOVPlayerObj();
-    }
-
     void Start () {
         DontDestroyOnLoad(gameObject);
 
@@ -33,6 +28,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         {
             CmdSpawnGameManager();
         }
+        if (!isServer) CmdSpawnPOVPlayerObj();
         //FindObjectOfType<GameManager>().connection = this;
     }
 
