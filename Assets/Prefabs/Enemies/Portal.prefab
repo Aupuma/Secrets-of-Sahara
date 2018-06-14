@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4623407847471976}
   - component: {fileID: 33027024494472790}
   - component: {fileID: 23219929125238566}
+  - component: {fileID: 65370802746759762}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -131,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112482258538104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.871704, y: 3.8339844, z: -2.9852343}
+  m_LocalPosition: {x: 5.91, y: 3.8339844, z: 9.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4623407847471976}
@@ -335,6 +336,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1577769948425120}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65370802746759762
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048203684052626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 1}
+  m_Center: {x: 0.00000023841858, y: -0.00000023841858, z: 0}
 --- !u!114 &114029163983676690
 MonoBehaviour:
   m_ObjectHideFlags: 1

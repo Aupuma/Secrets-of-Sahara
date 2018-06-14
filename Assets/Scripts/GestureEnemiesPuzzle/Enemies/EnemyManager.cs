@@ -40,6 +40,7 @@ public class EnemyManager : Puzzle {
     public GameObject sceneCamera;
     public Slider uiProgressBar;
     private ObjectPooler pooler;
+    public GameObject gestureManager;
 
 
     [Header("Score parameters")]
@@ -80,7 +81,7 @@ public class EnemyManager : Puzzle {
         {
             base.OnPuzzleReady();
             readyToSpawn = true;
-            GestureManager.instance.CreateGesturePlane();
+            gestureManager.SetActive(true);
             ChangeEnemyToDestroy();
         }
     }

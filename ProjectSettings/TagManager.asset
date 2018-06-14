@@ -15,6 +15,7 @@ TagManager:
   - Trap
   - Door
   - Key
+  - Portal
   layers:
   - Default
   - TransparentFX
