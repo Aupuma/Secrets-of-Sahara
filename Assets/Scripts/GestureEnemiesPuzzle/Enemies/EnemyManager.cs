@@ -75,8 +75,11 @@ public class EnemyManager : Puzzle {
 
     public override void OnPuzzleReady()
     {
-        base.OnPuzzleReady();
-        ChangeEnemyToDestroy();
+        if (isServer)
+        {
+            base.OnPuzzleReady();
+            ChangeEnemyToDestroy();
+        }
     }
 
 	// Update is called once per frame
