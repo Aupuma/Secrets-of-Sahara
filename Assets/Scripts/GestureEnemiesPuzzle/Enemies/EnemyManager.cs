@@ -86,8 +86,15 @@ public class EnemyManager : Puzzle {
         }
     }
 
-	// Update is called once per frame
-	void Update () {
+    public override void PuzzleCompleted()
+    {
+        gestureManager.SetActive(false);
+        readyToSpawn = false;
+        base.PuzzleCompleted();
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS
         {
             if (readyToSpawn && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
@@ -100,8 +107,6 @@ public class EnemyManager : Puzzle {
         else if (Input.GetMouseButtonDown(0)) //DETECTAMOS SI JUGADOR POV PULSA BOTÓN DEL PANEL
         {
             RaycastHit hit = new RaycastHit();
-            // Construct a ray from the current touch coordinates
-            //ESTO HAY QUE ARREGLARLO
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
