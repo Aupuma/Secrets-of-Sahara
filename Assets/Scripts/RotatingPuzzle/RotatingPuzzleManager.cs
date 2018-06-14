@@ -46,7 +46,7 @@ public class RotatingPuzzleManager : Puzzle {
                         if(puzzlePieces[i] == hit.collider.transform)
                         {
                             Debug.Log(i);
-                            POVPlayerInteractions.instance.connection.CmdRotationCall(i);
+                            GameManager.instance.POVPlayerConnection.CmdRotationCall(i);
                             break;
                         }
                     }
