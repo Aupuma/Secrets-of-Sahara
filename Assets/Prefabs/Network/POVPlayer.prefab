@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 54965912507620636}
   - component: {fileID: 114324446085803668}
   m_Layer: 0
-  m_Name: PlayerPlaceHolder
+  m_Name: POVPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connection: {fileID: 0}
   povCamera: {fileID: 20070836349610576}
-  spawnPos: {fileID: 0}
   actionTime: 0.2
   movementDistance: 1.4
   dashDistance: 3
