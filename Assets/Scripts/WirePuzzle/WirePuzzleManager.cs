@@ -58,10 +58,14 @@ public class WirePuzzleManager : Puzzle {
 
     void OnChangeIndex(int index)
     {
-        if(isServer) 
-            if(index == panelLights.Length) PuzzleCompleted();
+        if(isServer)
+        {
+            Debug.Log(index);
+            if (index == panelLights.Length) PuzzleCompleted();
+        }
         else
         {
+            Debug.Log(index);
             currentPuzzleIndex = index;
             for (int i = 0; i < panelLights.Length; i++)
             {
