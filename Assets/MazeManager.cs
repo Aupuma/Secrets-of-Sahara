@@ -30,13 +30,16 @@ public class MazeManager : Puzzle {
     [ClientRpc]
     public void RpcDisableTrapSymbolsOnPov()
     {
-        foreach (var trap in hiddenTrapsAfterKey)
+        if (!isServer)
         {
-            trap.GetComponent<MeshRenderer>().enabled = false;
-        }
-        foreach (var trap in hiddenTrapsBeforeKey)
-        {
-            trap.GetComponent<MeshRenderer>().enabled = false;
+            foreach (var trap in hiddenTrapsAfterKey)
+            {
+                trap.GetComponent<MeshRenderer>().enabled = false;
+            }
+            foreach (var trap in hiddenTrapsBeforeKey)
+            {
+                trap.GetComponent<MeshRenderer>().enabled = false;
+            }
         }
     }
 
