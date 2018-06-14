@@ -27,7 +27,8 @@ public class EnemyManager : Puzzle {
     private int[] selectionNumbers;
     private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
     public EnemyType currentEnemy; //PARA DEBUGGEAR
-    
+    private bool readyToSpawn = false;
+
 
     [Header("References")]
     public EnemyPathInfo[] enemyPaths;
@@ -78,6 +79,7 @@ public class EnemyManager : Puzzle {
         if (isServer)
         {
             base.OnPuzzleReady();
+            readyToSpawn = true;
             ChangeEnemyToDestroy();
         }
     }
@@ -86,7 +88,7 @@ public class EnemyManager : Puzzle {
 	void Update () {
         if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS
         {
-            if (Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
+            if (readyToSpawn && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
             {
                 currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
                 lastSpawnTime = Time.unscaledTime;
