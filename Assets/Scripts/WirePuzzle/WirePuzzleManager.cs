@@ -6,8 +6,6 @@ using DG.Tweening;
 
 public class WirePuzzleManager : Puzzle {
 
-    public static WirePuzzleManager instance;
-
     [SyncVar(hook = "OnChangeIndex")]
     public int currentPuzzleIndex = 0;
 
@@ -15,8 +13,17 @@ public class WirePuzzleManager : Puzzle {
     private bool[] lightsOn;
     private Draggable currentDraggedObject;
 
-    void Start () {
+    #region SINGLETON
+    public static WirePuzzleManager instance;
+
+    private void Awake()
+    {
         instance = this;
+    }
+    #endregion //SINGLETON
+
+    public override void Start () {
+        base.Start();
         lightsOn = new bool[panelLights.Length];
 	}
 
@@ -49,21 +56,10 @@ public class WirePuzzleManager : Puzzle {
         }
     }
 
-    public override void OnStartServer()
-    {
-        NetDiscovery.instance.StartAsServer();
-    }
-
-    public override void PuzzleCompleted()
-    {
-        if (currentDraggedObject != null) currentDraggedObject.Selected = false;
-        base.PuzzleCompleted();
-    }
-
     void OnChangeIndex(int index)
     {
         if(isServer) 
-            if(index == panelLights.Length) SceneObjectsManager.instance.HideObjects();
+            if(index == panelLights.Length) PuzzleCompleted();
         else
         {
             currentPuzzleIndex = index;
@@ -84,5 +80,11 @@ public class WirePuzzleManager : Puzzle {
                 }
             }
         }
+    }
+
+    public override void PuzzleCompleted()
+    {
+        if (currentDraggedObject != null) currentDraggedObject.Selected = false;
+        base.PuzzleCompleted();
     }
 }

@@ -136,20 +136,6 @@ public class Draggable : MonoBehaviour {
         objTrans.Rotate(Vector3.up, rotY);
 
         CorrectRotation();
-
-        /*
-        if (-Input.GetAxis("Mouse X") > 0 && onRightRotationLimit) return;
-        if (-Input.GetAxis("Mouse X") < 0 && onLeftRotationLimit) return;
-
-        if(-Input.GetAxis("Mouse X") > 0)
-        {
-            onLeftRotationLimit = false;
-        }
-        if (-Input.GetAxis("Mouse X") < 0)
-        {
-            onRightRotationLimit = false;
-        }
-        */
     }
     #endregion //PLAYER INPUT
 
@@ -207,22 +193,6 @@ public class Draggable : MonoBehaviour {
             objTrans.localRotation = Quaternion.Euler(0, nearestAngle, 0);
             onRotationInterval = true;
         }
-        
-
-        /*
-        if (rotY > 180f && 360 - rotY > leftRotation)
-        {
-            rotY = 360-leftRotation;
-            onLeftRotationLimit = true;
-        }
-        else if (rotY < 180f && rotY > rightRotation)
-        {
-            rotY = rightRotation;
-            onRightRotationLimit = true;
-        }
-
-        objTrans.localRotation = Quaternion.Euler(0, rotY, 0);
-        */
     }
     #endregion //MOVEMENT CORRECTION
 

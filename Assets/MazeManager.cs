@@ -4,26 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MazeManager : NetworkBehaviour {
+public class MazeManager : Puzzle {
 
-    public static MazeManager instance;
-
+    [Header("References")]
     public Animator[] lockedElements;
     public Animator[] hiddenTrapsBeforeKey;
     public Animator[] hiddenTrapsAfterKey;
 
+    #region SINGLETON
+    public static MazeManager instance;
+
     private void Awake()
     {
         instance = this;
-    }
-
-    public void Ready()
-    {
-        if (isServer)
-        {
-            NetDiscovery.instance.StartAsServer();
-        }
-    }
+    } 
+    #endregion SINGLETON
 
     [Command]
     public void CmdEnableFirstTraps()
@@ -51,7 +46,6 @@ public class MazeManager : NetworkBehaviour {
     {
         foreach (var item in lockedElements)
         {
-            Debug.Log("trying to meve");
             item.SetTrigger("Unlock"); //Movemos hacia abajo las paredes bloqueadas
         }
         foreach (var item in hiddenTrapsBeforeKey)
@@ -77,5 +71,6 @@ public class MazeManager : NetworkBehaviour {
         {
             item.SetTrigger("fadeOut");
         }
+        PuzzleCompleted();
     }
 }

@@ -6,15 +6,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class SequencePuzzleManager : NetworkBehaviour {
-
-    public static SequencePuzzleManager instance;
+public class SequencePuzzleManager : Puzzle {
 
     [Header("Parameters")]
     public int[] sequence;
     [SyncVar]
     private int seqIndex = 0;
-    public bool isDebug = false;
 
     [Header("References")]
     public SequencePanelSymbol[] sequencePanelSymbols;
@@ -31,20 +28,36 @@ public class SequencePuzzleManager : NetworkBehaviour {
     public Transform totem1Buttons;
     public Transform totem2Buttons;
 
-    void Start () {
+    #region SINGLETON
+    public static SequencePuzzleManager instance;
+
+    private void Awake()
+    {
         instance = this;
-        
+    } 
+    #endregion //SINGLETON
+
+    public override void Start () {
+        base.Start();
+
         if(isServer)
         {
-            if(isDebug) NetDiscovery.instance.StartAsServer();
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
             StartSceneMovementLoop();
-            //CmdGenerateNewSequence();
         }
     }
 
+    public override void OnPuzzleReady()
+    {
+        if (isServer) CmdGenerateNewSequence();
+        base.OnPuzzleReady();
+    }
+
+    /// <summary>
+    /// Anima de manera continua los objetos de la escena, rotación y movimiento en YOYO
+    /// </summary>
     private void StartSceneMovementLoop()
     {
         Sequence run = DOTween.Sequence();
@@ -133,8 +146,6 @@ public class SequencePuzzleManager : NetworkBehaviour {
 
         GenerateRandomSequence(btnIds);
 
-        //StartSceneMovementLoop();
-
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].SetNewInfo(btnIds[i], symbolTextures[btnIds[i]]);
@@ -160,7 +171,7 @@ public class SequencePuzzleManager : NetworkBehaviour {
         if (seqIndex == sequence.Length)
         {
             seqIndex = 0;
-            SceneObjectsManager.instance.HideObjects();
+            PuzzleCompleted();
         }
     }
 

@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class RotatingPuzzleManager : NetworkBehaviour {
+public class RotatingPuzzleManager : Puzzle {
 
-    public static RotatingPuzzleManager instance;
-
-    [Header("References")]//--------------------------------------------------------
+    [Header("References")]
     public float rotationTime = 0.35f;
     public Transform[] puzzlePieces;
     public Transform[] pillars;
@@ -16,9 +14,18 @@ public class RotatingPuzzleManager : NetworkBehaviour {
     [SyncVar]
     private bool isRotating = false;
 
-    // Use this for initialization
-    void Start () {
+    #region SINGLETON
+    public static RotatingPuzzleManager instance;
+
+    private void Awake()
+    {
         instance = this;
+    } 
+    #endregion //SINGLETON
+
+    // Use this for initialization
+    public override void Start () {
+        base.Start();
 	}
 	
 	// Update is called once per frame
@@ -80,6 +87,7 @@ public class RotatingPuzzleManager : NetworkBehaviour {
         {
             if (pillar.rotation.y != 0) return;
         }
-        SceneObjectsManager.instance.HideObjects();
+
+        PuzzleCompleted();
     }
 }

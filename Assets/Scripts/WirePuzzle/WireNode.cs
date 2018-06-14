@@ -9,15 +9,21 @@ public class WireNode : MonoBehaviour {
     [HideInInspector] public MeshRenderer wireRenderer;
     [HideInInspector] public Material originalMaterial;
     [HideInInspector] public Material currentConnexionMaterial;
-     public bool connected = false;
+    [HideInInspector] public bool connected = false;
     [HideInInspector] public int connectionOrder = -1;
 
-    // Use this for initialization
     public virtual void Start () {
         wireRenderer = transform.parent.GetComponent<MeshRenderer>();
         originalMaterial = wireRenderer.material;
 	}
 
+    /// <summary>
+    /// Conectamos este nodo, y depende del nodo que nos haya llamado, 
+    /// continuamos con la llamada recursiva de conexión en una dirección u otra
+    /// </summary>
+    /// <param name="callNode"></param>
+    /// <param name="callOrder"></param>
+    /// <param name="conexMaterial"></param>
     public virtual void Connect(WireNode callNode,int callOrder, Material conexMaterial)
     {
         connected = true;
@@ -26,14 +32,10 @@ public class WireNode : MonoBehaviour {
 
         if (callNode == internalConnection) 
         {
-            //Si el nodo que dice que nos conectemos es el del otro lado del cable
-            //le decimos al nodo externo (si hay) que se conecte
             if (externalConnection != null) externalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
         }
         else 
         {
-            //Si el nodo que ha llamado es el nodo externo, asignamos material de conexión y
-            //le decimos al nodo del otro lado de nuestro cable que se conecte
             wireRenderer.material = conexMaterial;
             internalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
         }
@@ -50,6 +52,10 @@ public class WireNode : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Desconectamos este nodo y si tenemos alguno conectado a nosotros, seguimos desconectando de manera recursiva
+    /// </summary>
+    /// <param name="callNode"></param>
     public virtual void Disconnect(WireNode callNode)
     {
         connected = false;

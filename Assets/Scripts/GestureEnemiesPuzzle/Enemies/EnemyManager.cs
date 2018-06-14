@@ -15,23 +15,21 @@ public class EnemyPathInfo
 
 public class EnemyManager : Puzzle {
 
-    public static EnemyManager instance;
 
-    private int lastEnemySpawned = -1;
-
-    [Header("Spawn parameters")]//-------------------------------------------------
+    [Header("Spawn parameters")]
     public float minTimeBetweenSpawns;
     public float maxTimeBetweenSpawns;
     [Range(0f, 1f)] public float superEnemyProbability;
     private float currentTimeBetweenSpawns;
     private float lastSpawnTime = 0;
-
     private int enemyToDestroy = -1;
+    private int lastEnemySpawned = -1;
     private int[] selectionNumbers;
     private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
     public EnemyType currentEnemy; //PARA DEBUGGEAR
+    
 
-    [Header("References")]//-------------------------------------------------------
+    [Header("References")]
     public EnemyPathInfo[] enemyPaths;
     public Enemy[] normalEnemies;
     public Enemy superEnemy;
@@ -42,7 +40,8 @@ public class EnemyManager : Puzzle {
     public Slider uiProgressBar;
     private ObjectPooler pooler;
 
-    [Header("Score parameters")]//-------------------------------------------------
+
+    [Header("Score parameters")]
     public int pointsToWin = 10;
     public int pointsCorrect = 1;
     public int pointsIncorrect = -1;
@@ -51,20 +50,19 @@ public class EnemyManager : Puzzle {
     [SyncVar(hook = "OnScoreChanged")]
     public int pointsScored;
 
-    //-----------------------------------------------------------------------------
 
-    public override void OnStartServer()
-    {
-        NetDiscovery.instance.StartAsServer();
-    }
+    #region SINGLETON
+    public static EnemyManager instance;
 
     private void Awake()
     {
         instance = this;
-    }
+    } 
+    #endregion SINGLETON
 
     // Use this for initialization
-    void Start () {
+    public override void Start () {
+        base.Start();
 
         if (isServer)
         {
@@ -77,6 +75,7 @@ public class EnemyManager : Puzzle {
 
     public override void OnPuzzleReady()
     {
+        base.OnPuzzleReady();
         ChangeEnemyToDestroy();
     }
 
