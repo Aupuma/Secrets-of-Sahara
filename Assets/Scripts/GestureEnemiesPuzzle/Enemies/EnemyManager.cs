@@ -80,6 +80,7 @@ public class EnemyManager : Puzzle {
         {
             base.OnPuzzleReady();
             readyToSpawn = true;
+            GestureManager.instance.CreateGesturePlane();
             ChangeEnemyToDestroy();
         }
     }

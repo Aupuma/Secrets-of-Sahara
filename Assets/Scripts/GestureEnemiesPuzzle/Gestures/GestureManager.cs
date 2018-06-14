@@ -39,6 +39,10 @@ public class GestureManager : MonoBehaviour
     {
         trainingSet = LoadTrainingSet();
         drawingTrail = false;
+    }
+
+    public void CreateGesturePlane()
+    {
         drawingPos = Camera.main.transform.GetChild(0);
         objPlane = new Plane(Camera.main.transform.forward * -1, drawingPos.position);
     }
