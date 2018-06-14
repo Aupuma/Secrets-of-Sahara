@@ -84,27 +84,27 @@ public class SequencePuzzleManager : Puzzle {
     void Update()
     {
         // Code for OnMouseDown in the iPhone. Unquote to test.
-        RaycastHit hit = new RaycastHit();
         if (Input.GetMouseButtonDown(0))
         {
+            RaycastHit hit = new RaycastHit();
             // Construct a ray from the current touch coordinates
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "SequenceButton")
-                    hit.transform.gameObject.GetComponent<SequenceButton>().ButtonPressed();
+                    hit.collider.GetComponent<SequenceButton>().ButtonPressed();
             }
         }
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            // Construct a ray from the current touch coordinates
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == "SequenceButton")
-                    hit.transform.gameObject.GetComponent<SequenceButton>().ButtonPressed();
-            }
-        }
+        //if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+        //    // Construct a ray from the current touch coordinates
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        if (hit.collider.tag == "SequenceButton")
+        //            hit.transform.gameObject.GetComponent<SequenceButton>().ButtonPressed();
+        //    }
+        //}
     }
 
 
