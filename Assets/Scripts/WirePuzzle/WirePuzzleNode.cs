@@ -39,7 +39,7 @@ public class WirePuzzleNode : WireNode {
         }
         else //Si la desconexión se ha pedido desde el nodo externo
         {
-            WirePuzzleManager.instance.NodeLostConnexion(orderInPuzzle);
+            WirePuzzleManager.instance.NodeLostConnexion();
             wireRenderer.material = originalMaterial;
             internalConnection.Disconnect(this);
         }

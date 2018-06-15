@@ -66,7 +66,7 @@ public class RotatingPuzzleManager : Puzzle {
                 pillars[index].localEulerAngles.y,
                 pillars[index].localEulerAngles.z + 90f), 
                 rotationTime).
-                OnComplete(CmdRotationFinished); 
+                OnComplete(RotationFinished); 
         }
         else //Rotamos la pieza en el jugador POV
         {
@@ -79,8 +79,7 @@ public class RotatingPuzzleManager : Puzzle {
         }
     }
 
-    [Command]
-    public void CmdRotationFinished()
+    public void RotationFinished()
     {
         isRotating = false;
         foreach (var pillar in pillars)

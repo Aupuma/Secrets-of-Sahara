@@ -61,9 +61,9 @@ public class WirePuzzleManager : Puzzle {
         currentPuzzleIndex = currentPuzzleIndex + 1;
     }
 
-    public void NodeLostConnexion(int order)
+    public void NodeLostConnexion()
     {
-        currentPuzzleIndex = order;
+        currentPuzzleIndex = currentPuzzleIndex - 1;
     }
 
     //SyncVar Hook
