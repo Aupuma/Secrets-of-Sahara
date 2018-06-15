@@ -56,18 +56,17 @@ public class WirePuzzleManager : Puzzle {
         }
     }
 
-    [Command]
-    public void CmdNextNodeConnected()
+    public void NextNodeConnected()
     {
         currentPuzzleIndex = currentPuzzleIndex + 1;
     }
 
-    [Command]
-    public void CmdNodeLostConnexion(int order)
+    public void NodeLostConnexion(int order)
     {
         currentPuzzleIndex = order;
     }
 
+    //SyncVar Hook
     void OnChangeIndex(int index)
     {
         if(isServer)

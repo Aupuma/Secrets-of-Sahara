@@ -20,7 +20,7 @@ public class WirePuzzleNode : WireNode {
         }
         else if (orderInPuzzle == WirePuzzleManager.instance.currentPuzzleIndex)
         {
-            WirePuzzleManager.instance.CmdNextNodeConnected();
+            WirePuzzleManager.instance.NextNodeConnected();
             //Si el nodo que ha llamado es el nodo externo, asignamos material de conexión y
             //le decimos al nodo del otro lado de nuestro cable que se conecte
             wireRenderer.material = conexMaterial;
@@ -39,7 +39,7 @@ public class WirePuzzleNode : WireNode {
         }
         else //Si la desconexión se ha pedido desde el nodo externo
         {
-            WirePuzzleManager.instance.CmdNodeLostConnexion(orderInPuzzle);
+            WirePuzzleManager.instance.NodeLostConnexion(orderInPuzzle);
             wireRenderer.material = originalMaterial;
             internalConnection.Disconnect(this);
         }

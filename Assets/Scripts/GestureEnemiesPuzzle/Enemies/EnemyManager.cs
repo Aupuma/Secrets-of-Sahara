@@ -125,6 +125,18 @@ public class EnemyManager : Puzzle {
         }
 	}
 
+    public void TrapsOnOff(int index)
+    {
+        if (isServer)
+        {
+            Animator[] animators = traps[index].GetComponentsInChildren<Animator>();
+            foreach (var a in animators)
+            {
+                a.SetTrigger("Move");
+            }
+        }
+    }
+
     #region ENEMY SPAWNING
 
     private void SpawnEnemies()
@@ -270,31 +282,5 @@ public class EnemyManager : Puzzle {
             symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeOut");
         }
     }
-
-    //[ClientRpc]
-    //public void RpcTrapsOnOff(int index)
-    //{
-    //    if (isServer)
-    //    {
-    //        Animator[] animators = traps[index].GetComponentsInChildren<Animator>();
-    //        foreach (var a in animators)
-    //        {
-    //            a.SetTrigger("Move");
-    //        }
-    //    }
-    //}
-
-    public void TrapsOnOff(int index)
-    {
-        if (isServer)
-        {
-            Animator[] animators = traps[index].GetComponentsInChildren<Animator>();
-            foreach (var a in animators)
-            {
-                a.SetTrigger("Move");
-            }
-        }
-    }
-
     #endregion //NETWORK METHODS
 }
