@@ -28,7 +28,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         {
             CmdSpawnGameManager();
         }
-        if (!isServer) CmdSpawnPOVPlayerObj();
+        //if (!isServer) CmdSpawnPOVPlayerObj();
         //FindObjectOfType<GameManager>().connection = this;
     }
 
