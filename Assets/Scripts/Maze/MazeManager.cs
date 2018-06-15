@@ -20,8 +20,7 @@ public class MazeManager : Puzzle {
     } 
     #endregion SINGLETON
 
-    [Command]
-    public void CmdEnableFirstTraps()
+    public void EnableFirstTraps()
     {
         RpcDisableTrapSymbolsOnPov();
         RpcEnableFirstTraps();
@@ -52,12 +51,6 @@ public class MazeManager : Puzzle {
         }
     }
 
-    [Command]
-    public void CmdUnlockElements()
-    {
-        RpcUnlockElements();
-    }
-
     [ClientRpc]
     public void RpcUnlockElements()
     {
@@ -73,12 +66,6 @@ public class MazeManager : Puzzle {
         {
             item.SetTrigger("fadeIn");
         }
-    }
-
-    [Command]
-    public void CmdMazeCompleted()
-    {
-        RpcMazeCompleted();
     }
 
     [ClientRpc]

@@ -59,7 +59,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
         NetworkServer.SpawnWithClientAuthority(playerObject,connectionToClient);
         RpcAssignConnectionToPOVPlayer(playerObject);
-        MazeManager.instance.CmdEnableFirstTraps();
+        MazeManager.instance.EnableFirstTraps();
     }
 
     //---------GESTURES ENEMIES PUZZLE----------------------

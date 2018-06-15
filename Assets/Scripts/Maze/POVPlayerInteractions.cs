@@ -244,11 +244,11 @@ public class POVPlayerInteractions : NetworkBehaviour {
             if (other.gameObject.tag == "Key")
             {
                 NetworkServer.Destroy(other.gameObject);
-                MazeManager.instance.CmdUnlockElements();
+                MazeManager.instance.RpcUnlockElements();
             }
             else if (other.gameObject.tag == "Door")
             {
-                MazeManager.instance.CmdMazeCompleted();
+                MazeManager.instance.RpcMazeCompleted();
             }
             else if (other.gameObject.tag == "Trap")
             {
