@@ -39,6 +39,6 @@ public class SequenceButton : MonoBehaviour {
 
     public void CheckIfButtonIsCorrect()
     {
-        SequencePuzzleManager.instance.CmdOnButtonPressed(id);
+        SequencePuzzleManager.instance.OnButtonPressed(id);
     }
 }

@@ -51,7 +51,7 @@ public class SequencePuzzleManager : Puzzle {
 
     public override void OnPuzzleReady()
     {
-        if (isServer) CmdGenerateNewSequence();
+        if (isServer) GenerateNewSequence();
         base.OnPuzzleReady();
     }
 
@@ -131,8 +131,7 @@ public class SequencePuzzleManager : Puzzle {
 
     #region NETWORK METHODS
 
-    [Command]
-    public void CmdGenerateNewSequence()
+    public void GenerateNewSequence()
     {
         Debug.Log("Generating new sequence");
 
@@ -152,8 +151,7 @@ public class SequencePuzzleManager : Puzzle {
         }
     }
 
-    [Command]
-    public void CmdOnButtonPressed(int id)
+    public void OnButtonPressed(int id)
     {
         //SI PULSAMOS BOTÓN CORRECTO LO HACEMOS SABER AL JUGADOR POV
         if (id == sequence[seqIndex])
@@ -163,7 +161,7 @@ public class SequencePuzzleManager : Puzzle {
         }
         else //SI NO, REINICIAMOS LA SECUENCIA
         {
-            CmdGenerateNewSequence();
+            GenerateNewSequence();
             seqIndex = 0;
         }
 
