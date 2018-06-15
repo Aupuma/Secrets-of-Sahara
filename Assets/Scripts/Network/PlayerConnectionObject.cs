@@ -66,7 +66,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     [Command]
     public void CmdRemoteTrapCall(int index)
     {
-        EnemyManager.instance.RpcTrapsOnOff(index);
+        EnemyManager.instance.TrapsOnOff(index);
     }
 
     //---------PERSPECTIVE PUZZLE----------------------

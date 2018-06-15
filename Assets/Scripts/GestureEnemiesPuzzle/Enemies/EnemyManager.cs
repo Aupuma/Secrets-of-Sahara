@@ -178,7 +178,7 @@ public class EnemyManager : Puzzle {
         if (enemyQueue.Count > 0)
         {
             enemyQueue.Dequeue();
-            CmdFadeOutSymbol();
+            RpcFadeOutSymbol(enemyToDestroy);
         }
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
@@ -191,7 +191,7 @@ public class EnemyManager : Puzzle {
 
         //CANBIAMOS EL TIPO DE ENEMIGO Y ENCENDEMOS SU LUZ
         currentEnemy = normalEnemies[enemyToDestroy].type;
-        CmdFadeInSymbol();
+        RpcFadeInSymbol(enemyToDestroy);
         enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
     } 
 
@@ -251,12 +251,6 @@ public class EnemyManager : Puzzle {
 
     #region NETWORK METHODS
 
-    [Command]
-    public void CmdFadeInSymbol()
-    {
-        RpcFadeInSymbol(enemyToDestroy);
-    }
-
     [ClientRpc]
     public void RpcFadeInSymbol(int index)
     {
@@ -265,12 +259,6 @@ public class EnemyManager : Puzzle {
             Debug.Log("Fading in");
             symbolTextures[index].GetComponent<Animator>().SetTrigger("fadeIn");
         }
-    }
-
-    [Command]
-    public void CmdFadeOutSymbol()
-    {
-        RpcFadeOutSymbol(enemyToDestroy);
     }
 
     [ClientRpc]
@@ -283,8 +271,20 @@ public class EnemyManager : Puzzle {
         }
     }
 
-    [ClientRpc]
-    public void RpcTrapsOnOff(int index)
+    //[ClientRpc]
+    //public void RpcTrapsOnOff(int index)
+    //{
+    //    if (isServer)
+    //    {
+    //        Animator[] animators = traps[index].GetComponentsInChildren<Animator>();
+    //        foreach (var a in animators)
+    //        {
+    //            a.SetTrigger("Move");
+    //        }
+    //    }
+    //}
+
+    public void TrapsOnOff(int index)
     {
         if (isServer)
         {
@@ -294,6 +294,7 @@ public class EnemyManager : Puzzle {
                 a.SetTrigger("Move");
             }
         }
-    } 
+    }
+
     #endregion //NETWORK METHODS
 }
