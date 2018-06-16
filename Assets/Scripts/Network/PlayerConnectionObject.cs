@@ -13,23 +13,10 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     void Start () {
         DontDestroyOnLoad(gameObject);
-
-        //Es éste mi PlayerObject local?
-        /*
-        if(isServer) //Soy el jugador en primera persona
-        {
-            if(GameManager.instance == null)
-            {
-                CmdSpawnGameManager();
-            }
-        }
-        */
         if (!isServer && GameManager.instance == null)
         {
             CmdSpawnGameManager();
         }
-        //if (!isServer) CmdSpawnPOVPlayerObj();
-        //FindObjectOfType<GameManager>().connection = this;
     }
 
     //--------------------------------------COMMANDS
@@ -54,11 +41,10 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     //---------MAZE----------------------
     [Command]
-    void CmdSpawnPOVPlayerObj()
+    public void CmdSpawnPOVPlayerObj()
     {
         GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
         NetworkServer.SpawnWithClientAuthority(playerObject,connectionToClient);
-        RpcAssignConnectionToPOVPlayer(playerObject);
         MazeManager.instance.EnableFirstTraps();
     }
 
@@ -74,14 +60,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
     public void CmdRotationCall(int index)
     {
         RotatingPuzzleManager.instance.RpcRotateElements(index);
-    }
-
-    //-------------------------------------RPC
-    //RPCs son funciones especiales que SOLO se ejecutan en los clientes
-    [ClientRpc]
-    void RpcAssignConnectionToPOVPlayer(GameObject playerObject)
-    {
-        if (!isServer) playerObject.GetComponent<POVPlayerInteractions>().connection = this;
     }
     //---------------------------------------
 }

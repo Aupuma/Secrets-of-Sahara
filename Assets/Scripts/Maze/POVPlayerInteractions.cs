@@ -16,11 +16,11 @@ public enum SwipeDirection
 
 public class POVPlayerInteractions : NetworkBehaviour {
 
-    public static POVPlayerInteractions instance;
+    #region DATA
+
     public PlayerConnectionObject connection;
-    public Camera povCamera;
-    private Vector3 originalPos;
-    private Quaternion originalRotation;
+    private Vector3 respawnPos;
+    private Quaternion respawnRot;
 
     [Header("Parameters")]
     bool canAct = true;
@@ -41,18 +41,26 @@ public class POVPlayerInteractions : NetworkBehaviour {
     float lowPassFilterFactor;
     Vector3 lowPassValue;
 
-    private Transform raycastInitialPos;
+    private Transform raycastInitialPos; 
+    #endregion
+
+    #region SINGLETON
+    public static POVPlayerInteractions instance;
 
     private void Awake()
     {
         instance = this;
     }
+    #endregion
 
+    #region MONOBEHAVIOUR METHODS
     private void Start()
     {
         if (isServer)
         {
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
+            respawnPos = transform.position;
+            respawnRot = transform.rotation;
         }
         else
         {
@@ -60,22 +68,46 @@ public class POVPlayerInteractions : NetworkBehaviour {
             raycastInitialPos = transform.GetChild(1);
         }
 
-        originalPos = transform.position;
-        originalRotation = transform.rotation;
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if (!hasAuthority)
         {
             return;
         }
-        if(canAct) CheckShake();
-        if(canAct) CheckSwipe();
+        if (canAct) CheckShake();
+        if (canAct) CheckSwipe();
     }
 
-    #region Input Handlers
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isServer)
+        {
+            if (other.gameObject.tag == "Key")
+            {
+                NetworkServer.Destroy(other.gameObject);
+                MazeManager.instance.RpcUnlockElements();
+
+                //Nueva posición de spawneo
+                respawnPos = transform.position;
+                respawnRot = transform.rotation;
+            }
+            else if (other.gameObject.tag == "Door")
+            {
+                MazeManager.instance.RpcMazeCompleted();
+            }
+            else if (other.gameObject.tag == "Trap")
+            {
+                CmdActivateTrapAndRestart(other.gameObject);
+            }
+        }
+    } 
+    #endregion
+
+    #region INPUT HANDLERS
+
     private void SetAccelerometer()
     {
         lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
@@ -157,7 +189,8 @@ public class POVPlayerInteractions : NetworkBehaviour {
     }
     #endregion
 
-    #region Network Methods
+    #region NETWORK METHODS
+
     [Command]
     public void CmdRotateRight()
     {
@@ -227,8 +260,8 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     private void Restart()
     {
-        transform.position = originalPos;
-        transform.rotation = originalRotation;
+        transform.position = respawnPos;
+        transform.rotation = respawnRot;
     }
 
     void ActionFinished()
@@ -237,23 +270,4 @@ public class POVPlayerInteractions : NetworkBehaviour {
     }
     #endregion
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (isServer)
-        {
-            if (other.gameObject.tag == "Key")
-            {
-                NetworkServer.Destroy(other.gameObject);
-                MazeManager.instance.RpcUnlockElements();
-            }
-            else if (other.gameObject.tag == "Door")
-            {
-                MazeManager.instance.RpcMazeCompleted();
-            }
-            else if (other.gameObject.tag == "Trap")
-            {
-                CmdActivateTrapAndRestart(other.gameObject);
-            }
-        }
-    }
 }

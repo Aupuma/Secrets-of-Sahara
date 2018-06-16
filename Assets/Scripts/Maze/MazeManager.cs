@@ -17,8 +17,14 @@ public class MazeManager : Puzzle {
     private void Awake()
     {
         instance = this;
-    } 
+    }
     #endregion SINGLETON
+
+    public override void OnPuzzleReady()
+    {
+        base.OnPuzzleReady();
+        GameManager.instance.POVPlayerConnection.CmdSpawnPOVPlayerObj();
+    }
 
     public void EnableFirstTraps()
     {
