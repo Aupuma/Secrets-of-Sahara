@@ -262,7 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connection: {fileID: 0}
-  povCamera: {fileID: 20070836349610576}
   actionTime: 0.2
   movementDistance: 1.4
   dashDistance: 3
