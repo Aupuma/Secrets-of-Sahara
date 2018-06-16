@@ -26,20 +26,11 @@ public class POVPlayerInteractions : NetworkBehaviour {
     bool canAct = true;
     public float actionTime = 0.5f;
     public float movementDistance = 1.5f;
-    public float dashDistance = 4f;
 
     private SwipeDirection direction;
     private Vector3 touchPosition;
     private float swipeResistanceX = 50.0f;
     private float swipeResistanceY = 100.0f;
-
-    float accelerometerUpdateInterval = 1.0f / 60.0f;
-    // The greater the value of LowPassKernelWidthInSeconds, the slower the
-    // filtered value will converge towards current input sample (and vice versa).
-    float lowPassKernelWidthInSeconds = 1.0f;
-    float shakeDetectionThreshold = 2.0f;
-    float lowPassFilterFactor;
-    Vector3 lowPassValue;
 
     private Transform raycastInitialPos; 
     #endregion
@@ -64,7 +55,6 @@ public class POVPlayerInteractions : NetworkBehaviour {
         }
         else
         {
-            SetAccelerometer();
             raycastInitialPos = transform.GetChild(1);
         }
 
@@ -73,12 +63,11 @@ public class POVPlayerInteractions : NetworkBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!hasAuthority)
+        if (!hasAuthority) //Si no tiene autoridad (servidor) no hacemos nada
         {
             return;
         }
-        if (canAct) CheckShake();
-        if (canAct) CheckSwipe();
+        else if (canAct) CheckSwipe();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,39 +89,21 @@ public class POVPlayerInteractions : NetworkBehaviour {
             }
             else if (other.gameObject.tag == "Trap")
             {
-                CmdActivateTrapAndRestart(other.gameObject);
+                RpcActivateTrapAndRestart(other.gameObject);
             }
         }
-    } 
+    }
+
+    private void Restart()
+    {
+        transform.position = respawnPos;
+        transform.rotation = respawnRot;
+    }
+
+
     #endregion
 
     #region INPUT HANDLERS
-
-    private void SetAccelerometer()
-    {
-        lowPassFilterFactor = accelerometerUpdateInterval / lowPassKernelWidthInSeconds;
-        shakeDetectionThreshold *= shakeDetectionThreshold;
-        lowPassValue = Input.acceleration;
-    }
-
-    private void CheckShake()
-    {
-        Vector3 acceleration = Input.acceleration;
-        lowPassValue = Vector3.Lerp(lowPassValue, acceleration, lowPassFilterFactor);
-        Vector3 deltaAcceleration = acceleration - lowPassValue;
-
-        if (deltaAcceleration.sqrMagnitude >= shakeDetectionThreshold)
-        {
-            Vector3 fwd = raycastInitialPos.TransformDirection(Vector3.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, 2f))
-                return;
-            else
-                CmdDash();
-            Debug.Log("Shake event detected at time " + Time.time);
-        }
-    }
 
     private void CheckSwipe()
     {
@@ -201,8 +172,10 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public void RpcRotateRight()
     {
         canAct = false;
-        transform.DORotate(new Vector3(0f, transform.localEulerAngles.y + 90f, 0f), actionTime,
-            RotateMode.Fast).OnComplete(ActionFinished);
+        transform.DORotate(new Vector3(0f, transform.localEulerAngles.y + 90f, 0f), 
+            actionTime,
+            RotateMode.Fast).
+            OnComplete(ActionFinished);
     }
 
     [Command]
@@ -215,8 +188,10 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public void RpcRotateLeft()
     {
         canAct = false;
-        transform.DORotate(new Vector3(0f, transform.localEulerAngles.y - 90f, 0f), actionTime,
-            RotateMode.Fast).OnComplete(ActionFinished);
+        transform.DORotate(new Vector3(0f, transform.localEulerAngles.y - 90f, 0f), 
+            actionTime,
+            RotateMode.Fast).
+            OnComplete(ActionFinished);
     }
 
     [Command]
@@ -229,26 +204,9 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public void RpcMove()
     {
         canAct = false;
-        transform.DOMove(transform.position + transform.forward * movementDistance, actionTime).OnComplete(ActionFinished);
-    }
-
-    [Command]
-    public void CmdDash()
-    {
-        RpcDash();
-    }
-
-    [ClientRpc]
-    public void RpcDash()
-    {
-        canAct = false;
-        transform.DOMove(transform.position + transform.forward * dashDistance, actionTime).OnComplete(ActionFinished);
-    }
-
-    [Command]
-    public void CmdActivateTrapAndRestart(GameObject trap)
-    {
-        RpcActivateTrapAndRestart(trap);
+        transform.DOMove(transform.position + transform.forward * movementDistance, 
+            actionTime).
+            OnComplete(ActionFinished);
     }
 
     [ClientRpc]
@@ -256,12 +214,6 @@ public class POVPlayerInteractions : NetworkBehaviour {
     {
         trap.GetComponent<Animator>().SetTrigger("Move");
         Invoke("Restart", 1f);
-    }
-
-    private void Restart()
-    {
-        transform.position = respawnPos;
-        transform.rotation = respawnRot;
     }
 
     void ActionFinished()

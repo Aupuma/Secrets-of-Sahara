@@ -28,8 +28,8 @@ public class MazeManager : Puzzle {
 
     public void EnableFirstTraps()
     {
-        RpcDisableTrapSymbolsOnPov();
         RpcEnableFirstTraps();
+        RpcDisableTrapSymbolsOnPov();
     }
 
     [ClientRpc]
