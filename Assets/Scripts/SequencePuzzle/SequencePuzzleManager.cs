@@ -97,6 +97,25 @@ public class SequencePuzzleManager : Puzzle {
         }
     }
 
+    public void GenerateNewSequence()
+    {
+        Debug.Log("Generating new sequence");
+
+        seqIndex = 0;
+
+        RpcRestartSequence();
+
+        GenerateRandomSequence(sequence);
+
+        RpcAssignSymbolsToPanel(sequence);
+
+        GenerateRandomSequence(btnIds);
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].SetNewInfo(btnIds[i], symbolTextures[btnIds[i]]);
+        }
+    }
 
     public void GenerateRandomSequence(int[] array)
     {
@@ -119,26 +138,7 @@ public class SequencePuzzleManager : Puzzle {
         }
     }
 
-    public void GenerateNewSequence()
-    {
-        Debug.Log("Generating new sequence");
-
-        seqIndex = 0;
-
-        RpcRestartSequence();
-
-        GenerateRandomSequence(sequence);
-
-        RpcAssignSymbolsToPanel(sequence);
-
-        GenerateRandomSequence(btnIds);
-
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].SetNewInfo(btnIds[i], symbolTextures[btnIds[i]]);
-        }
-    }
-
+    
     public void OnButtonPressed(int id)
     {
         //SI PULSAMOS BOTÓN CORRECTO LO HACEMOS SABER AL JUGADOR POV

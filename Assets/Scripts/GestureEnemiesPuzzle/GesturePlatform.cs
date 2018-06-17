@@ -7,13 +7,13 @@ public class GesturePlatform : MonoBehaviour {
 
     public string gestureType;
     public List<Enemy> enemiesInside;
-    private MeshRenderer renderer;
+    private MeshRenderer rendr;
     
 	// Use this for initialization
 	void Start () {
         enemiesInside = new List<Enemy>();
-        renderer = GetComponent<MeshRenderer>();
-        renderer.enabled = false;
+        rendr = GetComponent<MeshRenderer>();
+        rendr.enabled = false;
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -30,10 +30,7 @@ public class GesturePlatform : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             Enemy oldEnemy = other.GetComponent<Enemy>();
-            EnemyManager.instance.OnEnemyFinishedPath(oldEnemy);
             enemiesInside.Remove(oldEnemy);
-            oldEnemy.GetComponent<NavMeshAgent>().enabled = false;
-            oldEnemy.gameObject.SetActive(false);
         }
     }
 
@@ -47,7 +44,7 @@ public class GesturePlatform : MonoBehaviour {
             enemiesInside.RemoveAt(i);
             if (enemyToDestroy.type != EnemyType.SUPER)
             {
-                enemyToDestroy.GetComponent<Animator>().SetTrigger("Dissolve");
+                enemyToDestroy.PlayDisappearAnimation();
             }
         }
         //Invoke("FadeEffect", 1f);
@@ -55,6 +52,6 @@ public class GesturePlatform : MonoBehaviour {
 
     public void FadeEffect()
     {
-        renderer.enabled = false;
+        rendr.enabled = false;
     }
 }

@@ -19,7 +19,7 @@ public class WireEnd : WireNode {
             connected = true;
             connectionOrder = callOrder;
             //DESHABILITARIAMOS TODOS LOS HANDLES PARA QUE YA NO SE PUEDA MOVER
-            WirePuzzleManager.instance.PuzzleCompleted();
+            WirePuzzleManager.instance.WaitToComplete();
         }
     }
 

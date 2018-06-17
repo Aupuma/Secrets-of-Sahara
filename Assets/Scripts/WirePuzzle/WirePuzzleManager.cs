@@ -97,6 +97,11 @@ public class WirePuzzleManager : Puzzle {
         }
     }
 
+    public void WaitToComplete()
+    {
+        Invoke("PuzzleCompleted", 1.5f);
+    }
+
     public override void PuzzleCompleted()
     {
         if (currentDraggedObject != null) currentDraggedObject.Selected = false;
