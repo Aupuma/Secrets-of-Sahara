@@ -64,7 +64,7 @@ public class PerspectivePuzzleManager : Puzzle {
             pillars[index].DOLocalRotate(new Vector3(
                 pillars[index].localEulerAngles.x,
                 pillars[index].localEulerAngles.y,
-                pillars[index].localEulerAngles.z - 90f), 
+                pillars[index].localEulerAngles.z + 90f), 
                 rotationTime).
                 OnComplete(RotationFinished); 
         }
@@ -74,7 +74,7 @@ public class PerspectivePuzzleManager : Puzzle {
             puzzlePieces[index].DOLocalRotate(new Vector3(
                 puzzlePieces[index].localEulerAngles.x,
                 puzzlePieces[index].localEulerAngles.y,
-                puzzlePieces[index].localEulerAngles.z + 90f),
+                puzzlePieces[index].localEulerAngles.z - 90f),
                 rotationTime);
         }
     }

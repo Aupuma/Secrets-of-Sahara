@@ -18,7 +18,6 @@ public class WireEnd : WireNode {
             wireRenderer.material = conexMaterial;
             connected = true;
             connectionOrder = callOrder;
-            //DESHABILITARIAMOS TODOS LOS HANDLES PARA QUE YA NO SE PUEDA MOVER
             WirePuzzleManager.instance.WaitToComplete();
         }
     }

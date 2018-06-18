@@ -77,13 +77,24 @@ public class EnemyManager : Puzzle {
 
     public override void OnPuzzleReady()
     {
-        if (isServer)
+        base.OnPuzzleReady();
+
+        if (isServer == false)
         {
-            base.OnPuzzleReady();
-            readyToSpawn = true;
-            gestureManager.SetActive(true);
-            ChangeEnemyToDestroy();
-        }
+            //habrá que usar esta llamada para decirle a la conexion del POV que empiece a spawnear enemigos
+            GameManager.instance.POVConnection.CmdStartSpawningEnemies();
+        } 
+    }
+
+
+    /// <summary>
+    /// Asigna el enemigo a eliminar al panel de POV, activa el gestureManager y empieza a spawnear enemigos
+    /// </summary>
+    public void StartSpawningEnemies()
+    {
+        readyToSpawn = true;
+        gestureManager.SetActive(true);
+        ChangeEnemyToDestroy();
     }
 
     public override void PuzzleCompleted()

@@ -24,12 +24,9 @@ public class MazeManager : Puzzle {
     {
         base.Start();
         if (isServer) animator.SetTrigger("Move");
-    }
 
-    public override void OnPuzzleReady()
-    {
-        base.OnPuzzleReady();
-        //NetDiscovery.instance.StartAsServer();
+        //spawnearemos el prefab del player pov
+        //else GameManager.instance.POVConnection.CmdSpawnPOVPlayerObj();
     }
 
     public void EnableFirstTraps()

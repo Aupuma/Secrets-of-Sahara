@@ -66,15 +66,10 @@ public class WirePuzzleManager : Puzzle {
         currentPuzzleIndex = currentPuzzleIndex - 1;
     }
 
-    //SyncVar Hook
+
     void OnChangeIndex(int index)
     {
-        if(isServer)
-        {
-            Debug.Log(index);
-            if (index == panelLights.Length) PuzzleCompleted();
-        }
-        else
+        if(!isServer)
         {
             Debug.Log(index);
             currentPuzzleIndex = index;
@@ -99,12 +94,12 @@ public class WirePuzzleManager : Puzzle {
 
     public void WaitToComplete()
     {
+        if (currentDraggedObject != null) currentDraggedObject.Selected = false;
         Invoke("PuzzleCompleted", 1.5f);
     }
 
     public override void PuzzleCompleted()
     {
-        if (currentDraggedObject != null) currentDraggedObject.Selected = false;
         base.PuzzleCompleted();
     }
 }

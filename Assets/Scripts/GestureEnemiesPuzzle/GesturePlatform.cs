@@ -36,7 +36,7 @@ public class GesturePlatform : MonoBehaviour {
 
     public void GestureUsed()
     {
-        //renderer.enabled = true;
+        rendr.enabled = true;
         for (int i = enemiesInside.Count - 1; i >= 0; i--)
         {
             Enemy enemyToDestroy = enemiesInside[i];
@@ -47,7 +47,7 @@ public class GesturePlatform : MonoBehaviour {
                 enemyToDestroy.PlayDisappearAnimation();
             }
         }
-        //Invoke("FadeEffect", 1f);
+        Invoke("FadeEffect", 1f);
     }
 
     public void FadeEffect()

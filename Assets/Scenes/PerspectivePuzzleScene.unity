@@ -803,7 +803,7 @@ MonoBehaviour:
   POV_Player_Objects:
   - {fileID: 1410833784}
   animator: {fileID: 0}
-  rotationTime: 1.5
+  rotationTime: 1
   puzzlePieces:
   - {fileID: 1352338825}
   - {fileID: 742192819}

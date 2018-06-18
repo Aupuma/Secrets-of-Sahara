@@ -5,6 +5,7 @@ using UnityEngine;
 public class WirePuzzleNode : WireNode {
 
     public int orderInPuzzle;
+    public Animator textureAnimator;
 
     public override void Connect(WireNode callNode, int callOrder, Material conexMaterial)
     {
@@ -24,6 +25,7 @@ public class WirePuzzleNode : WireNode {
             //Si el nodo que ha llamado es el nodo externo, asignamos material de conexión y
             //le decimos al nodo del otro lado de nuestro cable que se conecte
             wireRenderer.material = conexMaterial;
+            textureAnimator.SetTrigger("fadeIn");
             internalConnection.Connect(this, connectionOrder + 1, currentConnexionMaterial);
         }
     }
@@ -41,6 +43,7 @@ public class WirePuzzleNode : WireNode {
         {
             WirePuzzleManager.instance.NodeLostConnexion();
             wireRenderer.material = originalMaterial;
+            textureAnimator.SetTrigger("fadeOut");
             internalConnection.Disconnect(this);
         }
     }

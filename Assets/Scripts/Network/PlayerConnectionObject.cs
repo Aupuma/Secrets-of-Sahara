@@ -21,7 +21,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         else //No es servidor, es el jugador POV
         {
             GameManager.instance.POVConnection = this;
-            if (MazeManager.instance != null) CmdSpawnPOVPlayerObj();
+            if (MazeManager.instance != null) CmdSpawnPOVPlayerObj(); //TEMPORAL
         }
     }
 
@@ -44,6 +44,12 @@ public class PlayerConnectionObject : NetworkBehaviour {
     }
 
     //---------GESTURES ENEMIES PUZZLE
+    [Command]
+    public void CmdStartSpawningEnemies()
+    {
+        EnemyManager.instance.StartSpawningEnemies();
+    }
+
     [Command]
     public void CmdRemoteTrapCall(int index)
     {
