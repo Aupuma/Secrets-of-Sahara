@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUnitPrefab: {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf,
     type: 2}
-  ARPlayerCamera: {fileID: 1206050539615930, guid: 8ab9602dbf39d174fb79cd7d8ee451df,
+  ARPlayerCamera: {fileID: 1552999215206978, guid: d2c5ac36708939a4aa1cedc7407a7236,
     type: 2}
   gameManager: {fileID: 1361143989600480, guid: 570b88a6e9bca8f4da0f1ced9ec2641d,
     type: 2}

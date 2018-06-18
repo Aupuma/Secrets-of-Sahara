@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour {
     public string[] scenes;
     private int sceneIndex;
 
-    public PlayerConnectionObject POVPlayerConnection;
+    public PlayerConnectionObject POVConnection;
 
 
     private void Awake()

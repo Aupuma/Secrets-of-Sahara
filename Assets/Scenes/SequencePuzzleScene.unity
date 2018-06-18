@@ -8682,7 +8682,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh54774
+  m_Name: pb_Mesh41224
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -13452,13 +13452,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1342416041}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0.46, z: 4.51}
+  m_LocalRotation: {x: -0, y: -0.70706695, z: -0, w: 0.7071467}
+  m_LocalPosition: {x: -2.112656, y: -1.7460546, z: -2.9634218}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 2025838591}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: -89.994, z: 0}
 --- !u!1001 &1343141788
 Prefab:
   m_ObjectHideFlags: 0
@@ -21251,6 +21251,7 @@ Transform:
   - {fileID: 305089227}
   - {fileID: 1037567941}
   - {fileID: 1208320979}
+  - {fileID: 1342416045}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21296,6 +21297,7 @@ MonoBehaviour:
   POV_Player_Objects:
   - {fileID: 1342416041}
   - {fileID: 1208320974}
+  animator: {fileID: 0}
   sequence: 
   sequencePanelSymbols:
   - {fileID: 370197674}

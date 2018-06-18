@@ -16,10 +16,11 @@ public class PlayerConnectionObject : NetworkBehaviour {
         if (isServer) //Servidor, jugador PAR
         {
             if (GameManager.instance == null) SpawnGameManager();
+            if(PARCamera.instance == null) Instantiate(ARPlayerCamera);
         }
         else //No es servidor, es el jugador POV
         {
-            RpcAssignConnectionToGM();
+            GameManager.instance.POVConnection = this;
             if (MazeManager.instance != null) CmdSpawnPOVPlayerObj();
         }
     }
@@ -28,15 +29,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
     {
         GameObject gm = Instantiate(gameManager, this.transform.position, Quaternion.identity);
         NetworkServer.Spawn(gm);
-    }
-
-    [ClientRpc]
-    void RpcAssignConnectionToGM()
-    {
-        if (!isServer)
-        {
-            GameManager.instance.POVPlayerConnection = this;
-        }
     }
 
     //---------------COMMANDS---------------------------------------------

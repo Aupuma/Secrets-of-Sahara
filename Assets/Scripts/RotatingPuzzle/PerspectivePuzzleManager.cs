@@ -46,7 +46,7 @@ public class PerspectivePuzzleManager : Puzzle {
                         if(puzzlePieces[i] == hit.collider.transform)
                         {
                             Debug.Log(i);
-                            GameManager.instance.POVPlayerConnection.CmdRotationCall(i);
+                            GameManager.instance.POVConnection.CmdRotationCall(i);
                             break;
                         }
                     }
@@ -64,7 +64,7 @@ public class PerspectivePuzzleManager : Puzzle {
             pillars[index].DOLocalRotate(new Vector3(
                 pillars[index].localEulerAngles.x,
                 pillars[index].localEulerAngles.y,
-                pillars[index].localEulerAngles.z + 90f), 
+                pillars[index].localEulerAngles.z - 90f), 
                 rotationTime).
                 OnComplete(RotationFinished); 
         }
@@ -87,6 +87,11 @@ public class PerspectivePuzzleManager : Puzzle {
             if (pillar.rotation.y != 0) return;
         }
 
-        PuzzleCompleted();
+        WaitToComplete();
+    }
+
+    public void WaitToComplete()
+    {
+        Invoke("PuzzleCompleted", 1.5f);
     }
 }

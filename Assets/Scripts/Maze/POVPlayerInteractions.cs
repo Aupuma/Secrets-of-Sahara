@@ -89,17 +89,16 @@ public class POVPlayerInteractions : NetworkBehaviour {
             }
             else if (other.gameObject.tag == "Trap")
             {
-                RpcActivateTrapAndRestart(other.gameObject);
+                RpcActivateTrap(other.gameObject);
+                Invoke("RestartFromSpawnPos", 1f);
             }
         }
     }
 
-    private void Restart()
+    private void RestartFromSpawnPos()
     {
-        transform.position = respawnPos;
-        transform.rotation = respawnRot;
+        RpcGetBackToSpawnPos(respawnPos, respawnRot);
     }
-
 
     #endregion
 
@@ -136,7 +135,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
             Vector3 fwd = raycastInitialPos.TransformDirection(Vector3.forward);
             RaycastHit hit;
 
-            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, 1f))
+            if (Physics.Raycast(raycastInitialPos.position, fwd, out hit, movementDistance))
             {
                 Debug.DrawRay(raycastInitialPos.position,fwd,Color.red,2f);
                 print("There is something in front of the object!");
@@ -161,6 +160,12 @@ public class POVPlayerInteractions : NetworkBehaviour {
     #endregion
 
     #region NETWORK METHODS
+    [ClientRpc]
+    private void RpcGetBackToSpawnPos(Vector3 pos, Quaternion rot)
+    {
+        transform.position = pos;
+        transform.rotation = rot;
+    }
 
     [Command]
     public void CmdRotateRight()
@@ -210,10 +215,9 @@ public class POVPlayerInteractions : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcActivateTrapAndRestart(GameObject trap)
+    public void RpcActivateTrap(GameObject trap)
     {
         trap.GetComponent<Animator>().SetTrigger("Move");
-        Invoke("Restart", 1f);
     }
 
     void ActionFinished()

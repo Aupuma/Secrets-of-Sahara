@@ -117,7 +117,7 @@ public class EnemyManager : Puzzle {
                         if(trapButtons[i] == hit.collider.gameObject)
                         {
                             hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
-                            GameManager.instance.POVPlayerConnection.CmdRemoteTrapCall(i);
+                            GameManager.instance.POVConnection.CmdRemoteTrapCall(i);
                         }
                     }
                 }
