@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef8c68bade09b41aca258d42a632f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTab: 2
+  lastTab: 0
   movementSettingsFoldout: 0
   zoomingSettingsFoldout: 0
   rotationSettingsFoldout: 0
@@ -206,17 +206,17 @@ MonoBehaviour:
   targetingSettingsFoldout: 0
   inputSettingsFoldout: 0
   useFixedUpdate: 0
-  keyboardMovementSpeed: 20
+  keyboardMovementSpeed: 15
   screenEdgeMovementSpeed: 3
   followingSpeed: 5
   rotationSped: 3
   panningSpeed: 10
-  mouseRotationSpeed: 150
+  mouseRotationSpeed: 100
   autoHeight: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxHeight: 3
+  maxHeight: 2
   minHeight: 10
   heightDampening: 5
   keyboardZoomingSensitivity: 3
