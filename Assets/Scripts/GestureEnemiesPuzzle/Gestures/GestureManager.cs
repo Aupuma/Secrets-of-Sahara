@@ -26,10 +26,8 @@ public class GestureManager : MonoBehaviour
     Gesture[] trainingSet = null;             // training set loaded from XML files
     GameObject thisTrail;   //Trazo actual que se está dibujando
     Vector3 startPos;       //Posición inicial de trazo
-    Plane objPlane;
     bool drawingTrail;
     float drawingStartingTime;
-    Transform drawingPos;
 
     [Header("References")]//--------------------------------------------------------
     public GameObject trailPrefab; //Prefab de trazo
@@ -39,8 +37,7 @@ public class GestureManager : MonoBehaviour
     {
         trainingSet = LoadTrainingSet();
         drawingTrail = false;
-        drawingPos = Camera.main.transform.GetChild(0);
-        objPlane = new Plane(Camera.main.transform.forward * -1, drawingPos.position);
+        PARCamera.instance.EnableDrawingPlane();
     }
 
     /// <summary>
@@ -83,10 +80,12 @@ public class GestureManager : MonoBehaviour
     {
         points = new List<Point>();
 
-        Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float rayDistance;
-        if (objPlane.Raycast(mRay, out rayDistance))
-            startPos = mRay.GetPoint(rayDistance);
+        RaycastHit hit;
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        if (Physics.Raycast(ray, out hit))
+        {
+            startPos = hit.point;
+        }
 
         //Instanciamos trazo
         thisTrail = (GameObject)Instantiate(trailPrefab, startPos, Quaternion.identity);
@@ -99,10 +98,13 @@ public class GestureManager : MonoBehaviour
         //Añadimos punto actual al conjunto
         points.Add(new Point(Input.mousePosition.x, Screen.height - Input.mousePosition.y, 0));
 
-        Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float rayDistance;
-        if (objPlane.Raycast(mRay, out rayDistance))
-            thisTrail.transform.position = mRay.GetPoint(rayDistance);
+        //Realizamos raycast desde la posición del ratón al plano de dibujado para obtener la posicion de la trail
+        RaycastHit hit;
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
+        {
+            thisTrail.transform.position = hit.point;
+        }
     }
 
     private void FinishDrawing()
