@@ -22,13 +22,12 @@ public class EnemyManager : Puzzle {
     [Range(0f, 1f)] public float superEnemyProbability;
     private float currentTimeBetweenSpawns;
     private float lastSpawnTime = 0;
-    private int enemyToDestroy = -1;
     private int lastEnemySpawned = -1;
     private int[] selectionNumbers;
-    private Queue<Enemy> enemyQueue; //Utilizamos una cola por si se ampliase a secuencias de enemigos en el futuro
-    public EnemyType currentEnemy; //PARA DEBUGGEAR
+    private Enemy enemyToDestroy;
+    private int enemyToDestroyIndex = -1;
+    public EnemyType enemyToDestroyDebugType; //PARA DEBUGGEAR
     private bool readyToSpawn = false;
-
 
     [Header("References")]
     public EnemyPathInfo[] enemyPaths;
@@ -37,11 +36,9 @@ public class EnemyManager : Puzzle {
     public GameObject[] trapButtons;
     public GameObject[] traps;
     public GameObject[] symbolTextures;
-    public GameObject sceneCamera;
     public Slider uiProgressBar;
     private ObjectPooler pooler;
     public GameObject gestureManager;
-
 
     [Header("Score parameters")]
     public int pointsToWin = 10;
@@ -70,7 +67,6 @@ public class EnemyManager : Puzzle {
         {
             currentTimeBetweenSpawns = UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             selectionNumbers = new int[] { 0, 1, 2, 3 };
-            enemyQueue = new Queue<Enemy>();
             pooler = GetComponent<ObjectPooler>();
         }
     }
@@ -94,7 +90,10 @@ public class EnemyManager : Puzzle {
     {
         readyToSpawn = true;
         gestureManager.SetActive(true);
-        ChangeEnemyToDestroy();
+        enemyToDestroyIndex = UnityEngine.Random.Range(0, normalEnemies.Length);
+        enemyToDestroy = normalEnemies[enemyToDestroyIndex];
+        enemyToDestroyDebugType = enemyToDestroy.type;
+        RpcFadeInSymbol(enemyToDestroyIndex);
     }
 
     public override void PuzzleCompleted()
@@ -198,24 +197,22 @@ public class EnemyManager : Puzzle {
 
     private void ChangeEnemyToDestroy()
     {
-        if (enemyQueue.Count > 0)
-        {
-            enemyQueue.Dequeue();
-            RpcFadeOutSymbol(enemyToDestroy);
-        }
+        //APAGAMOS LA LUZ DE ENEMIGO ANTERIOR
+        RpcFadeOutSymbol(enemyToDestroyIndex);
 
         //NUEVO ENEMIGO A DESTRUIR, DISTINTO AL ANTERIOR
-        int rand = enemyToDestroy;
-        while (rand == enemyToDestroy)
+        int rand = enemyToDestroyIndex;
+        while (rand == enemyToDestroyIndex)
         {
             rand = UnityEngine.Random.Range(0, normalEnemies.Length);
         }
-        enemyToDestroy = rand;
+        enemyToDestroyIndex = rand;
 
         //CANBIAMOS EL TIPO DE ENEMIGO Y ENCENDEMOS SU LUZ
-        currentEnemy = normalEnemies[enemyToDestroy].type;
-        RpcFadeInSymbol(enemyToDestroy);
-        enemyQueue.Enqueue(normalEnemies[enemyToDestroy]);
+        enemyToDestroy = normalEnemies[enemyToDestroyIndex];
+        enemyToDestroyDebugType = enemyToDestroy.type;//DEBUG
+        RpcFadeInSymbol(enemyToDestroyIndex);
+
     } 
 
     #endregion //ENEMY SPAWNING
@@ -227,8 +224,7 @@ public class EnemyManager : Puzzle {
     /// <param name="enemyToCompare"></param>
     public void OnGestureUsedInEnemy(Enemy enemyToCompare)
     {
-        Enemy firstEnemyInQueue = enemyQueue.Peek();
-        if (enemyToCompare.type == firstEnemyInQueue.type)
+        if (enemyToCompare.type == enemyToDestroy.type)
         {
             //Hemos usado el símbolo en el enemigo correcto, sumamos puntuación
             if (pointsScored + pointsCorrect >= pointsToWin) pointsScored = pointsToWin;
@@ -248,8 +244,7 @@ public class EnemyManager : Puzzle {
 
     public void OnEnemyFinishedPath(Enemy enemyToCompare)
     {
-        Enemy firstEnemyInQueue = enemyQueue.Peek();
-        if (enemyToCompare.type == EnemyType.SUPER)
+        if (enemyToCompare.type == EnemyType.WOLF)
         {
             //Si el superenemigo llega al final restamos muchos puntos
             if (pointsScored + pointsSuperEnemyFailed < 0) pointsScored = 0;

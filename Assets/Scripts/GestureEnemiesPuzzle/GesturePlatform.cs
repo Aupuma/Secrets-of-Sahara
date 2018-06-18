@@ -6,12 +6,11 @@ using UnityEngine.AI;
 public class GesturePlatform : MonoBehaviour {
 
     public string gestureType;
-    public List<Enemy> enemiesInside;
+    private Enemy enemyInside;
     private MeshRenderer rendr;
     
 	// Use this for initialization
 	void Start () {
-        enemiesInside = new List<Enemy>();
         rendr = GetComponent<MeshRenderer>();
         rendr.enabled = false;
 	}
@@ -20,32 +19,17 @@ public class GesturePlatform : MonoBehaviour {
     {
         if(other.tag == "Enemy")
         {
-            Enemy newEnemy = other.GetComponent<Enemy>();
-            enemiesInside.Add(newEnemy);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            Enemy oldEnemy = other.GetComponent<Enemy>();
-            enemiesInside.Remove(oldEnemy);
+            enemyInside = other.GetComponent<Enemy>();
         }
     }
 
     public void GestureUsed()
     {
         rendr.enabled = true;
-        for (int i = enemiesInside.Count - 1; i >= 0; i--)
+        if (enemyInside != null)
         {
-            Enemy enemyToDestroy = enemiesInside[i];
-            EnemyManager.instance.OnGestureUsedInEnemy(enemyToDestroy);
-            enemiesInside.RemoveAt(i);
-            if (enemyToDestroy.type != EnemyType.SUPER)
-            {
-                enemyToDestroy.PlayDisappearAnimation();
-            }
+            EnemyManager.instance.OnGestureUsedInEnemy(enemyInside);
+            enemyInside.DeactivateEnemy();
         }
         Invoke("FadeEffect", 1f);
     }

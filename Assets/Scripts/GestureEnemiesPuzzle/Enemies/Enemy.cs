@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public enum EnemyType
 {
-    SNAKE,
+    DOG,
     BIRD,
     CAT,
-    LION,
-    SUPER
+    FOX,
+    WOLF
 }
 
 public class Enemy : MonoBehaviour {
