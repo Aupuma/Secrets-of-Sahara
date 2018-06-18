@@ -84,5 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a638f9d4ef04494595fcb490a947ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes: []
+  scenes:
+  - SequencePuzzleScene
+  - PerspectivePuzzleScene
+  - WirePuzzleScene
+  - GestureEnemiesPuzzleScene
   POVPlayerConnection: {fileID: 0}

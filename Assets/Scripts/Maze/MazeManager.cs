@@ -20,10 +20,16 @@ public class MazeManager : Puzzle {
     }
     #endregion SINGLETON
 
+    public override void Start()
+    {
+        base.Start();
+        if (isServer) animator.SetTrigger("Move");
+    }
+
     public override void OnPuzzleReady()
     {
         base.OnPuzzleReady();
-        GameManager.instance.POVPlayerConnection.CmdSpawnPOVPlayerObj();
+        //NetDiscovery.instance.StartAsServer();
     }
 
     public void EnableFirstTraps()

@@ -12,7 +12,7 @@ public class Puzzle : NetworkBehaviour {
     public GameObject[] POV_Player_Objects;
 
     private bool hasStarted = false;
-    private Animator animator;
+    public Animator animator;
 
     public virtual void Start()
     {

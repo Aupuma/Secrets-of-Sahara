@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class RotatingPuzzleManager : Puzzle {
+public class PerspectivePuzzleManager : Puzzle {
 
     [Header("References")]
     public float rotationTime = 0.35f;
@@ -15,7 +15,7 @@ public class RotatingPuzzleManager : Puzzle {
     private bool isRotating = false;
 
     #region SINGLETON
-    public static RotatingPuzzleManager instance;
+    public static PerspectivePuzzleManager instance;
 
     private void Awake()
     {

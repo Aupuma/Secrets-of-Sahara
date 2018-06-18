@@ -13,21 +13,21 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     void Start () {
         DontDestroyOnLoad(gameObject);
-        if (!isServer && GameManager.instance == null)
+        if (isServer) //Servidor, jugador PAR
         {
-            CmdSpawnGameManager();
+            if (GameManager.instance == null) SpawnGameManager();
+        }
+        else //No es servidor, es el jugador POV
+        {
+            RpcAssignConnectionToGM();
+            if (MazeManager.instance != null) CmdSpawnPOVPlayerObj();
         }
     }
 
-    //--------------------------------------COMMANDS
-    //Commandos son funciones especiales que SOLO se ejecutan en el servidor
-
-    [Command]
-    void CmdSpawnGameManager()
+    void SpawnGameManager()
     {
         GameObject gm = Instantiate(gameManager, this.transform.position, Quaternion.identity);
         NetworkServer.Spawn(gm);
-        RpcAssignConnectionToGM();
     }
 
     [ClientRpc]
@@ -39,7 +39,10 @@ public class PlayerConnectionObject : NetworkBehaviour {
         }
     }
 
-    //---------MAZE----------------------
+    //---------------COMMANDS---------------------------------------------
+    //Commandos son funciones especiales que SOLO se ejecutan en el servidor
+
+    //---------MAZE
     [Command]
     public void CmdSpawnPOVPlayerObj()
     {
@@ -48,18 +51,18 @@ public class PlayerConnectionObject : NetworkBehaviour {
         MazeManager.instance.EnableFirstTraps();
     }
 
-    //---------GESTURES ENEMIES PUZZLE----------------------
+    //---------GESTURES ENEMIES PUZZLE
     [Command]
     public void CmdRemoteTrapCall(int index)
     {
         EnemyManager.instance.TrapsOnOff(index);
     }
 
-    //---------PERSPECTIVE PUZZLE----------------------
+    //---------PERSPECTIVE PUZZLE
     [Command]
     public void CmdRotationCall(int index)
     {
-        RotatingPuzzleManager.instance.RpcRotateElements(index);
+        PerspectivePuzzleManager.instance.RpcRotateElements(index);
     }
     //---------------------------------------
 }
