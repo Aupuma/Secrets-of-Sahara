@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayerSelectionScene.unity
     guid: f027d0e04125c354da4876469759d86c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Old/ARSetupScene.unity
     guid: 6fe3946e3bdc20e428b372559256545a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MazeScene.unity
     guid: 57407896835baa6409817ec45e804209
   - enabled: 0
@@ -26,7 +26,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GestureEnemiesPuzzleScene.unity
     guid: d6490414a4fc1d348ae251c0f7651bc2
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
     path: Assets/Scenes/Old/ARTestScene2.unity
     guid: ccabaf4a4ad678a4e8797b83093461a1
   m_configObjects: {}
