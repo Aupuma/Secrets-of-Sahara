@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour {
 
-    public static GameManager instance;
-
-    public float totalTime;
-    public float intervalToShowTime;
+    //Countdown timer
     [SyncVar] private float timeLeft;
+    public int totalTime;
+    public int intervalToShowTime;
+    public GameObject timerObject;
+    private Animator timerAnimator;
+    private Text timerText;
 
     public string[] scenes;
     private int sceneIndex;
@@ -18,11 +21,24 @@ public class GameManager : NetworkBehaviour {
     public PlayerConnectionObject POVConnection;
 
 
+    #region SINGLETON
+    public static GameManager instance;
+
     private void Awake()
     {
         instance = this;
+    } 
+    #endregion
+
+    private void Start()
+    {
         DontDestroyOnLoad(this.gameObject);
         sceneIndex = 0;
+        timeLeft = totalTime;
+        timerAnimator = timerObject.GetComponent<Animator>();
+        timerText = timerObject.GetComponent<Text>();
+
+        timerAnimator.SetTrigger("InitialAnim");
     }
 
     public void LoadNextScene()
@@ -35,14 +51,18 @@ public class GameManager : NetworkBehaviour {
     {
         if (isServer)
         {
-            
+            timeLeft -= Time.deltaTime;
+            //if((int)timeLeft % 60 == )
         }
+
+        string minSec = string.Format("{0}:{1:00}", (int)timeLeft / 60, (int)timeLeft % 60);
+        timerText.text = minSec;
     }
 
     [ClientRpc]
     void RpcShowTimeLeft()
     {
-
+        timerAnimator.SetTrigger("Show");
     }
 
 }
