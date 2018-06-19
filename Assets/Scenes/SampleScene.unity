@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 1335839537}
   - component: {fileID: 1335839536}
   - component: {fileID: 1335839538}
+  - component: {fileID: 1335839540}
   - component: {fileID: 1335839539}
   m_Layer: 0
   m_Name: AR Session Origin
@@ -376,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 1335839533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -18}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 282840814}
   m_Father: {fileID: 0}
@@ -432,3 +433,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adc7b4ead18e3849afd826ce03cb508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1335839540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335839533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0deaa56de4b38244aa2fec4d8fe8a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlacedPrefab: {fileID: 100000, guid: 91185780952bbd94ebaefce5ae4ae7eb, type: 3}

@@ -8,6 +8,10 @@ public class GameManager : NetworkBehaviour {
 
     public static GameManager instance;
 
+    public float totalTime;
+    public float intervalToShowTime;
+    [SyncVar] private float timeLeft;
+
     public string[] scenes;
     private int sceneIndex;
 
@@ -25,6 +29,20 @@ public class GameManager : NetworkBehaviour {
     {
         NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
         sceneIndex++;
+    }
+
+    private void Update()
+    {
+        if (isServer)
+        {
+            
+        }
+    }
+
+    [ClientRpc]
+    void RpcShowTimeLeft()
+    {
+
     }
 
 }

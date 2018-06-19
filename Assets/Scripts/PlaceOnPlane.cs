@@ -25,27 +25,11 @@ public class PlaceOnPlane : MonoBehaviour
     /// </summary>
     public GameObject placedObject { get; private set; }
 
-    void Awake()
-    {
-        m_SessionOrigin = GetComponent<ARSessionOrigin>();
-    }
-
-    void Update()
-    {
-        if (Input.touchCount == 0)
-            return;
-
-        var touch = Input.GetTouch(0);
-
-        var hits = s_RaycastHits;
-        
-        if (!m_SessionOrigin.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
-            return;
-
-        placementHit = hits[0];
-    }
-
     ARSessionOrigin m_SessionOrigin;
+
+    ARPlaneManager planeManager;
+
+    ARReferencePointManager refPointManager;
 
     ARRaycastHit m_PlacementHit;
 
@@ -56,11 +40,18 @@ public class PlaceOnPlane : MonoBehaviour
         {
             m_PlacementHit = value;
 
+            var plane = planeManager.TryGetPlane(m_PlacementHit.trackableId);
+            var pose = m_PlacementHit.pose;
+
+            refPointManager.TryAttachReferencePoint(plane,pose);
+            SceneManager.LoadScene("ARTestScene2");
+            this.enabled = false;
+
+            /*
             if (placedObject == null && m_PlacedPrefab != null)
             {
                 placedObject = Instantiate(m_PlacedPrefab);
                 DontDestroyOnLoad(gameObject);
-                SceneManager.LoadScene("ARTestScene2");
             }
 
             if (placedObject != null)
@@ -69,8 +60,31 @@ public class PlaceOnPlane : MonoBehaviour
                 placedObject.transform.position = pose.position;
                 placedObject.transform.rotation = pose.rotation;
             }
+            */
         }
     }
 
     List<ARRaycastHit> s_RaycastHits = new List<ARRaycastHit>();
+
+    void Awake()
+    {
+        m_SessionOrigin = GetComponent<ARSessionOrigin>();
+        planeManager = GetComponent<ARPlaneManager>();
+        refPointManager = GetComponent<ARReferencePointManager>();
+    }
+
+    void Update()
+    {
+        if (Input.touchCount == 0)
+            return;
+
+        var touch = Input.GetTouch(0);
+
+        var hits = s_RaycastHits;
+
+        if (!m_SessionOrigin.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+            return;
+
+        placementHit = hits[0];
+    }
 }
