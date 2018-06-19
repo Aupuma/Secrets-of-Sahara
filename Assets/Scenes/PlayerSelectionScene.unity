@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScreen: {fileID: 1229534935}
   loadingScreen: {fileID: 615341858}
-  arSetupScene: GameTestScene
+  arSetupScene: ARSetupScene
   gameScene: GameTestScene
 --- !u!114 &97858620
 MonoBehaviour:
