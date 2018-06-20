@@ -934,7 +934,7 @@ MonoBehaviour:
   transfChoice: 0
   autoSnaps: 1
   detectsCollisions: 0
-  userRotSpeed: 20
+  userRotSpeed: 1
   snapRotSpeed: 5
   userMovSpeed: 20
   snapMovSpeed: 5
