@@ -22,11 +22,9 @@ public class SequencePuzzleManager : Puzzle {
     private SequenceButton[] buttons;
     private int[] btnIds;
     
-    [Header("Scene objects with movement")]
+    [Header("Scene objects with rotation")]
     public Transform[] objectsRightRotation;
     public Transform[] objectsLeftRotation;
-    public Transform totem1Buttons;
-    public Transform totem2Buttons;
 
     #region SINGLETON
     public static SequencePuzzleManager instance;
@@ -45,7 +43,7 @@ public class SequencePuzzleManager : Puzzle {
             sequence = new int[4];
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
-            StartSceneMovementLoop();
+            StartPillarsRotationLoop();
         }
     }
 
@@ -58,27 +56,24 @@ public class SequencePuzzleManager : Puzzle {
     /// <summary>
     /// Anima de manera continua los objetos de la escena, rotación y movimiento en YOYO
     /// </summary>
-    private void StartSceneMovementLoop()
+    private void StartPillarsRotationLoop()
     {
-        Sequence run = DOTween.Sequence();
+        Sequence rotSeq = DOTween.Sequence();
 
         Vector3 newRightRotation = new Vector3(0, 360, 0);
         foreach (var item in objectsRightRotation)
         {
             Tween rot = item.DORotate(newRightRotation, 10, RotateMode.FastBeyond360).SetEase(Ease.Linear);
-            run.Join(rot);
+            rotSeq.Join(rot);
         }
 
         Vector3 newLeftRotation = new Vector3(0, -360, 0);
         foreach (var item in objectsLeftRotation)
         {
             Tween rot = item.DORotate(newLeftRotation, 10, RotateMode.FastBeyond360).SetEase(Ease.Linear);
-            run.Join(rot);
+            rotSeq.Join(rot);
         }
-        run.SetLoops(-1);
-
-        totem1Buttons.DOLocalMoveY(totem1Buttons.position.y - 1, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuart);
-        totem2Buttons.DOLocalMoveY(totem2Buttons.position.y + 1, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuart);
+        rotSeq.SetLoops(-1);
     }
 
     void Update()

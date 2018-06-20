@@ -8,11 +8,12 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
     //public static UIManager instance;
+    public bool isDebug = false;
+
     public GameObject menuScreen;
     public GameObject loadingScreen;
 
     public string arSetupScene;
-    public string gameScene;
     
     private void Start()
     {
@@ -21,7 +22,8 @@ public class UIManager : MonoBehaviour {
 
     public void StartServerButtonClicked()
     {
-        SceneManager.LoadScene(arSetupScene);
+        if(isDebug) NetworkManager.singleton.StartHost();
+        else SceneManager.LoadScene(arSetupScene);
     }
 
     public void StartClientButtonClicked()

@@ -19,6 +19,12 @@ public class Puzzle : NetworkBehaviour {
     {
         animator = GetComponent<Animator>();
         HidePlayerDependentObjects();
+        
+        if (isServer)
+        {
+            this.transform.position = ARWorldOrigin.instance.transform.position;
+            //this.transform.rotation = ARWorldOrigin.instance.transform.rotation;
+        }
     }
 
     public override void OnStartServer()

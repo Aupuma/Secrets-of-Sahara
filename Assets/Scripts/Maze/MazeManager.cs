@@ -84,6 +84,6 @@ public class MazeManager : Puzzle {
         {
             item.SetTrigger("fadeOut");
         }
-        PuzzleCompleted();
+        if(isServer) PuzzleCompleted();
     }
 }

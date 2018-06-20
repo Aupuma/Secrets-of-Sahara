@@ -1,90 +1,67 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.XR;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(ARSessionOrigin))]
 public class PlaceOnPlane : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Instantiates this prefab on a plane at the touch location.")]
-    GameObject m_PlacedPrefab;
+    public GameObject PlacedPrefab;
 
-    /// <summary>
-    /// The prefab to instantiate on touch.
-    /// </summary>
-    public GameObject placedPrefab
-    {
-        get { return m_PlacedPrefab; }
-        set { m_PlacedPrefab = value; }
-    }
-
-    /// <summary>
-    /// The object instantiated as a result of a successful raycast intersection with a plane.
-    /// </summary>
-    public GameObject placedObject { get; private set; }
-
-    ARSessionOrigin m_SessionOrigin;
-
-    ARPlaneManager planeManager;
-
-    ARReferencePointManager refPointManager;
-
-    ARRaycastHit m_PlacementHit;
-
-    ARRaycastHit placementHit
-    {
-        get { return m_PlacementHit; }
-        set
-        {
-            m_PlacementHit = value;
-
-            var plane = planeManager.TryGetPlane(m_PlacementHit.trackableId);
-            var pose = m_PlacementHit.pose;
-
-            refPointManager.TryAttachReferencePoint(plane,pose);
-            SceneManager.LoadScene("ARTestScene2");
-            this.enabled = false;
-
-            /*
-            if (placedObject == null && m_PlacedPrefab != null)
-            {
-                placedObject = Instantiate(m_PlacedPrefab);
-                DontDestroyOnLoad(gameObject);
-            }
-
-            if (placedObject != null)
-            {
-                var pose = m_PlacementHit.pose;
-                placedObject.transform.position = pose.position;
-                placedObject.transform.rotation = pose.rotation;
-            }
-            */
-        }
-    }
-
-    List<ARRaycastHit> s_RaycastHits = new List<ARRaycastHit>();
+    private List<ARRaycastHit> hits;
+    private GameObject spawnedObject;
+    private ARSessionOrigin sessionOrigin;
+    private ARPlaneManager planeManager;
 
     void Awake()
     {
-        m_SessionOrigin = GetComponent<ARSessionOrigin>();
+        sessionOrigin = GetComponent<ARSessionOrigin>();
         planeManager = GetComponent<ARPlaneManager>();
-        refPointManager = GetComponent<ARReferencePointManager>();
+        hits = new List<ARRaycastHit>();
     }
 
     void Update()
     {
-        if (Input.touchCount == 0)
-            return;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        var touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (sessionOrigin.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+                {
+                    Pose hitPose = hits[0].pose;
 
-        var hits = s_RaycastHits;
+                    ChoosePlane(hits[0].trackableId);
 
-        if (!m_SessionOrigin.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
-            return;
+                    spawnedObject = Instantiate(PlacedPrefab, hitPose.position, hitPose.rotation);
 
-        placementHit = hits[0];
+                    this.enabled = false;
+                }
+            }
+        }
+    }
+
+    private void ChoosePlane(TrackableId id)
+    {
+        ARPlane planeChosen = planeManager.TryGetPlane(id);
+        List<ARPlane> arPlanes = new List<ARPlane>();
+        planeManager.GetAllPlanes(arPlanes);
+
+        //Eliminamos el resto de planos que no se van a usar
+        for (int i = arPlanes.Count - 1; i == 0; i++)
+        {
+            ARPlane tempPlane = arPlanes[i];
+            if (tempPlane != planeChosen)
+            {
+                arPlanes.Remove(tempPlane);
+                Destroy(tempPlane);
+            }
+        }
+
+        planeManager.enabled = false;
     }
 }

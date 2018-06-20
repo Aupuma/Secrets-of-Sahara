@@ -34,11 +34,12 @@ public class GameManager : NetworkBehaviour {
     {
         DontDestroyOnLoad(this.gameObject);
         sceneIndex = 0;
-        timeLeft = totalTime;
-        timerAnimator = timerObject.GetComponent<Animator>();
-        timerText = timerObject.GetComponent<Text>();
 
-        timerAnimator.SetTrigger("InitialAnim");
+        //timeLeft = totalTime;
+        //timerAnimator = timerObject.GetComponent<Animator>();
+        //timerText = timerObject.GetComponent<Text>();
+
+        //timerAnimator.SetTrigger("InitialAnim");
     }
 
     public void LoadNextScene()
@@ -49,6 +50,7 @@ public class GameManager : NetworkBehaviour {
 
     private void Update()
     {
+        /*
         if (isServer)
         {
             timeLeft -= Time.deltaTime;
@@ -57,6 +59,7 @@ public class GameManager : NetworkBehaviour {
 
         string minSec = string.Format("{0}:{1:00}", (int)timeLeft / 60, (int)timeLeft % 60);
         timerText.text = minSec;
+        */
     }
 
     [ClientRpc]

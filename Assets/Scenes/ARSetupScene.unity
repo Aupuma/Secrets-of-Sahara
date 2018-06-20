@@ -347,7 +347,6 @@ GameObject:
   - component: {fileID: 1335839534}
   - component: {fileID: 1335839537}
   - component: {fileID: 1335839536}
-  - component: {fileID: 1335839538}
   - component: {fileID: 1335839540}
   - component: {fileID: 1335839539}
   m_Layer: 0
@@ -389,7 +388,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1335839533}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
@@ -408,19 +407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 1568414836858200, guid: f0e0be81472ff1243aa2afa27e5d0e61,
-    type: 2}
---- !u!114 &1335839538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1335839533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ReferencePointPrefab: {fileID: 1334674422071556, guid: 99cb53a9b42002044852e6c08c6e1e90,
     type: 2}
 --- !u!114 &1335839539
 MonoBehaviour:
@@ -444,4 +430,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0deaa56de4b38244aa2fec4d8fe8a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlacedPrefab: {fileID: 100000, guid: 91185780952bbd94ebaefce5ae4ae7eb, type: 3}
+  PlacedPrefab: {fileID: 1110189835375532, guid: 01fccf2498304d4439d60654c31dc3fb,
+    type: 2}
