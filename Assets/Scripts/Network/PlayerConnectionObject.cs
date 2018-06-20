@@ -18,7 +18,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         if (isServer) //Servidor, jugador PAR
         {
             if (GameManager.instance == null) SpawnGameManager();
-            if (enableDebugARCamera && PARCamera.instance == null) Instantiate(ARPlayerCamera);
+            if (enableDebugARCamera) Instantiate(ARPlayerCamera);
         }
         else //No es servidor, es el jugador POV
         {

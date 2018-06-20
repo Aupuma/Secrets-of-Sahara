@@ -32,12 +32,12 @@ public class GestureManager : MonoBehaviour
     [Header("References")]//--------------------------------------------------------
     public GameObject trailPrefab; //Prefab de trazo
     public GesturePlatform[] gesturePlatforms;
+    public Camera drawingCamera;
 
     void Start()
     {
         trainingSet = LoadTrainingSet();
         drawingTrail = false;
-        PARCamera.instance.EnableDrawingPlane();
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class GestureManager : MonoBehaviour
         points = new List<Point>();
 
         RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        var ray = drawingCamera.ScreenPointToRay(Input.mousePosition); 
         if (Physics.Raycast(ray, out hit))
         {
             startPos = hit.point;
@@ -100,7 +100,7 @@ public class GestureManager : MonoBehaviour
 
         //Realizamos raycast desde la posición del ratón al plano de dibujado para obtener la posicion de la trail
         RaycastHit hit;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = drawingCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
             thisTrail.transform.position = hit.point;
