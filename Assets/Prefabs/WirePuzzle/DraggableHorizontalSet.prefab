@@ -1094,7 +1094,7 @@ MonoBehaviour:
   detectsCollisions: 1
   userRotSpeed: 200
   snapRotSpeed: 250
-  userMovSpeed: 5
+  userMovSpeed: 3
   snapMovSpeed: 5
   minPosition: -2
   maxPosition: 5

@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50ba661145482d49b825306ad389a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   menuScreen: {fileID: 1229534935}
   loadingScreen: {fileID: 615341858}
   arSetupScene: ARSetupScene
@@ -1287,7 +1287,7 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf,
+      objectReference: {fileID: 1015991051557976, guid: 5fad79a2d16617444984bd95a72c2648,
         type: 2}
     - target: {fileID: 114698763809306498, guid: ccd36261dd0fe4956be2a433afa622dc,
         type: 2}

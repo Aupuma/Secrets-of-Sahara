@@ -84,7 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbb8a6e52d3c6145848c1f2813779e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1795607309147032, guid: 3c625b41374e17e44860a89521fd11cf,
+  enableDebugARCamera: 1
+  PlayerUnitPrefab: {fileID: 1015991051557976, guid: 5fad79a2d16617444984bd95a72c2648,
     type: 2}
   ARPlayerCamera: {fileID: 1552999215206978, guid: d2c5ac36708939a4aa1cedc7407a7236,
     type: 2}

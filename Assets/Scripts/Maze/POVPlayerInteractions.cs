@@ -21,6 +21,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public PlayerConnectionObject connection;
     private Vector3 respawnPos;
     private Quaternion respawnRot;
+    private Animator animator;
 
     [Header("Parameters")]
     bool canAct = true;
@@ -32,7 +33,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
     private float swipeResistanceX = 50.0f;
     private float swipeResistanceY = 100.0f;
 
-    private Transform raycastInitialPos; 
+    public Transform raycastInitialPos; 
     #endregion
 
     #region SINGLETON
@@ -49,15 +50,11 @@ public class POVPlayerInteractions : NetworkBehaviour {
     {
         if (isServer)
         {
+            animator = GetComponent<Animator>();
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
             respawnPos = transform.position;
             respawnRot = transform.rotation;
         }
-        else
-        {
-            raycastInitialPos = transform.GetChild(1);
-        }
-
     }
 
     // Update is called once per frame
@@ -141,7 +138,9 @@ public class POVPlayerInteractions : NetworkBehaviour {
                 print("There is something in front of the object!");
             }
             else
+            {
                 CmdMove();
+            }
         }
         else if (isSwiping(SwipeDirection.Left))
         {
@@ -192,6 +191,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
     [ClientRpc]
     public void RpcRotateLeft()
     {
+        if (isServer) animator.SetBool("Turning", true);
         canAct = false;
         transform.DORotate(new Vector3(0f, transform.localEulerAngles.y - 90f, 0f), 
             actionTime,
@@ -208,6 +208,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
     [ClientRpc]
     public void RpcMove()
     {
+        if (isServer) animator.SetBool("Walking", true);
         canAct = false;
         transform.DOMove(transform.position + transform.forward * movementDistance, 
             actionTime).
@@ -222,6 +223,11 @@ public class POVPlayerInteractions : NetworkBehaviour {
 
     void ActionFinished()
     {
+        if (isServer)
+        {
+            animator.SetBool("Turning", false);
+            animator.SetBool("Walking", false);
+        }
         canAct = true;
     }
     #endregion

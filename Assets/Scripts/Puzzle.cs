@@ -20,10 +20,9 @@ public class Puzzle : NetworkBehaviour {
         animator = GetComponent<Animator>();
         HidePlayerDependentObjects();
         
-        if (isServer)
+        if (isServer && ARWorldOrigin.instance != null)
         {
             this.transform.position = ARWorldOrigin.instance.transform.position;
-            //this.transform.rotation = ARWorldOrigin.instance.transform.rotation;
         }
     }
 

@@ -40,7 +40,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     [Command]
     public void CmdSpawnPOVPlayerObj()
     {
-        GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,Quaternion.identity);
+        GameObject playerObject = Instantiate(PlayerUnitPrefab,this.transform.position,PlayerUnitPrefab.transform.rotation);
         NetworkServer.SpawnWithClientAuthority(playerObject,connectionToClient);
         MazeManager.instance.EnableFirstTraps();
     }
