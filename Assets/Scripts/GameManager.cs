@@ -7,10 +7,11 @@ using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour {
 
-    //Countdown timer
-    [SyncVar] private float timeLeft;
-    public int totalTime;
-    public int intervalToShowTime;
+    [Header("Countdown timer")]
+    [SyncVar] private float secondsLeft;
+    public int secsIntervalToShowTimer;
+    public int totalMinutes;
+    [SyncVar] private bool timerEnabled;
     public GameObject timerObject;
     private Animator timerAnimator;
     private Text timerText;
@@ -19,7 +20,6 @@ public class GameManager : NetworkBehaviour {
     private int sceneIndex;
 
     public PlayerConnectionObject POVConnection;
-
 
     #region SINGLETON
     public static GameManager instance;
@@ -35,11 +35,11 @@ public class GameManager : NetworkBehaviour {
         DontDestroyOnLoad(this.gameObject);
         sceneIndex = 0;
 
-        //timeLeft = totalTime;
-        //timerAnimator = timerObject.GetComponent<Animator>();
-        //timerText = timerObject.GetComponent<Text>();
-
-        //timerAnimator.SetTrigger("InitialAnim");
+        secondsLeft = totalMinutes * 60;
+        timerAnimator = timerObject.GetComponent<Animator>();
+        timerText = timerObject.GetComponent<Text>();
+        timerEnabled = false;
+        
     }
 
     public void LoadNextScene()
@@ -48,24 +48,74 @@ public class GameManager : NetworkBehaviour {
         sceneIndex++;
     }
 
-    private void Update()
+    public void LoadDefeatScene()
     {
-        /*
-        if (isServer)
-        {
-            timeLeft -= Time.deltaTime;
-            //if((int)timeLeft % 60 == )
-        }
-
-        string minSec = string.Format("{0}:{1:00}", (int)timeLeft / 60, (int)timeLeft % 60);
-        timerText.text = minSec;
-        */
+       // NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
     }
 
+    private void Update()
+    {
+        if (timerEnabled) UpdateSecondsLeft();
+    }
+
+    #region COUNTDOWN TIMER
+
+    /// <summary>
+    /// Si somos el servidor llamamos a la corrutina para que empiece con los intervalos
+    /// y activamos la animación inicial del timer
+    /// </summary>
+    [ClientRpc]
+    public void RpcShowInitialTimerAnim()
+    {
+        if (isServer) StartCoroutine(TimeIntervals());
+        timerAnimator.SetTrigger("InitialAnim");
+    }
+
+    private void UpdateSecondsLeft()
+    {
+        if (isServer){
+            secondsLeft -= Time.deltaTime; //El servidor actualiza la synvar del temporizador
+
+            if (secondsLeft < 0)
+            {
+                secondsLeft = 0;
+                timerEnabled = false;
+                LoadDefeatScene();
+            }
+        }
+
+        //Actualizamos el texto del timer
+        string minSec = string.Format("{0}:{1:00}", (int)secondsLeft / 60, (int)secondsLeft % 60);
+        timerText.text = minSec;
+    }
+
+    /// <summary>
+    /// Inicialmente esperamos un segundo para empezar a contar los segundos
+    /// y después llamamos a mostrar timer cada x segundos
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TimeIntervals()
+    {
+        yield return new WaitForSeconds(1f);
+        timerEnabled = true;
+        yield return null;
+
+        while (timerEnabled)
+        {
+            yield return new WaitForSeconds(secsIntervalToShowTimer);
+            RpcShowTimeLeft();
+        }
+    }
+
+    /// <summary>
+    /// Mostramos el timer en los dos jugadores
+    /// </summary>
     [ClientRpc]
     void RpcShowTimeLeft()
     {
         timerAnimator.SetTrigger("Show");
-    }
+    } 
+
+    #endregion //COUNTDOWN TIMER
 
 }

@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1551434632563768
 GameObject:
   m_ObjectHideFlags: 1
@@ -116,17 +116,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: 1f54a5101fdb4f04b8c3d1b060a66d8a, type: 3}
+    m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 200
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 15:00
 --- !u!114 &114498281783263502
@@ -209,8 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a638f9d4ef04494595fcb490a947ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 15
-  intervalToShowTime: 0
+  secsIntervalToShowTimer: 15
+  totalMinutes: 5
   timerObject: {fileID: 1551434632563768}
   scenes:
   - SequencePuzzleScene
@@ -252,16 +252,16 @@ RectTransform:
   m_GameObject: {fileID: 1551434632563768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5367366, y: 0.5367366, z: 0.5367366}
   m_Children: []
   m_Father: {fileID: 224464842558648744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 332}
-  m_SizeDelta: {x: 263.3, y: 137.8}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 137.90002}
+  m_SizeDelta: {x: 263.3, y: 137.79999}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224464842558648744
 RectTransform:
   m_ObjectHideFlags: 1

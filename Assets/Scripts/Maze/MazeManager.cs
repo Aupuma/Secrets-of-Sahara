@@ -24,7 +24,6 @@ public class MazeManager : Puzzle {
     {
         base.Start();
         if (isServer) animator.SetTrigger("Move");
-
         //spawnearemos el prefab del player pov
         //else GameManager.instance.POVConnection.CmdSpawnPOVPlayerObj();
     }

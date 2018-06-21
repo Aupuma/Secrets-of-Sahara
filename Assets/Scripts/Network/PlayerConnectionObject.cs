@@ -23,6 +23,8 @@ public class PlayerConnectionObject : NetworkBehaviour {
         else //No es servidor, es el jugador POV
         {
             GameManager.instance.POVConnection = this;
+            CmdStartTimer();
+
             if (MazeManager.instance != null) CmdSpawnPOVPlayerObj(); //TEMPORAL
         }
     }
@@ -35,6 +37,12 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     //---------------COMMANDS---------------------------------------------
     //Commandos son funciones especiales que SOLO se ejecutan en el servidor
+
+    [Command]
+    public void CmdStartTimer()
+    {
+        GameManager.instance.RpcShowInitialTimerAnim();
+    }
 
     //---------MAZE
     [Command]
