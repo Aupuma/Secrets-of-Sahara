@@ -66,7 +66,10 @@ public class WirePuzzleManager : Puzzle {
         currentPuzzleIndex = currentPuzzleIndex - 1;
     }
 
-
+    /// <summary>
+    /// Mantiene el control sobre cuál nodo del puzzle se ha conectado o desconectado
+    /// </summary>
+    /// <param name="index"></param>
     void OnChangeIndex(int index)
     {
         if(!isServer)
@@ -92,14 +95,9 @@ public class WirePuzzleManager : Puzzle {
         }
     }
 
-    public void WaitToComplete()
+    public override void WaitToComplete()
     {
         if (currentDraggedObject != null) currentDraggedObject.Selected = false;
-        Invoke("PuzzleCompleted", 1.5f);
-    }
-
-    public override void PuzzleCompleted()
-    {
-        base.PuzzleCompleted();
+        base.WaitToComplete();
     }
 }

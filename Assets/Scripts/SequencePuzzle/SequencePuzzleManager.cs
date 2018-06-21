@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class SequencePuzzleManager : Puzzle {
 
-    [Header("Parameters")]
-    public int[] sequence;
+    //Parameters
+    private int[] sequence;
     [SyncVar]
     private int seqIndex = 0;
 

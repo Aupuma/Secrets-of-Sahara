@@ -15,6 +15,7 @@ public class EnemyPathInfo
 
 public class EnemyManager : Puzzle {
 
+    #region DATA
 
     [Header("Spawn parameters")]
     public float minTimeBetweenSpawns;
@@ -47,8 +48,9 @@ public class EnemyManager : Puzzle {
     public int pointsSuperEnemyFailed = -5;
 
     [SyncVar(hook = "OnScoreChanged")]
-    public int pointsScored;
+    public int pointsScored; 
 
+    #endregion
 
     #region SINGLETON
     public static EnemyManager instance;
@@ -82,7 +84,6 @@ public class EnemyManager : Puzzle {
         } 
     }
 
-
     /// <summary>
     /// Asigna el enemigo a eliminar al panel de POV, activa el gestureManager y empieza a spawnear enemigos
     /// </summary>
@@ -94,13 +95,6 @@ public class EnemyManager : Puzzle {
         enemyToDestroy = normalEnemies[enemyToDestroyIndex];
         enemyToDestroyDebugType = enemyToDestroy.type;
         RpcFadeInSymbol(enemyToDestroyIndex);
-    }
-
-    public override void PuzzleCompleted()
-    {
-        gestureManager.SetActive(false);
-        readyToSpawn = false;
-        base.PuzzleCompleted();
     }
 
     // Update is called once per frame
@@ -145,6 +139,13 @@ public class EnemyManager : Puzzle {
                 a.SetTrigger("Move");
             }
         }
+    }
+
+    public override void PuzzleCompleted()
+    {
+        gestureManager.SetActive(false);
+        readyToSpawn = false;
+        base.PuzzleCompleted();
     }
 
     #region ENEMY SPAWNING

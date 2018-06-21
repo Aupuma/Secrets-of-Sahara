@@ -58,13 +58,28 @@ public class Puzzle : NetworkBehaviour {
         //if (isDebug) NetDiscovery.instance.StartAsServer();
     }
 
+    public virtual void WaitToComplete()
+    {
+        Invoke("PuzzleCompleted", 1.5f);
+    }
+
     /// <summary>
     /// Llamado una vez se ha completado el puzzle, activa animación de
     /// desaparición del escenario
     /// </summary>
     public virtual void PuzzleCompleted()
     {
+        RpcClosePOVWalls();
         animator.SetTrigger("Disappear");
+    }
+
+    /// <summary>
+    /// Activamos la animación de cerrar las paredes de la habitación POV
+    /// </summary>
+    [ClientRpc]
+    private void RpcClosePOVWalls()
+    {
+        if (!isServer) POVRoom.instance.animator.SetTrigger("CloseWalls");
     }
 
     /// <summary>

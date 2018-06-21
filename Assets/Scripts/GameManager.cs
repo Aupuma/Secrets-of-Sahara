@@ -46,6 +46,13 @@ public class GameManager : NetworkBehaviour {
     {
         NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
         sceneIndex++;
+        RpcOpenPOVWalls();
+    }
+
+    [ClientRpc]
+    private void RpcOpenPOVWalls()
+    {
+        if(!isServer) POVRoom.instance.animator.SetTrigger("OpenWalls");
     }
 
     public void LoadDefeatScene()

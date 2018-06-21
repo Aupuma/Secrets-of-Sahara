@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class POVRoom : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public static POVRoom instance;
+
+    [HideInInspector]
+    public Animator animator;
+
+    private void Awake()
+    {
+        // if the singleton hasn't been initialized yet
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;//Avoid doing anything else
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
+        animator = GetComponent<Animator>();
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

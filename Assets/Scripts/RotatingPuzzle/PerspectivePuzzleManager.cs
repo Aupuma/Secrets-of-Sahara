@@ -89,9 +89,4 @@ public class PerspectivePuzzleManager : Puzzle {
 
         WaitToComplete();
     }
-
-    public void WaitToComplete()
-    {
-        Invoke("PuzzleCompleted", 1.5f);
-    }
 }

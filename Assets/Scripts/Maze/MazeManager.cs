@@ -34,6 +34,9 @@ public class MazeManager : Puzzle {
         RpcDisableTrapSymbolsOnPov();
     }
 
+    /// <summary>
+    /// Desactivamos los símbolos de las trampas en POV para que no los pueda ver
+    /// </summary>
     [ClientRpc]
     public void RpcDisableTrapSymbolsOnPov()
     {
@@ -50,6 +53,9 @@ public class MazeManager : Puzzle {
         }
     }
 
+    /// <summary>
+    /// Activa las primeras trampas cuando se conecta el jugador
+    /// </summary>
     [ClientRpc]
     public void RpcEnableFirstTraps()
     {
@@ -59,6 +65,9 @@ public class MazeManager : Puzzle {
         }
     }
 
+    /// <summary>
+    /// Desbloquea dos paredes y cambia las trampas de sitio al coger la llave
+    /// </summary>
     [ClientRpc]
     public void RpcUnlockElements()
     {
@@ -76,6 +85,10 @@ public class MazeManager : Puzzle {
         }
     }
 
+    /// <summary>
+    /// Activada cuando el jugador llega a la salida
+    /// Desactivamos todas las trampas y activamos la animación de desaparecer
+    /// </summary>
     [ClientRpc]
     public void RpcMazeCompleted()
     {
@@ -84,5 +97,10 @@ public class MazeManager : Puzzle {
             item.SetTrigger("fadeOut");
         }
         if(isServer) PuzzleCompleted();
+    }
+
+    public override void PuzzleCompleted()
+    {
+        animator.SetTrigger("Disappear");
     }
 }
