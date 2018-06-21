@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 33525055110247752}
   - component: {fileID: 23943436713515492}
   - component: {fileID: 64680515816610124}
+  - component: {fileID: 95106665775079756}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -317,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 1147748420345964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: -0.504}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7994796, z: 1}
   m_Children: []
   m_Father: {fileID: 4537116437063438}
   m_RootOrder: 3
@@ -341,8 +342,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1790486781618614}
-  m_LocalRotation: {x: 0.00000052581254, y: 1, z: -0.0000022798777, w: -0.00006837105}
-  m_LocalPosition: {x: 0.01953125, y: -2.8233595, z: 3.803711}
+  m_LocalRotation: {x: 0.0000029504604, y: -0.00006848573, z: 0.0000004905312, w: -1}
+  m_LocalPosition: {x: 7.5195312, y: -2.8233595, z: -8.196289}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4157901539034042}
@@ -682,7 +683,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 98dde00e00d7cee4b82cd9adf65c59d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -880,6 +881,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19506767, y: 0.8532625, z: 1}
   m_Center: {x: -0.032689106, y: 0.0733687, z: 0}
+--- !u!95 &95106665775079756
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147748420345964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4deadd9cdc9473a43a46053ddddc94fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114088719940562816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -939,7 +958,8 @@ MonoBehaviour:
   currentConnexionMaterial: {fileID: 0}
   connected: 0
   connectionOrder: -1
-  orderInPuzzle: 0
+  orderInPuzzle: 3
+  textureAnimator: {fileID: 95106665775079756}
 --- !u!114 &114270315157239634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1431,7 +1451,8 @@ MonoBehaviour:
   currentConnexionMaterial: {fileID: 0}
   connected: 0
   connectionOrder: -1
-  orderInPuzzle: 0
+  orderInPuzzle: 3
+  textureAnimator: {fileID: 95106665775079756}
 --- !u!114 &114568177498496514
 MonoBehaviour:
   m_ObjectHideFlags: 1
