@@ -11,6 +11,7 @@ public class PARCamera : MonoBehaviour {
     {
         instance = this;
         drawingPlane = transform.GetChild(0).gameObject;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void EnableDrawingPlane()

@@ -5,8 +5,6 @@ using UnityEngine.Networking;
 
 public class Puzzle : NetworkBehaviour {
 
-    public bool isDebug = false;
-
     [Header ("Player dependent objects")]
     public GameObject[] AR_Player_Objects;
     public GameObject[] POV_Player_Objects;
@@ -26,18 +24,13 @@ public class Puzzle : NetworkBehaviour {
         }
     }
 
-    public override void OnStartServer()
-    {
-        if (isDebug) NetDiscovery.instance.StartAsServer();
-    }
-
     public void HidePlayerDependentObjects()
     {
         if (isServer) //Somos el jugador en AR
         {
             foreach (var obj in POV_Player_Objects)
             {
-                obj.SetActive(false);
+                if(obj!=null) obj.SetActive(false);
             }
         }
         else //Somos el jugador en primera persona

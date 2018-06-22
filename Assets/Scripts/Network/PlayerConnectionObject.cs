@@ -17,8 +17,9 @@ public class PlayerConnectionObject : NetworkBehaviour {
         DontDestroyOnLoad(gameObject);
         if (isServer) //Servidor, jugador PAR
         {
+            if (NetDiscovery.instance.isServer == false) NetDiscovery.instance.StartAsServer();
             if (GameManager.instance == null) SpawnGameManager();
-            if (enableDebugARCamera) Instantiate(ARPlayerCamera);
+            if (enableDebugARCamera && PARCamera.instance == null) Instantiate(ARPlayerCamera);
         }
         else //No es servidor, es el jugador POV
         {
