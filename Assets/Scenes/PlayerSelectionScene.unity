@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50ba661145482d49b825306ad389a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   menuScreen: {fileID: 1229534935}
   loadingScreen: {fileID: 615341858}
   arSetupScene: ARSetupScene
