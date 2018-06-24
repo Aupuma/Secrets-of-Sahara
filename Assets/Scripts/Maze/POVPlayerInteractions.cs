@@ -55,6 +55,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
             respawnPos = transform.position;
             respawnRot = transform.rotation;
         }
+        else GameManager.instance.FadeOnStart();
     }
 
     // Update is called once per frame
@@ -77,7 +78,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
                 MazeManager.instance.RpcUnlockElements();
 
                 //Nueva posición de spawneo
-                respawnPos = transform.position;
+                respawnPos = new Vector3(other.transform.position.x,transform.position.y, other.transform.position.z);
                 respawnRot = transform.rotation;
             }
             else if (other.gameObject.tag == "Door")
@@ -219,6 +220,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
     public void RpcActivateTrap(GameObject trap)
     {
         trap.GetComponent<Animator>().SetTrigger("Move");
+        if(!isServer) GameManager.instance.FadeDamage();
     }
 
     void ActionFinished()

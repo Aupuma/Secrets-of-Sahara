@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: LiquidWireMat
-  m_Shader: {fileID: 4800000, guid: c9366379bf147be40833906992233f21, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 52830524f45ced5488878bdf0e933082, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6cf8f83ce4a211142b0c3722ace6a522, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -103,7 +103,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.99999976, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0.8745098, b: 1, a: 1}
     - _NumTexTiles: {r: 4, g: 4, b: 0, a: 0}
     - _ScrollingSpeed: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0, g: 0.94549274, b: 1, a: 1}

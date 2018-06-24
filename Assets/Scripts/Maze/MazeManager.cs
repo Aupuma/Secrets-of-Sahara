@@ -23,7 +23,14 @@ public class MazeManager : Puzzle {
     public override void Start()
     {
         base.Start();
-        if (isServer) animator.SetTrigger("Move");
+        if (isServer)
+        {
+            animator.SetTrigger("Move");
+            foreach (var item in lockedElements)
+            {
+                item.SetTrigger("Lock"); //Movemos arriba las paredes bloqueadas
+            }
+        }
         //spawnearemos el prefab del player pov
         //else GameManager.instance.POVConnection.CmdSpawnPOVPlayerObj();
     }
@@ -96,7 +103,8 @@ public class MazeManager : Puzzle {
         {
             item.SetTrigger("fadeOut");
         }
-        if(isServer) PuzzleCompleted();
+        if (isServer) PuzzleCompleted();
+        else GameManager.instance.FadeOnTeleport();
     }
 
     public override void PuzzleCompleted()

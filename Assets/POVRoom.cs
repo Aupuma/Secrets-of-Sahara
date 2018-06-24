@@ -26,8 +26,8 @@ public class POVRoom : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        GameManager.instance.FinishLoadingFade();
+    }
 	
 	// Update is called once per frame
 	void Update () {

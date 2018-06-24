@@ -16,9 +16,12 @@ public class GameManager : NetworkBehaviour {
     private Animator timerAnimator;
     private Text timerText;
 
+    [Header("References")]
     public string[] scenes;
     private int sceneIndex;
+    public Animator faderAnimator;
 
+    [HideInInspector]
     public PlayerConnectionObject POVConnection;
 
     #region SINGLETON
@@ -27,8 +30,13 @@ public class GameManager : NetworkBehaviour {
     private void Awake()
     {
         instance = this;
-    } 
+    }
     #endregion
+
+    public override void OnStartServer()
+    {
+        NetDiscovery.instance.StartAsServer();
+    }
 
     private void Start()
     {
@@ -40,6 +48,11 @@ public class GameManager : NetworkBehaviour {
         timerText = timerObject.GetComponent<Text>();
         timerEnabled = false;
         
+    }
+
+    private void Update()
+    {
+        if (timerEnabled) UpdateSecondsLeft();
     }
 
     public void LoadNextScene()
@@ -61,10 +74,29 @@ public class GameManager : NetworkBehaviour {
        // NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
     }
 
-    private void Update()
+    #region SCREEN FADER
+
+    public void FadeOnStart()
     {
-        if (timerEnabled) UpdateSecondsLeft();
+        if (!isServer) faderAnimator.SetTrigger("InitialFade");
     }
+
+    public void FadeDamage()
+    {
+        if (!isServer) faderAnimator.SetTrigger("Damaged");
+    }
+
+    public void FadeOnTeleport()
+    {
+        if(!isServer) faderAnimator.SetTrigger("ChangeScene");
+    }
+
+    public void FinishLoadingFade()
+    {
+        if (!isServer) faderAnimator.SetTrigger("SceneLoaded");
+    }
+
+    #endregion
 
     #region COUNTDOWN TIMER
 

@@ -13,11 +13,15 @@ public class Puzzle : NetworkBehaviour {
     [HideInInspector]
     public Animator animator;
 
+    private void Awake()
+    {
+        HidePlayerDependentObjects();
+    }
+
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
-        HidePlayerDependentObjects();
-        
+
         if (isServer && ARWorldOrigin.instance != null)
         {
             this.transform.position = ARWorldOrigin.instance.transform.position;

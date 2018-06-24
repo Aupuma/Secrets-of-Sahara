@@ -15,10 +15,8 @@ public class SequencePuzzleManager : Puzzle {
 
     [Header("References")]
     public SequencePanelSymbol[] sequencePanelSymbols;
-    public MeshRenderer[] sequencePanelBooleans;
+    public Animator[] sequencePanelBooleans;
     public Texture[] symbolTextures;
-    public Material wrongBoolMaterial;
-    public Material correctBoolMaterial;
     private SequenceButton[] buttons;
     private int[] btnIds;
     
@@ -175,7 +173,7 @@ public class SequencePuzzleManager : Puzzle {
     {
         if (isServer == false)
         {
-            sequencePanelBooleans[seqIndex].material = correctBoolMaterial;
+            sequencePanelBooleans[seqIndex].SetBool("Enabled",true);
         }
     }
 
@@ -184,9 +182,9 @@ public class SequencePuzzleManager : Puzzle {
     {
         if (isServer == false)
         {
-            foreach (var rendBool in sequencePanelBooleans)
+            foreach (var anim in sequencePanelBooleans)
             {
-                rendBool.material = wrongBoolMaterial;
+                anim.SetBool("Enabled", false);
             }
         }
     } 

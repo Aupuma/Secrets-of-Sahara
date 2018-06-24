@@ -8,11 +8,15 @@ public class GesturePlatform : MonoBehaviour {
     public string gestureType;
     private Enemy enemyInside;
     private MeshRenderer rendr;
+    private ParticleSystem pSystem;
     
 	// Use this for initialization
 	void Start () {
-        rendr = GetComponent<MeshRenderer>();
-        rendr.enabled = false;
+        pSystem = GetComponentInChildren<ParticleSystem>();
+
+        //DEBUG
+        //rendr = GetComponent<MeshRenderer>();
+        //rendr.enabled = false;
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -25,17 +29,21 @@ public class GesturePlatform : MonoBehaviour {
 
     public void GestureUsed()
     {
-        rendr.enabled = true;
         if (enemyInside != null)
         {
             EnemyManager.instance.OnGestureUsedInEnemy(enemyInside);
             enemyInside.DeactivateEnemy();
         }
-        Invoke("FadeEffect", 1f);
+        pSystem.Play();
+
+        //DEBUG
+        //rendr.enabled = true; 
+        //Invoke("FadeEffect", 1f);
     }
 
-    public void FadeEffect()
-    {
-        rendr.enabled = false;
-    }
+    //DEBUG
+    //public void FadeEffect()
+    //{
+    //    rendr.enabled = false;
+    //}
 }
