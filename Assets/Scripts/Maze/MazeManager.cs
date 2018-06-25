@@ -14,10 +14,9 @@ public class MazeManager : Puzzle {
     #region SINGLETON
     public static MazeManager instance;
 
-    public override void Awake()
+    public void Awake()
     {
         instance = this;
-        base.Awake();
     }
     #endregion SINGLETON
 

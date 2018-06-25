@@ -13,11 +13,6 @@ public class Puzzle : NetworkBehaviour {
     [HideInInspector]
     public Animator animator;
 
-    public virtual void Awake()
-    {
-        HidePlayerDependentObjects();
-    }
-
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +21,8 @@ public class Puzzle : NetworkBehaviour {
         {
             this.transform.position = ARWorldOrigin.instance.transform.position;
         }
+
+        HidePlayerDependentObjects();
     }
 
     public void HidePlayerDependentObjects()
@@ -74,7 +71,7 @@ public class Puzzle : NetworkBehaviour {
     /// Activamos la animación de cerrar las paredes de la habitación POV
     /// </summary>
     [ClientRpc]
-    private void RpcClosePOVWalls()
+    public void RpcClosePOVWalls()
     {
         if (!isServer) POVRoom.instance.animator.SetTrigger("CloseWalls");
     }

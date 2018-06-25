@@ -27,10 +27,9 @@ public class SequencePuzzleManager : Puzzle {
     #region SINGLETON
     public static SequencePuzzleManager instance;
 
-    public override void Awake()
+    public void Awake()
     {
         instance = this;
-        base.Awake();
     } 
     #endregion //SINGLETON
 
@@ -43,8 +42,13 @@ public class SequencePuzzleManager : Puzzle {
             btnIds = new int[15];
             buttons = FindObjectsOfType<SequenceButton>();
             StartPillarsRotationLoop();
-            GenerateNewSequence();
         }
+    }
+
+    public override void OnPuzzleReady()
+    {
+        base.OnPuzzleReady();
+        if(isServer) GenerateNewSequence();
     }
 
     /// <summary>

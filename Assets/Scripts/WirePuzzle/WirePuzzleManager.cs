@@ -16,10 +16,9 @@ public class WirePuzzleManager : Puzzle {
     #region SINGLETON
     public static WirePuzzleManager instance;
 
-    public override void Awake()
+    public void Awake()
     {
         instance = this;
-        base.Awake();
     }
     #endregion //SINGLETON
 

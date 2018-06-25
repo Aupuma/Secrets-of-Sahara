@@ -17,7 +17,7 @@ public class SequencePanelSymbol : MonoBehaviour {
     public void SetNewInfo(Texture texture)
     {
         nextTexture = texture;
-        textureRenderer.material.SetTexture("_Texture2", nextTexture);
+        textureRenderer.material.SetTexture("_MainTex2", nextTexture);
         myAnimator.SetTrigger("CrossFade");
     }
 

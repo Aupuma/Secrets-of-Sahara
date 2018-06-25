@@ -17,10 +17,9 @@ public class PerspectivePuzzleManager : Puzzle {
     #region SINGLETON
     public static PerspectivePuzzleManager instance;
 
-    public override void Awake()
+    public void Awake()
     {
         instance = this;
-        base.Awake();
     } 
     #endregion //SINGLETON
 
@@ -88,6 +87,12 @@ public class PerspectivePuzzleManager : Puzzle {
             if (pillar.rotation.y != 0) return;
         }
 
-        WaitToComplete();
+        PuzzleCompleted();
+    }
+
+    public override void PuzzleCompleted()
+    {
+        RpcClosePOVWalls();
+        animator.SetTrigger("Solved");
     }
 }

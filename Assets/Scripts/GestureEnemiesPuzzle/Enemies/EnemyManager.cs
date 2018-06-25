@@ -55,10 +55,9 @@ public class EnemyManager : Puzzle {
     #region SINGLETON
     public static EnemyManager instance;
 
-    public override void Awake()
+    public void Awake()
     {
         instance = this;
-        base.Awake();
     }
     #endregion SINGLETON
 
