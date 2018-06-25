@@ -55,14 +55,18 @@ public class EnemyManager : Puzzle {
     #region SINGLETON
     public static EnemyManager instance;
 
-    private void Awake()
+    public override void Awake()
     {
         instance = this;
-    } 
+        base.Awake();
+    }
     #endregion SINGLETON
 
+    #region GENERAL PUZZLE METHODS
+
     // Use this for initialization
-    public override void Start () {
+    public override void Start()
+    {
         base.Start();
 
         if (isServer)
@@ -81,24 +85,12 @@ public class EnemyManager : Puzzle {
         {
             //habrá que usar esta llamada para decirle a la conexion del POV que empiece a spawnear enemigos
             GameManager.instance.POVConnection.CmdStartSpawningEnemies();
-        } 
-    }
-
-    /// <summary>
-    /// Asigna el enemigo a eliminar al panel de POV, activa el gestureManager y empieza a spawnear enemigos
-    /// </summary>
-    public void StartSpawningEnemies()
-    {
-        readyToSpawn = true;
-        gestureManager.SetActive(true);
-        enemyToDestroyIndex = UnityEngine.Random.Range(0, normalEnemies.Length);
-        enemyToDestroy = normalEnemies[enemyToDestroyIndex];
-        enemyToDestroyDebugType = enemyToDestroy.type;
-        RpcFadeInSymbol(enemyToDestroyIndex);
+        }
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (isServer) //SPAWNEAMOS ENEMIGOS PARA JUGADOR AR CADA X SEGUNDOS
         {
             if (readyToSpawn && Time.unscaledTime - lastSpawnTime >= currentTimeBetweenSpawns)
@@ -118,7 +110,7 @@ public class EnemyManager : Puzzle {
                 {
                     for (int i = 0; i < trapButtons.Length; i++)
                     {
-                        if(trapButtons[i] == hit.collider.gameObject)
+                        if (trapButtons[i] == hit.collider.gameObject)
                         {
                             hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
                             GameManager.instance.POVConnection.CmdRemoteTrapCall(i);
@@ -127,7 +119,7 @@ public class EnemyManager : Puzzle {
                 }
             }
         }
-	}
+    }
 
     public void TrapsOnOff(int index)
     {
@@ -146,9 +138,23 @@ public class EnemyManager : Puzzle {
         gestureManager.SetActive(false);
         readyToSpawn = false;
         base.PuzzleCompleted();
-    }
+    } 
+    #endregion
 
     #region ENEMY SPAWNING
+
+    /// <summary>
+    /// Asigna el enemigo a eliminar al panel de POV, activa el gestureManager y empieza a spawnear enemigos
+    /// </summary>
+    public void StartSpawningEnemies()
+    {
+        readyToSpawn = true;
+        gestureManager.SetActive(true);
+        enemyToDestroyIndex = UnityEngine.Random.Range(0, normalEnemies.Length);
+        enemyToDestroy = normalEnemies[enemyToDestroyIndex];
+        enemyToDestroyDebugType = enemyToDestroy.type;
+        RpcFadeInSymbol(enemyToDestroyIndex);
+    }
 
     private void SpawnEnemies()
     {

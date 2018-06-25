@@ -13,7 +13,7 @@ public class Puzzle : NetworkBehaviour {
     [HideInInspector]
     public Animator animator;
 
-    private void Awake()
+    public virtual void Awake()
     {
         HidePlayerDependentObjects();
     }

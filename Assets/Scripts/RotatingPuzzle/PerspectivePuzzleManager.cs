@@ -17,9 +17,10 @@ public class PerspectivePuzzleManager : Puzzle {
     #region SINGLETON
     public static PerspectivePuzzleManager instance;
 
-    private void Awake()
+    public override void Awake()
     {
         instance = this;
+        base.Awake();
     } 
     #endregion //SINGLETON
 

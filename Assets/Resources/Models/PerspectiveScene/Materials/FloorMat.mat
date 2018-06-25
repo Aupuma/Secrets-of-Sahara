@@ -96,7 +96,7 @@ Material:
     - _WindEdgeFlutterFreqScale: 0.5
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.32156864, g: 0.12490204, b: 0, a: 1}
+    - _Color: {r: 0.41960785, g: 0.2509804, b: 0.078431375, a: 0}
     - _EmissionColor: {r: 0, g: 0.8745098, b: 1, a: 1}
     - _NumTexTiles: {r: 4, g: 4, b: 0, a: 0}
     - _ScrollingSpeed: {r: 0, g: 0, b: 0, a: 0}
