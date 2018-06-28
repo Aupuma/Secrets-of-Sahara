@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4111881208985300}
-  - component: {fileID: 114742819727602456}
+  - component: {fileID: 114402391084668112}
   - component: {fileID: 114028067140921408}
   m_Layer: 0
   m_Name: ARWorldOrigin
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adc7b4ead18e3849afd826ce03cb508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114742819727602456
+--- !u!114 &114402391084668112
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1110189835375532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c7c91055bc4dd47b67bdbc13114f4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fc77eb3711648f46922fcd91e6785dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135218845863686164

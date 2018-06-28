@@ -6,24 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PlayerSelectionScene.unity
+    path: Assets/6_General/Scenes/PlayerSelectionScene.unity
     guid: f027d0e04125c354da4876469759d86c
   - enabled: 1
-    path: Assets/Scenes/ARSetupScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/0_AR/ARSetupScene.unity
+    guid: 369df73a5bc430649acd2603425b09a0
   - enabled: 1
-    path: Assets/Scenes/MazeScene.unity
-    guid: 57407896835baa6409817ec45e804209
+    path: Assets/1_MazePuzzle/MazeScene.unity
+    guid: 7316c211014c07f4981827213b945210
   - enabled: 1
-    path: Assets/Scenes/SequencePuzzleScene.unity
-    guid: 05b648c9f4ebfe349bb034ed07d3c2eb
+    path: Assets/2_SequencePuzzle/SequencePuzzleScene.unity
+    guid: 5bbb764111c30984899878a9ae755b0a
   - enabled: 1
-    path: Assets/Scenes/PerspectivePuzzleScene.unity
-    guid: 8e23025ec3d64824daf590808672c47f
+    path: Assets/3_PerspectivePuzzle/PerspectivePuzzleScene.unity
+    guid: c7c9046a86e769d4e94e37b2882b77c1
   - enabled: 1
-    path: Assets/Scenes/WirePuzzleScene.unity
-    guid: 7fece825f0f1f0b43b4321554880f535
+    path: Assets/4_WirePuzzle/WirePuzzleScene.unity
+    guid: 52c6d313035256244bdec8c1cf2e16a7
   - enabled: 1
-    path: Assets/Scenes/GestureEnemiesPuzzleScene.unity
-    guid: d6490414a4fc1d348ae251c0f7651bc2
-  m_configObjects: {}
+    path: Assets/5_GestureEnemiesPuzzle/GestureEnemiesPuzzleScene.unity
+    guid: 2393d516c5faffc4584dafd95cdb9b26
+  m_configObjects:
+    com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: 7420f41ab9f7a164ba0a53a9c380d1fe,
+      type: 2}

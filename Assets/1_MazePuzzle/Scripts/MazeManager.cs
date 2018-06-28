@@ -10,6 +10,8 @@ public class MazeManager : Puzzle {
     public Animator[] lockedElements;
     public Animator[] hiddenTrapsBeforeKey;
     public Animator[] hiddenTrapsAfterKey;
+    public Transform[] lockedWalls;
+    public Transform mazeTransform;
 
     #region SINGLETON
     public static MazeManager instance;
@@ -17,6 +19,17 @@ public class MazeManager : Puzzle {
     public void Awake()
     {
         instance = this;
+
+        if (isServer)
+        {
+            foreach (var item in lockedWalls)
+            {
+                item.localPosition = new Vector3(item.localPosition.x, item.localPosition.y - 1.3f, item.localPosition.z);
+            }
+            mazeTransform.localPosition = new Vector3(mazeTransform.localPosition.x, 
+                mazeTransform.localPosition.y - 3.53f, mazeTransform.localPosition.z);
+        }
+
     }
     #endregion SINGLETON
 
