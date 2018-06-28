@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 33118674875342534}
   - component: {fileID: 114339465891087116}
   - component: {fileID: 64955572723186250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MovingPanel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 33360254798103476}
   - component: {fileID: 114594556766350704}
   - component: {fileID: 64249407634613372}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MovingPanel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4955338845358570}
   - component: {fileID: 220928353249869990}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Light Probe Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4380746586527064}
   - component: {fileID: 95301070896688996}
   - component: {fileID: 114994003839688484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: POVRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 33648600644486830}
   - component: {fileID: 114518287824619632}
   - component: {fileID: 64092958238999086}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LowPolyTorch (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 33387869992964482}
   - component: {fileID: 114005509366406520}
   - component: {fileID: 64501252827783212}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MovingPanel4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 33973560854916612}
   - component: {fileID: 114050623886102252}
   - component: {fileID: 64144331317816430}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4439278805643632}
   - component: {fileID: 198226544189694716}
   - component: {fileID: 199311850381808336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 124572302159073598}
   - component: {fileID: 81655587759765530}
   - component: {fileID: 114810537775561132}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: POVCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046385493434294}
   - component: {fileID: 108776821684270852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 33144796280110406}
   - component: {fileID: 114477456726131792}
   - component: {fileID: 64199505319272182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MovingPanel3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 33689924669517940}
   - component: {fileID: 114570114794128870}
   - component: {fileID: 64189303453507246}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LowPolyTorch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 4551448626770146}
   - component: {fileID: 198905896432672130}
   - component: {fileID: 199232200848142152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4753759693904304}
   - component: {fileID: 108131299037650198}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721841184146474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6883198, y: 9.308501, z: 0.35761037}
+  m_LocalPosition: {x: 0.6883198, y: 9.308501, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4975880267298634}
@@ -410,7 +410,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948571999162068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6883198, y: 9.308501, z: 0.35761037}
+  m_LocalPosition: {x: 0.6883198, y: 9.308501, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4272553660284898}
@@ -929,7 +929,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.2
@@ -965,7 +965,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.2
@@ -1541,9 +1541,17 @@ MonoBehaviour:
     angleError: 8
     areaError: 15
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 00000000
+  m_SelectedEdges:
+  - x: 2
+    y: 3
+  - x: 3
+    y: 1
+  - x: 1
+    y: 0
+  - x: 0
+    y: 2
+  m_selectedTriangles: 02000000030000000100000000000000
 --- !u!114 &114339465891087116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13996,3 +14004,6 @@ LightProbeGroup:
   - {x: -1.0754582, y: 1, z: 0.21286392}
   - {x: -1.1097574, y: -1.1058432, z: 1}
   - {x: -1.1097574, y: -1.1058432, z: 0.21286392}
+  - {x: 1.0912459, y: 0, z: 0.23079136}
+  - {x: -1.0973287, y: 0, z: 0.23079136}
+  - {x: 0, y: 0, z: 0.23079136}
