@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.XR.ARFoundation;
 
 public class Puzzle : NetworkBehaviour {
 
@@ -17,9 +18,17 @@ public class Puzzle : NetworkBehaviour {
     {
         animator = GetComponent<Animator>();
 
+        ////Preparamos los materiales para que no se vean detrás de la máscara
+        //Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //foreach (var rndr in renderers)
+        //{
+        //    if(rndr.material.renderQueue == 2000) rndr.material.renderQueue = 2002; // set their renderQueue
+        //}
+
+        //Situamos el nivel en el punto elegido en AR
         if (isServer && ARWorldOrigin.instance != null)
         {
-            this.transform.position = ARWorldOrigin.instance.transform.position;
+            FindObjectOfType<ARSessionOrigin>().MakeContentAppearAt(this.transform, ARWorldOrigin.instance.transform.position, ARWorldOrigin.instance.transform.rotation);
         }
 
         HidePlayerDependentObjects();

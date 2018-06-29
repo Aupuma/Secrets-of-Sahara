@@ -5,15 +5,23 @@ using UnityEngine.Networking;
 
 public class ARWorldOrigin : MonoBehaviour {
 
-    public static ARWorldOrigin instance;
+    public GameObject searchingUI;
 
+    #region SINGLETON
+    public static ARWorldOrigin instance;
     private void Awake()
     {
         instance = this;
+    } 
+    #endregion
+
+    public void HideUI()
+    {
+        GetComponent<Animator>().SetTrigger("Placed");
     }
 
-    private void Start()
+    public void DisableUI()
     {
-        NetworkManager.singleton.StartHost();
+        searchingUI.SetActive(false);
     }
 }

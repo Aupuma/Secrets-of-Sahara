@@ -3,18 +3,17 @@ using UnityEngine;
 using UnityEngine.Experimental.XR;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(ARSessionOrigin))]
 public class PlaceOnPlane : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("Instantiates this prefab on a plane at the touch location.")]
-    public GameObject PlacedPrefab;
+    public GameObject arWorldOrigin;
 
     private List<ARRaycastHit> hits;
-    private GameObject spawnedObject;
     private ARSessionOrigin sessionOrigin;
     private ARPlaneManager planeManager;
+    private Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
 
     void Awake()
     {
@@ -23,26 +22,39 @@ public class PlaceOnPlane : MonoBehaviour
         hits = new List<ARRaycastHit>();
     }
 
+    private void Start()
+    {
+        arWorldOrigin = Instantiate(arWorldOrigin);
+        arWorldOrigin.SetActive(false);
+    }
+
     void Update()
     {
-        if (Input.touchCount > 0)
+        //Mandamos raycast desde el centro de la pantalla a la escena para ver si colisiona con un plano
+        if (sessionOrigin.Raycast(screenCenter, hits, TrackableType.PlaneWithinPolygon))
         {
-            Touch touch = Input.GetTouch(0);
+            //Si choca obtenemos la posición donde el rayo ha tocado el plano
+            Pose hitPose = hits[0].pose;
 
-            if (touch.phase == TouchPhase.Began)
+            //Si no está activo el objeto origen lo activamos y colocamos en la posicion de choque
+            if (!arWorldOrigin.activeSelf) arWorldOrigin.SetActive(true);
+            arWorldOrigin.transform.position = hitPose.position;
+            arWorldOrigin.transform.rotation = hitPose.rotation;
+
+            //Si el usuario pulsa en la pantalla:
+            if (Input.touchCount > 0)
             {
-                if (sessionOrigin.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
-                {
-                    Pose hitPose = hits[0].pose;
-
-                    ChoosePlane(hits[0].trackableId);
-
-                    spawnedObject = Instantiate(PlacedPrefab, hitPose.position, hitPose.rotation);
-
-                    this.enabled = false;
-                }
+                ChoosePlane(hits[0].trackableId); //Elegimos el plano de juego
+                arWorldOrigin.GetComponent<ARWorldOrigin>().HideUI(); //Ocultamos la UI auxiliar del plano
+                NetworkManager.singleton.StartHost(); //Empezamos el juego como servidor
+                this.enabled = false; //Desactivamos este script
             }
         }
+        else //Si no hay choque desactivamos el objeto origen
+        {
+            arWorldOrigin.SetActive(false);
+        }
+
     }
 
     private void ChoosePlane(TrackableId id)

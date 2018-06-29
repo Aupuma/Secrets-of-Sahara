@@ -13866,6 +13866,8 @@ MonoBehaviour:
   - {fileID: 297085674}
   - {fileID: 1344647406}
   - {fileID: 1457738374}
+  lockedWalls: []
+  mazeTransform: {fileID: 0}
 --- !u!43 &771750198
 Mesh:
   m_ObjectHideFlags: 0

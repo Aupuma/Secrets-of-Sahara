@@ -260,7 +260,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1691506801350002}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 0, y: 1.85, z: 0}
   m_LocalScale: {x: 1.5, y: 0.47208282, z: 0.5219322}
   m_Children:
   - {fileID: 4848611401938152}
@@ -285,7 +285,7 @@ Transform:
   - {fileID: 4388928294701546}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4651063808405946
 Transform:
   m_ObjectHideFlags: 1
@@ -336,7 +336,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -371,7 +371,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -406,7 +406,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -441,7 +441,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -476,7 +476,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -511,7 +511,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -690,17 +690,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1691506801350002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27eafd60b8b53c14faa70b38f2f31a28, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e0147da6e0aea248b64c2649e2aeb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transfChoice: 2
   autoSnaps: 0
   detectsCollisions: 0
-  userRotSpeed: 200
-  snapRotSpeed: 250
-  userMovSpeed: 3
-  snapMovSpeed: 5
-  minPosition: 0.25
+  userRotSpeed: 2.5
+  snapRotSpeed: 2.5
+  userMovSpeed: 2.5
+  snapMovSpeed: 2.5
+  minPosition: 0
   maxPosition: 3.3
   moveIntervalDistance: 1
 --- !u!114 &114510366994005586
