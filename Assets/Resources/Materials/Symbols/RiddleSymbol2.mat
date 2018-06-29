@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WireSymbol3
+  m_Name: RiddleSymbol2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHABLEND_ON _EMISSION
   m_LightmapFlags: 1
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6e83b7a41edc71c4a82632bf3715270f, type: 3}
+        m_Texture: {fileID: 2800000, guid: f021585bc3d001e44b75be405a121207, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.5
+    - _Cutoff: 0.309
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _GlossMapScale: 1
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.3490566, g: 0.14102003, b: 0, a: 1}
+    - _Color: {r: 0.3490566, g: 0.14102003, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
