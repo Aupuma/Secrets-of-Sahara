@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4841829674896252}
   - component: {fileID: 33292911624081178}
   - component: {fileID: 23483921881008504}
-  - component: {fileID: 65997295435722302}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Handle
@@ -130,7 +129,7 @@ GameObject:
   - component: {fileID: 4389136107992668}
   - component: {fileID: 33937078498623938}
   - component: {fileID: 23166144405135608}
-  - component: {fileID: 65565937950534370}
+  - component: {fileID: 65390705281294072}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Handle
@@ -148,7 +147,6 @@ GameObject:
   - component: {fileID: 4872794707176564}
   - component: {fileID: 33547120758712098}
   - component: {fileID: 23329112225270300}
-  - component: {fileID: 65194551897541100}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Handle
@@ -426,8 +424,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334674422071556}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000035762784}
-  m_LocalPosition: {x: 3.1831055, y: -1.3827813, z: 1.046875}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
+  m_LocalPosition: {x: -4.3168945, y: -1.3827813, z: 1.046875}
   m_LocalScale: {x: 1.5000005, y: 1.5, z: 1.5000005}
   m_Children:
   - {fileID: 4380796584652608}
@@ -440,7 +438,7 @@ Transform:
   - {fileID: 4628926541816196}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
 --- !u!4 &4496783413363102
 Transform:
   m_ObjectHideFlags: 1
@@ -533,7 +531,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -568,7 +566,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -603,7 +601,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -638,7 +636,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -673,7 +671,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -708,7 +706,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -743,7 +741,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -778,7 +776,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -813,7 +811,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -848,7 +846,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
@@ -1029,19 +1027,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19506767, y: 0.8532625, z: 1}
   m_Center: {x: -0.032689106, y: 0.0733687, z: 0}
---- !u!65 &65194551897541100
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437451632029600}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65565937950534370
+--- !u!65 &65390705281294072
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1051,8 +1037,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.6546984, y: 2, z: 4.600588}
+  m_Center: {x: -0.0000008151717, y: 0, z: 1.8002974}
 --- !u!65 &65673275965859654
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1075,8 +1061,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.6546984, y: 2, z: 4.600588}
+  m_Center: {x: -0.0000008151717, y: 0, z: 1.8002974}
 --- !u!65 &65717448995228232
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1101,18 +1087,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19506767, y: 0.8532625, z: 1}
   m_Center: {x: -0.032689106, y: 0.0733687, z: 0}
---- !u!65 &65997295435722302
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1002835526873168}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114057612772925520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1121,18 +1095,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334674422071556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27eafd60b8b53c14faa70b38f2f31a28, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e0147da6e0aea248b64c2649e2aeb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transfChoice: 0
   autoSnaps: 1
   detectsCollisions: 0
-  userRotSpeed: 5
-  snapRotSpeed: 5
-  userMovSpeed: 20
-  snapMovSpeed: 5
-  minPosition: -2
-  maxPosition: 5
+  userRotSpeed: 3.5
+  snapRotSpeed: 2.5
+  userMovSpeed: 3.5
+  snapMovSpeed: 2.5
+  minPosition: 0
+  maxPosition: 0
   moveIntervalDistance: 1
 --- !u!114 &114058602252933234
 MonoBehaviour:

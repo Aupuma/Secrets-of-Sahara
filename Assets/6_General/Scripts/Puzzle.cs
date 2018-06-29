@@ -14,21 +14,17 @@ public class Puzzle : NetworkBehaviour {
     [HideInInspector]
     public Animator animator;
 
+    public static bool placed = false;
+
     public virtual void Start()
     {
         animator = GetComponent<Animator>();
 
-        ////Preparamos los materiales para que no se vean detrás de la máscara
-        //Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //foreach (var rndr in renderers)
-        //{
-        //    if(rndr.material.renderQueue == 2000) rndr.material.renderQueue = 2002; // set their renderQueue
-        //}
-
-        //Situamos el nivel en el punto elegido en AR
-        if (isServer && ARWorldOrigin.instance != null)
+        //Situamos el nivel en el punto elegido en AR, esto solo lo hará el primer nivel en cargar
+        if (isServer && ARWorldOrigin.instance != null && !placed)
         {
-            FindObjectOfType<ARSessionOrigin>().MakeContentAppearAt(this.transform, ARWorldOrigin.instance.transform.position, ARWorldOrigin.instance.transform.rotation);
+            ARWorldOrigin.instance.PlaceLevelAtOrigin(this.transform);
+            placed = true;
         }
 
         HidePlayerDependentObjects();

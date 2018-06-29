@@ -44,8 +44,6 @@ public class MazeManager : Puzzle {
                 item.SetTrigger("Lock"); //Movemos arriba las paredes bloqueadas
             }
         }
-        //spawnearemos el prefab del player pov
-        //else GameManager.instance.POVConnection.CmdSpawnPOVPlayerObj();
     }
 
     public void EnableFirstTraps()

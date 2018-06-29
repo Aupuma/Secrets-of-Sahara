@@ -73,7 +73,6 @@ GameObject:
   - component: {fileID: 4867903168856212}
   - component: {fileID: 33276597522129696}
   - component: {fileID: 23680965161328522}
-  - component: {fileID: 65343964589978520}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Handle
@@ -145,7 +144,6 @@ GameObject:
   - component: {fileID: 4196632594311364}
   - component: {fileID: 33460971805525200}
   - component: {fileID: 23275510928817610}
-  - component: {fileID: 65669252975255602}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Handle
@@ -359,8 +357,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1347919297094802}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000014901161}
-  m_LocalPosition: {x: 3.1831055, y: -1.3827813, z: -3.453125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.3168945, y: -1.3827813, z: -3.603125}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4054566562555606}
@@ -858,8 +856,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 2, z: 4.859269}
+  m_Center: {x: 0.000000098958914, y: 0, z: -1.7484474}
 --- !u!65 &65252127234710286
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -884,30 +882,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19691062, y: 1, z: 1}
   m_Center: {x: 0.00083124876, y: -1.5363722e-16, z: 0}
---- !u!65 &65343964589978520
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1336229040403246}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65669252975255602
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413693468104362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65948943572357078
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -918,8 +892,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 2, z: 4.9914985}
+  m_Center: {x: -4.0919048e-12, y: 0, z: -1.723349}
 --- !u!114 &114087198800956590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3402,9 +3376,9 @@ MonoBehaviour:
   transfChoice: 0
   autoSnaps: 1
   detectsCollisions: 0
-  userRotSpeed: 2.5
+  userRotSpeed: 3.5
   snapRotSpeed: 2.5
-  userMovSpeed: 2.5
+  userMovSpeed: 3.5
   snapMovSpeed: 2.5
   minPosition: 0
   maxPosition: 0

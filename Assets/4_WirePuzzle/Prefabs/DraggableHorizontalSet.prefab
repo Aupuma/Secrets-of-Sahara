@@ -2079,7 +2079,7 @@ MonoBehaviour:
   detectsCollisions: 0
   userRotSpeed: 2.5
   snapRotSpeed: 2.5
-  userMovSpeed: 2.5
+  userMovSpeed: 3
   snapMovSpeed: 2.5
   minPosition: -3.57
   maxPosition: 0

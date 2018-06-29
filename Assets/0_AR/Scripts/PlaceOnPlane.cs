@@ -25,6 +25,7 @@ public class PlaceOnPlane : MonoBehaviour
     private void Start()
     {
         arWorldOrigin = Instantiate(arWorldOrigin);
+        arWorldOrigin.GetComponent<ARWorldOrigin>().sessionOrigin = sessionOrigin;
         arWorldOrigin.SetActive(false);
     }
 
@@ -45,8 +46,7 @@ public class PlaceOnPlane : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 ChoosePlane(hits[0].trackableId); //Elegimos el plano de juego
-                arWorldOrigin.GetComponent<ARWorldOrigin>().HideUI(); //Ocultamos la UI auxiliar del plano
-                NetworkManager.singleton.StartHost(); //Empezamos el juego como servidor
+                arWorldOrigin.GetComponent<ARWorldOrigin>().HideUIandStartGame(); //Ocultamos la UI auxiliar del plano
                 this.enabled = false; //Desactivamos este script
             }
         }
@@ -54,7 +54,6 @@ public class PlaceOnPlane : MonoBehaviour
         {
             arWorldOrigin.SetActive(false);
         }
-
     }
 
     private void ChoosePlane(TrackableId id)
