@@ -12,7 +12,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     public GameObject gameManager;
 
     void Start () {
-        DontDestroyOnLoad(gameObject);
+        gameObject.DontDestroyOnLoad();
         if (isServer) //Servidor, jugador PAR
         {
             if (GameManager.instance == null) SpawnGameManager();

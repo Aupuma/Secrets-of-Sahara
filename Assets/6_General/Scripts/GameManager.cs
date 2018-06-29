@@ -40,7 +40,7 @@ public class GameManager : NetworkBehaviour {
 
     private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        gameObject.DontDestroyOnLoad();
         sceneIndex = 0;
 
         secondsLeft = totalMinutes * 60;

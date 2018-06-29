@@ -19,7 +19,7 @@ public class POVRoom : MonoBehaviour {
         }
 
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        gameObject.DontDestroyOnLoad();
 
         animator = GetComponent<Animator>();
     }

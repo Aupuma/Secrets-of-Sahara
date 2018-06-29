@@ -368,6 +368,7 @@ MonoBehaviour:
   - PerspectivePuzzleScene
   - WirePuzzleScene
   - GestureEnemiesPuzzleScene
+  - GameOverScreen
   faderAnimator: {fileID: 95212300012326828}
   POVConnection: {fileID: 0}
 --- !u!222 &222056572122248086

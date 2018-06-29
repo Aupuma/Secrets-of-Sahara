@@ -23,6 +23,7 @@ public class NetDiscovery : NetworkDiscovery{
             Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
             NetworkManager.singleton.StartClient();
+            StopBroadcast();
         }
     }
 }

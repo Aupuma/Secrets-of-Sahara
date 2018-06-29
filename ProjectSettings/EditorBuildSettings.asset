@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/5_GestureEnemiesPuzzle/GestureEnemiesPuzzleScene.unity
     guid: 2393d516c5faffc4584dafd95cdb9b26
+  - enabled: 1
+    path: Assets/6_General/Scenes/GameOverScreen.unity
+    guid: dc1afbee157e49a4b814215b3406e797
   m_configObjects:
     com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: 7420f41ab9f7a164ba0a53a9c380d1fe,
       type: 2}
