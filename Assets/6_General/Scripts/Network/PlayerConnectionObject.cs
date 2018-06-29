@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 
 public class PlayerConnectionObject : NetworkBehaviour {
 
-    public bool enableDebugARCamera = false;
-
     public GameObject PlayerUnitPrefab;
     public GameObject ARPlayerCamera;
 
@@ -18,7 +16,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
         if (isServer) //Servidor, jugador PAR
         {
             if (GameManager.instance == null) SpawnGameManager();
-            if (enableDebugARCamera && PARCamera.instance == null) Instantiate(ARPlayerCamera);
+            if(isLocalPlayer && ARWorldOrigin.instance == null && PARCamera.Instance == null) Instantiate(ARPlayerCamera);
         }
         else //No es servidor, es el jugador POV
         {

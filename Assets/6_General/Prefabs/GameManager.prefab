@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a638f9d4ef04494595fcb490a947ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secsIntervalToShowTimer: 15
-  totalMinutes: 5
+  secsIntervalToShowTimer: 60
+  totalMinutes: 15
   timerObject: {fileID: 1551434632563768}
   scenes:
   - SequencePuzzleScene

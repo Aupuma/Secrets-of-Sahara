@@ -7,23 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
-    //public static UIManager instance;
     public bool isDebug = false;
 
     public GameObject menuScreen;
     public GameObject loadingScreen;
 
     public string arSetupScene;
-    
-    private void Start()
-    {
-        //instance = this;
-    }
 
     public void StartServerButtonClicked()
     {
-        if(isDebug) NetworkManager.singleton.StartHost();
-        else SceneManager.LoadScene(arSetupScene);
+#if UNITY_EDITOR
+        NetworkManager.singleton.StartHost();
+
+#elif  UNITY_STANDALONE
+        NetworkManager.singleton.StartHost();
+
+#elif UNITY_ANDROID
+        SceneManager.LoadScene(arSetupScene);
+
+#elif UNITY_IOS
+        SceneManager.LoadScene(arSetupScene);
+#endif
     }
 
     public void StartClientButtonClicked()

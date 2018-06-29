@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class PARCamera : MonoBehaviour {
 
-    public static PARCamera instance;
+    private static PARCamera _instance;
+    public static PARCamera Instance { get { return _instance; } }
+
     private GameObject drawingPlane;
 
     private void Awake()
     {
-        instance = this;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
         drawingPlane = transform.GetChild(0).gameObject;
         DontDestroyOnLoad(this.gameObject);
     }
