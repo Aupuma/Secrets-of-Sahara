@@ -22,8 +22,8 @@ public class NetDiscovery : NetworkDiscovery{
             connected = true;
             Debug.Log("Broadcast: " + fromAddress);
             NetworkManager.singleton.networkAddress = fromAddress;
-            StopBroadcast();
             UIManager.instance.PlayFadeToPOVMode();
+            StopBroadcast();
         }
     }
 }

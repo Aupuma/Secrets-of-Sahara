@@ -57,9 +57,12 @@ public class GameManager : NetworkBehaviour {
 
     public void LoadNextScene()
     {
-        RpcOpenPOVWalls();
-        NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
-        sceneIndex++;
+        if (sceneIndex == scenes.Length) RpcShowGameCompletedScreen();
+        {
+            RpcOpenPOVWalls();
+            NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
+            sceneIndex++;
+        }
     }
 
     [ClientRpc]
@@ -69,9 +72,21 @@ public class GameManager : NetworkBehaviour {
             POVRoom.instance.animator.SetTrigger("OpenWalls");
     }
 
-    public void LoadDefeatScene()
+    [ClientRpc]
+    public void RpcShowGameOverScreen()
     {
-       // NetworkManager.singleton.ServerChangeScene(scenes[sceneIndex]);
+        faderAnimator.SetTrigger("GameOver");
+    }
+
+    [ClientRpc]
+    public void RpcShowGameCompletedScreen()
+    {
+        faderAnimator.SetTrigger("GameCompleted");
+    }
+
+    public void ExitFromGame()
+    {
+        Application.Quit();
     }
 
     #region SCREEN FADER
@@ -120,7 +135,7 @@ public class GameManager : NetworkBehaviour {
             {
                 secondsLeft = 0;
                 timerEnabled = false;
-                LoadDefeatScene();
+                RpcShowGameOverScreen();
             }
         }
 

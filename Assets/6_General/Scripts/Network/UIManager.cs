@@ -75,4 +75,9 @@ public class UIManager : MonoBehaviour {
     {
         NetworkManager.singleton.StartClient();
     }
+
+    public void ExitFromGame()
+    {
+        Application.Quit();
+    }
 }
