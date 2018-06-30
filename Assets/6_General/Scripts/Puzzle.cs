@@ -9,6 +9,7 @@ public class Puzzle : NetworkBehaviour {
     [Header ("Player dependent objects")]
     public GameObject[] AR_Player_Objects;
     public GameObject[] POV_Player_Objects;
+    public GameObject debugSandPlane;
 
     private bool hasStarted = false;
     [HideInInspector]
@@ -25,6 +26,10 @@ public class Puzzle : NetworkBehaviour {
         {
             ARWorldOrigin.instance.PlaceLevelAtOrigin(this.transform);
             placed = true;
+        }
+        if(isServer && ARWorldOrigin.instance == null)
+        {
+            debugSandPlane.SetActive(true);
         }
 
         HidePlayerDependentObjects();

@@ -40,7 +40,7 @@ public class MazeManager : Puzzle {
             {
                 item.position = Vector3.zero;
             }
-            mazeTransform.position = new Vector3(0f, transform.position.y + 3.53f, 0f);
+            mazeTransform.localPosition = new Vector3(0f, mazeTransform.position.y + 3.53f, 0f);
             Debug.Log(mazeTransform.position);
         }
     }
