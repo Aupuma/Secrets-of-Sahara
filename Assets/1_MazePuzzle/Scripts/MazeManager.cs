@@ -36,12 +36,17 @@ public class MazeManager : Puzzle {
         }
         else //Si somos jugador POV situamos los elementos a vista de jugador
         {
-            foreach (var item in lockedWalls)
+            animator.SetTrigger("StayStatic");
+            foreach (var item in lockedElements)
             {
-                item.position = Vector3.zero;
+                item.SetTrigger("StayStatic"); //Movemos arriba las paredes bloqueadas
             }
-            mazeTransform.localPosition = new Vector3(0f, mazeTransform.position.y + 3.53f, 0f);
-            Debug.Log(mazeTransform.position);
+            //foreach (var item in lockedWalls)
+            //{
+            //    item.position = Vector3.zero;
+            //}
+            //mazeTransform.localPosition = new Vector3(0f, mazeTransform.position.y + 3.53f, 0f);
+            //Debug.Log(mazeTransform.position);
         }
     }
 
