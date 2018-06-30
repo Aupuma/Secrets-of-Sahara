@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 2.5
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f14e791cab3ea0c4397ab4827d05bebc, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45140302, g: 0.50089294, b: 0.57231545, a: 1}
+  m_Sun: {fileID: 209047234}
+  m_IndirectSpecularColor: {r: 0.7514298, g: 0.6939786, b: 0.6662909, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -59,7 +59,7 @@ LightmapSettings:
     m_Resolution: 2
     m_BakeResolution: 40
     m_AtlasSize: 1024
-    m_AO: 0
+    m_AO: 1
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
@@ -67,7 +67,7 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 0
-    m_FinalGather: 0
+    m_FinalGather: 1
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
@@ -1570,19 +1570,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4171934420665280, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.23911765
+      value: 0.5006815
       objectReference: {fileID: 0}
     - target: {fileID: 4171934420665280, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.3696438
+      value: 0.4188092
       objectReference: {fileID: 0}
     - target: {fileID: 4171934420665280, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.09904577
+      value: -0.5748461
       objectReference: {fileID: 0}
     - target: {fileID: 4171934420665280, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.89239913
+      value: 0.49342552
       objectReference: {fileID: 0}
     - target: {fileID: 4171934420665280, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
       propertyPath: m_RootOrder
@@ -1591,6 +1591,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd1b3037343dc724c8847e7b75877900, type: 2}
   m_IsPrefabParent: 0
+--- !u!108 &209047234 stripped
+Light:
+  m_PrefabParentObject: {fileID: 108043157095289054, guid: bd1b3037343dc724c8847e7b75877900,
+    type: 2}
+  m_PrefabInternal: {fileID: 209047233}
 --- !u!43 &236567725
 Mesh:
   m_ObjectHideFlags: 0
@@ -9845,7 +9850,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3340128
+  m_Name: pb_Mesh-528870
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
