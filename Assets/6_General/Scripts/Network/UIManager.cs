@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour {
         //Aqui se puede empezar a cargar la escena también
         loadingScreen.SetActive(true);
         menuScreen.SetActive(false);
+        NetworkTransport.Init();
+        NetDiscovery.instance.Initialize();
         NetDiscovery.instance.StartAsClient();
     }
 
@@ -44,6 +46,7 @@ public class UIManager : MonoBehaviour {
         loadingScreen.SetActive(false);
         menuScreen.SetActive(true);
         NetDiscovery.instance.StopBroadcast();
+        NetworkTransport.Shutdown();
     }
 
     // Update is called once per frame
