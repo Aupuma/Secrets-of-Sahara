@@ -83,6 +83,7 @@ public class POVPlayerInteractions : NetworkBehaviour {
             }
             else if (other.gameObject.tag == "Door")
             {
+                GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
                 MazeManager.instance.RpcMazeCompleted();
             }
             else if (other.gameObject.tag == "Trap")

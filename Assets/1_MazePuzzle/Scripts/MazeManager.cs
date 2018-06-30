@@ -19,30 +19,29 @@ public class MazeManager : Puzzle {
     public void Awake()
     {
         instance = this;
-
-        if (isServer)
-        {
-            foreach (var item in lockedWalls)
-            {
-                item.localPosition = new Vector3(item.localPosition.x, item.localPosition.y - 1.3f, item.localPosition.z);
-            }
-            mazeTransform.localPosition = new Vector3(mazeTransform.localPosition.x, 
-                mazeTransform.localPosition.y - 3.53f, mazeTransform.localPosition.z);
-        }
-
     }
     #endregion SINGLETON
 
     public override void Start()
     {
         base.Start();
-        if (isServer)
+
+        if (isServer) //Si somos jugador AR activamos la animacion de aparicion desde el exterior
         {
             animator.SetTrigger("Move");
             foreach (var item in lockedElements)
             {
                 item.SetTrigger("Lock"); //Movemos arriba las paredes bloqueadas
             }
+        }
+        else //Si somos jugador POV situamos los elementos a vista de jugador
+        {
+            foreach (var item in lockedWalls)
+            {
+                item.position = Vector3.zero;
+            }
+            mazeTransform.position = new Vector3(0f, transform.position.y + 3.53f, 0f);
+            Debug.Log(mazeTransform.position);
         }
     }
 
