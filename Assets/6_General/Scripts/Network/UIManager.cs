@@ -7,14 +7,31 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
-    public bool isDebug = false;
-
     public GameObject menuScreen;
     public GameObject loadingScreen;
-
     public string arSetupScene;
+    private Animator animator;
 
-    public void StartServerButtonClicked()
+    #region SINGLETON
+    public static UIManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void StartARButtonClicked()
+    {
+        animator.SetTrigger("ARmode");
+    }
+
+    public void StartARMode()
     {
 #if UNITY_EDITOR
         NetworkManager.singleton.StartHost();
@@ -30,7 +47,7 @@ public class UIManager : MonoBehaviour {
 #endif
     }
 
-    public void StartClientButtonClicked()
+    public void StartPOVButtonClicked()
     {
         //Esto se hará con transición
         //Aqui se puede empezar a cargar la escena también
@@ -49,8 +66,13 @@ public class UIManager : MonoBehaviour {
         NetworkTransport.Shutdown();
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public void PlayFadeToPOVMode()
+    {
+        animator.SetTrigger("POVmode");
+    }
+
+    public void StartPOVMode()
+    {
+        NetworkManager.singleton.StartClient();
+    }
 }
