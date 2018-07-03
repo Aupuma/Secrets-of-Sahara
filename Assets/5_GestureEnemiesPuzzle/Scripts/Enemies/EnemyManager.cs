@@ -40,6 +40,8 @@ public class EnemyManager : Puzzle {
     public Slider uiProgressBar;
     private ObjectPooler pooler;
     public GameObject gestureManager;
+    public AudioSource pushSound;
+    public AudioSource correctSound;
 
     [Header("Score parameters")]
     public int pointsToWin = 10;
@@ -111,6 +113,7 @@ public class EnemyManager : Puzzle {
                     {
                         if (trapButtons[i] == hit.collider.gameObject)
                         {
+                            pushSound.Play();
                             hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Pressed");
                             GameManager.instance.POVConnection.CmdRemoteTrapCall(i);
                         }
@@ -237,6 +240,7 @@ public class EnemyManager : Puzzle {
             else
             {
                 pointsScored += pointsCorrect;
+                correctSound.Play();
                 ChangeEnemyToDestroy();
             }
         }

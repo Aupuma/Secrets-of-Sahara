@@ -10,6 +10,7 @@ public class PerspectivePuzzleManager : Puzzle {
     public float rotationTime = 0.35f;
     public Transform[] puzzlePieces;
     public Transform[] pillars;
+    private AudioSource moveObjSound;
 
     [SyncVar]
     private bool isRotating = false;
@@ -26,6 +27,7 @@ public class PerspectivePuzzleManager : Puzzle {
     // Use this for initialization
     public override void Start () {
         base.Start();
+        moveObjSound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -77,6 +79,7 @@ public class PerspectivePuzzleManager : Puzzle {
                 puzzlePieces[index].localEulerAngles.z - 90f),
                 rotationTime);
         }
+        moveObjSound.Play();
     }
 
     public void RotationFinished()

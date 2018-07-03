@@ -19,6 +19,7 @@ public class SequencePuzzleManager : Puzzle {
     public Texture[] symbolTextures;
     private SequenceButton[] buttons;
     private int[] btnIds;
+    private AudioSource correctSound;
     
     [Header("Scene objects with rotation")]
     public Transform[] objectsRightRotation;
@@ -43,6 +44,7 @@ public class SequencePuzzleManager : Puzzle {
             buttons = FindObjectsOfType<SequenceButton>();
             StartPillarsRotationLoop();
         }
+        correctSound = GetComponent<AudioSource>();
     }
 
     public override void OnPuzzleReady()
@@ -174,6 +176,7 @@ public class SequencePuzzleManager : Puzzle {
         if (isServer == false)
         {
             sequencePanelBooleans[seqIndex].SetBool("Enabled",true);
+            correctSound.Play();
         }
     }
 

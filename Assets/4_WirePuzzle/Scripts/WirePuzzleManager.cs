@@ -12,6 +12,7 @@ public class WirePuzzleManager : Puzzle {
     public GameObject[] panelLights;
     private bool[] lightsOn;
     private Draggable currentDraggedObject;
+    private AudioSource switchSound;
 
     #region SINGLETON
     public static WirePuzzleManager instance;
@@ -24,6 +25,7 @@ public class WirePuzzleManager : Puzzle {
 
     public override void Start () {
         base.Start();
+        switchSound = GetComponent<AudioSource>();
         lightsOn = new bool[panelLights.Length];
 	}
 
@@ -59,6 +61,7 @@ public class WirePuzzleManager : Puzzle {
     public void NextNodeConnected()
     {
         currentPuzzleIndex = currentPuzzleIndex + 1;
+        switchSound.Play();
     }
 
     public void NodeLostConnexion()

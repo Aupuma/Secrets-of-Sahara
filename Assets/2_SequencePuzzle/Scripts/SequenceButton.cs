@@ -9,11 +9,13 @@ public class SequenceButton : MonoBehaviour {
     MeshRenderer textureRenderer;
     public int id;
     private Texture nextTexture;
+    private AudioSource pushSound;
 
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
         textureRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        pushSound = GetComponent<AudioSource>();
 	}
 
     public void SetNewInfo(int n, Texture texture)
@@ -35,6 +37,7 @@ public class SequenceButton : MonoBehaviour {
     public void ButtonPressed()
     {
         anim.SetTrigger("Pressed");
+        pushSound.Play();
     }
 
     public void CheckIfButtonIsCorrect()
