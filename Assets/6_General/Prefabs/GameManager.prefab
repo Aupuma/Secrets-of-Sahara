@@ -835,13 +835,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secsIntervalToShowTimer: 60
-  totalMinutes: 15
+  totalMinutes: 5
   timerObject: {fileID: 1551434632563768}
   scenes:
-  - SequencePuzzleScene
-  - PerspectivePuzzleScene
   - WirePuzzleScene
   - GestureEnemiesPuzzleScene
+  - SequencePuzzleScene
+  - PerspectivePuzzleScene
   faderAnimator: {fileID: 95212300012326828}
   POVConnection: {fileID: 0}
 --- !u!114 &114913864348665350
