@@ -838,10 +838,10 @@ MonoBehaviour:
   totalMinutes: 5
   timerObject: {fileID: 1551434632563768}
   scenes:
-  - WirePuzzleScene
-  - GestureEnemiesPuzzleScene
   - SequencePuzzleScene
   - PerspectivePuzzleScene
+  - GestureEnemiesPuzzleScene
+  - GestureEnemiesPuzzleScene
   faderAnimator: {fileID: 95212300012326828}
   POVConnection: {fileID: 0}
 --- !u!114 &114913864348665350
